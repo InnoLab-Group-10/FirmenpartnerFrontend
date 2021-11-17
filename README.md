@@ -1,6 +1,10 @@
 # Getting Started
 
-On first installation:
+## Important Note
+
+This project uses nodejs version 16.13.0. You can download it from [the official website](https://nodejs.org). If you need a different node version for another project you can look into nvm which is available for Linux, but there is also a port for Windows ([see here](https://github.com/coreybutler/nvm-windows)).
+
+## First Installation
 
 ### `npm install`
 
@@ -41,3 +45,29 @@ Some more suggestions:
 * Auto Rename Tag
 
 Note that this project uses a config file for Prettier which overrides most of the default settings so formatting always stays the same!
+
+# Contributing guide
+## Folder descriptions
+* src/components
+  * for components of all kind, subfolders are welcome
+* src/pages
+  * for components that are used inside src/App.js and are basically the root components for the different pages
+* src/store
+  * for the redux store (TBD)
+
+## Naming and formatting
+* Formatting is mostly enforced with the help of Prettier
+* Use ES6 arrow functions
+* Component names upppercase
+* Component file names uppercase
+* React-Bootstrap imports should be from the global react-bootstrap namespace
+  * DO: `import { Button, Col, Row } from 'react-bootstrap'`
+  * DON'T: `import Button from 'react-bootstrap/button'`
+* Try to use standard bootstrap styles as much as possible
+* For global css use the provided default.css
+* For component specific styles use styled-components or css modules
+* For API calls use the store (TBD)
+* Don't use unnecesary handler functions when binding something to e.g. a button
+  * DO: `<Button onClick={() => doSomething()} />`
+  * DON'T: `<Button onClick={doSomethingHandler()} />` and have another function that just calls `doSomething()`
+* Don't use `<React.Fragment>`, just use `<>` and `</>`
