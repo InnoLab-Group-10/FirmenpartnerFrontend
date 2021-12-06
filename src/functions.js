@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 		if (toggle && close && nav && bodypd && headerpd) {
 			toggle.addEventListener('click', () => {
 				// show navbar
-				nav.classList.toggle('show');
+				nav.classList.toggle('showing');
 				// change icon
 				toggle.setAttribute("class", 'header-toggle-hide');
 				close.setAttribute("class", 'header-close-show');
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
 			close.addEventListener('click', () => {
 				// show navbar
-				nav.classList.toggle('show');
+				nav.classList.toggle('showing');
 				// change icon
 				toggle.setAttribute("class", 'header-toggle-show');
 				close.setAttribute("class", 'header-close-hide');
