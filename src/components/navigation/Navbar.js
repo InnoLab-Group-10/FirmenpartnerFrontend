@@ -20,7 +20,7 @@ const Navbar = () => {
 					<LinkContainer to='/'>
 						<Nav.Link className='nav_logo'>
 							<BiLayer className='nav_logo-icon'></BiLayer>
-							<span className='nav_logo-name'>Control Panel</span>
+							<span className='nav_logo-name'>Seitentitel</span>
 						</Nav.Link>
 					</LinkContainer>
 					<div className='nav_list'>

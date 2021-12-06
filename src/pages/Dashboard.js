@@ -1,7 +1,14 @@
 import React from 'react';
+import SiteTitle from '../components/SiteTitle';
 
 const Dashboard = () => {
-	return <div>dashboard works</div>;
+	return <div>
+		<SiteTitle 
+			title="Dashboard" 
+			subtitle="Unterüberschrift zum Dashboard" 
+			text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.">
+		</SiteTitle>
+	</div>;
 };
 
 export default Dashboard;

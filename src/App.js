@@ -19,8 +19,7 @@ const App = () => {
 			<div id='body-pd'>
 				<Header />
 				<Navbar />
-				<div className='height-100 bg-light'>
-					<h4 className='mt-5'>Main Components</h4>
+				<div className='content'>
 					<Routes>
 						<Route path='dashboard' element={<Dashboard />} />
 						<Route path='benutzer' element={<Benutzer />} />
