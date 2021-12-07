@@ -256,6 +256,10 @@ a {
 	border-right: 1px solid #adb5bd;
 }
 
+.user-notification .timeline-button svg{
+	margin-top: 0;
+}
+
 .user-notification svg{
 	margin-top: 0.6rem;
 	width: 24px;
@@ -292,4 +296,33 @@ a {
 	.user-badge-menu svg{
 		margin-bottom: 0.6rem;
 	}
+}
+
+/* === SITE-TITLE === */
+.site-title{
+	margin-bottom: 2rem;
+}
+
+/* === TIMELINE === */
+.toast-message{
+	margin-bottom: 1rem;
+}
+
+.toast-button{
+	margin-bottom: 0.8rem;
+}
+
+.appointment-card{
+	margin-bottom: 1rem;
+}
+
+.appointment-card .btn{
+	border: 2px solid #fff;
+}
+
+.timeline-year, 
+.timeline-month{
+	background-color:#f7f6fb;
+	padding: .4rem .6rem;
+	border-radius: 12px;
 }

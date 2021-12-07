@@ -1,6 +1,6 @@
 import React from 'react';
 import SiteTitle from '../components/SiteTitle';
-import CollapsibleTable from '../components/tables/Collapsible-Table';
+import CollapsibleTable from '../components/tables/Students-Collapsible-Table';
 
 const Studierende = () => {
 	return <div>

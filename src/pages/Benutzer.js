@@ -1,5 +1,5 @@
 import React from 'react';
-import CollapsibleTable from '../components/tables/Collapsible-Table.js';
+import CollapsibleTable from '../components/tables/User-Collapsible-Table.js';
 import SiteTitle from '../components/SiteTitle.js';
 
 const Benutzer = () => {

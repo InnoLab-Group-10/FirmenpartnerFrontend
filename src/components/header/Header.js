@@ -1,9 +1,31 @@
-import React from 'react';
-import { Container, Row, Col, Dropdown } from 'react-bootstrap';
+import React, {useState} from 'react';
+import { Container, Row, Col, Dropdown, Button, Offcanvas} from 'react-bootstrap';
 import { BiMenu, BiX, BiNotification, BiCalendarWeek, BiUserCircle} from 'react-icons/bi';
+import Timeline from '../cards/Timeline';
 
 const Header = () => {
-	return (
+	const [showCanvas, setShow] = useState(false);
+
+  	const handleClose = () => setShow(false);
+  	const handleShow = () => setShow(true);
+
+	return (<>
+		{/* Timeline-Canvas */}
+		<Offcanvas 
+			show={showCanvas}
+			onHide={handleClose}
+			placement="end"
+			scroll="true"
+			>
+		  <Offcanvas.Header closeButton>
+			<Offcanvas.Title>Timeline</Offcanvas.Title>
+		  </Offcanvas.Header>
+		  <Offcanvas.Body>
+			<Timeline></Timeline>
+		  </Offcanvas.Body>
+		</Offcanvas>
+
+		{/* Header */}
 		<Container>
 			<Row>
 				<Col>
@@ -16,7 +38,9 @@ const Header = () => {
 							<BiNotification/>
 						</div>
 						<div className="user-notification">
-							<BiCalendarWeek/>
+							<Button className="timeline-button" variant="light" onClick={handleShow}>
+								<BiCalendarWeek/>
+							</Button>
 						</div>
 						<Dropdown className="user-badge-menu">
 							<Dropdown.Toggle variant="light" id="dropdown-basic">
@@ -34,12 +58,12 @@ const Header = () => {
 								<Dropdown.Divider />
 								<Dropdown.Item href="#/action-3">Abmelden</Dropdown.Item>
 							</Dropdown.Menu>
-						</Dropdown>
-						
+						</Dropdown>	
 					</header>
 				</Col>
 			</Row>
 		</Container>
+		</>
 	);
 };
 
