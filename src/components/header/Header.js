@@ -1,13 +1,18 @@
 import React, {useState} from 'react';
 import { Container, Row, Col, Dropdown, Button, Offcanvas} from 'react-bootstrap';
 import { BiMenu, BiX, BiNotification, BiCalendarWeek, BiUserCircle} from 'react-icons/bi';
+import Notifications from '../cards/Notifications';
 import Timeline from '../cards/Timeline';
 
 const Header = () => {
 	const [showCanvas, setShow] = useState(false);
+	const [showNotes, setShowNotes] = useState(false);
 
   	const handleClose = () => setShow(false);
   	const handleShow = () => setShow(true);
+
+	const handleCloseNotes = () => setShowNotes(false);
+	const handleShowNotes = () => setShowNotes(true);
 
 	return (<>
 		{/* Timeline-Canvas */}
@@ -21,7 +26,22 @@ const Header = () => {
 			<Offcanvas.Title>Timeline</Offcanvas.Title>
 		  </Offcanvas.Header>
 		  <Offcanvas.Body>
-			<Timeline></Timeline>
+				<Timeline></Timeline>
+		  </Offcanvas.Body>
+		</Offcanvas>
+
+		{/* Notification-Canvas */}
+		<Offcanvas 
+			show={showNotes}
+			onHide={handleCloseNotes}
+			placement="end"
+			scroll="true"
+			>
+		  <Offcanvas.Header closeButton>
+			<Offcanvas.Title>Benachrichtigungen</Offcanvas.Title>
+		  </Offcanvas.Header>
+		  <Offcanvas.Body>
+				<Notifications></Notifications>
 		  </Offcanvas.Body>
 		</Offcanvas>
 
@@ -35,7 +55,9 @@ const Header = () => {
 							<BiX id='header-close' className="header-close-hide"></BiX>
 						</div>
 						<div className="user-notification">
-							<BiNotification/>
+							<Button className="timeline-button" variant="light" onClick={handleShowNotes}>
+								<BiNotification/>
+							</Button>
 						</div>
 						<div className="user-notification">
 							<Button className="timeline-button" variant="light" onClick={handleShow}>

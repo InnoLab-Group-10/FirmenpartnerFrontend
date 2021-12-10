@@ -165,6 +165,14 @@ a {
 	height: 100vh;
 }
 
+.sort-icon{
+	margin-left: 0.3rem;
+}
+
+.sort-icon-center{
+	margin-left: 0;
+}
+
 /* === MENU TOGGLE === */
 .header-toggle-show{
 	display: inline-block;
@@ -223,16 +231,6 @@ a {
 	float: right;
 	width: 24px;
 	height: 24px;
-}
-
-/* === DOCUMENTS === */
-.document-wrapper .col{
-	margin-bottom: 2rem;
-}
-
-.document-wrapper img{
-	width: 100%;
-	height: auto;
 }
 
 /* === HEADER USER-BADGE === */
@@ -298,6 +296,17 @@ a {
 	}
 }
 
+@media(max-width: 320px){
+	.user-notification{
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.user-badge-menu svg{
+		margin-right: 0.3rem;
+	}
+}
+
 /* === SITE-TITLE === */
 .site-title{
 	margin-bottom: 2rem;
@@ -325,4 +334,25 @@ a {
 	background-color:#f7f6fb;
 	padding: .4rem .6rem;
 	border-radius: 12px;
+}
+
+/* === DOCUMENTS === */
+.pdf path{
+	stroke: #dc3545;
+}
+
+.ppt path{
+	stroke: #fd7e14;
+}
+
+.word path{
+	stroke: #0d6efd;
+}
+
+.excel path{
+	stroke: #20c997;
+}
+
+.misc path{
+	stroke: #6c757d;
 }

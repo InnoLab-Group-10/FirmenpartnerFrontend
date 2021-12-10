@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {Container, Collapse, Table, Card, Col, Row} from 'react-bootstrap';
-import {BiInfoCircle} from 'react-icons/bi';
+import {BiInfoCircle, 
+    BiSortAZ, 
+    BiSortZA} from 'react-icons/bi';
 
 import 'bootstrap/js/src/collapse.js';
 
@@ -29,10 +31,26 @@ const CollapsibleTable = () => {
             <Table hover responsive>
                 <thead>
                     <tr>
-                    <th>Studenten-ID.</th>
-                    <th>Name</th>
-                    <th>Studiengang</th>
-                    <th>E-Mail</th>
+                    <th>
+                        Studenten-ID.
+                        <BiSortAZ className="sort-icon"/>
+                        <BiSortZA className="sort-icon" hidden/>
+                    </th>
+                    <th>
+                        Name
+                        <BiSortAZ className="sort-icon"/>
+                        <BiSortZA className="sort-icon" hidden/>
+                    </th>
+                    <th>
+                        Studiengang
+                        <BiSortAZ className="sort-icon"/>
+                        <BiSortZA className="sort-icon" hidden/>
+                    </th>
+                    <th>
+                        E-Mail
+                        <BiSortAZ className="sort-icon"/>
+                        <BiSortZA className="sort-icon" hidden/>
+                    </th>
                     </tr>
                 </thead>
                 <tbody>
