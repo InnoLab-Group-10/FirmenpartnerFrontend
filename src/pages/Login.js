@@ -21,7 +21,9 @@ const Login = () => {
 									tempor invidunt ut l.
 								</p>
 								<LoginForm />
-								<Alerts />
+								<Alerts variant="success"/>
+								<Alerts variant="warning"/>
+								<Alerts variant="danger"/>
 							</Card.Body>
 						</Card>
 					</Col>

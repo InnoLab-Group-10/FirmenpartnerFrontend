@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Container, Row, Col, Table} from 'react-bootstrap';
+import {Card, Container, Row, Col, Table, Button} from 'react-bootstrap';
 import { BiInfoCircle,
         BiSortAZ, 
         BiSortZA, 
@@ -9,7 +9,8 @@ import {GrDocumentPdf,
         GrDocumentPpt, 
         GrDocumentExcel,
         GrDocumentWord,
-        GrDocument} from 'react-icons/gr';
+        GrDocument,
+        GrDocumentImage} from 'react-icons/gr';
 
 const Documents = () => {
 	return <Container className="document-table">
@@ -17,7 +18,7 @@ const Documents = () => {
         <Card.Header>
             <Row>
                 <Col>
-                    Test
+                    Dokumente
                 </Col>
                 <Col>
                     <BiInfoCircle className="info-button"></BiInfoCircle>
@@ -25,27 +26,35 @@ const Documents = () => {
             </Row>
         </Card.Header>
         <Card.Body>
-        <Table hover>
+        <Table hover responsive>
             <thead>
                 <tr>
                 <th>
-                    <BiSortDown className="sort-icon-center"/>
-                    <BiSortUp className="sort-icon-center" hidden/>
+                    <Button variant="light" className="sort-icon-single">
+                        <BiSortDown className="sort-icon-center"/>
+                        <BiSortUp className="sort-icon-center" hidden/>
+                    </Button>
                 </th>
                 <th>
-                    Dateiname
-                    <BiSortAZ className="sort-icon"/>
-                    <BiSortZA className="sort-icon" hidden/>
+                    <Button variant="light">
+                        Dateiname
+                        <BiSortAZ className="sort-icon"/>
+                        <BiSortZA className="sort-icon" hidden/>
+                    </Button>
                 </th>
                 <th>
-                    Author
-                    <BiSortAZ className="sort-icon"/>
-                    <BiSortZA className="sort-icon" hidden/>   
+                    <Button variant="light">
+                        Author
+                        <BiSortAZ className="sort-icon"/>
+                        <BiSortZA className="sort-icon" hidden/>
+                    </Button>  
                 </th>
                 <th>
-                    Änderungsdatum
-                    <BiSortDown className="sort-icon"/>
-                    <BiSortUp hidden/>
+                    <Button variant="light">
+                        Änderungsdatum
+                        <BiSortDown className="sort-icon"/>
+                        <BiSortUp hidden/>
+                    </Button>
                 </th>
                 </tr>
             </thead>
@@ -87,6 +96,14 @@ const Documents = () => {
                         <GrDocument className="misc"/>
                     </td>
                     <td>Sonstiges.csv</td>
+                    <td>Benutzername</td>
+                    <td>00.00.0000 00:00</td>
+                </tr>
+                <tr>
+                    <td>
+                        <GrDocumentImage className="pic"/>
+                    </td>
+                    <td>Logo.jpg</td>
                     <td>Benutzername</td>
                     <td>00.00.0000 00:00</td>
                 </tr>

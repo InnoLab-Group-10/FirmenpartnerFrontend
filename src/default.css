@@ -9,6 +9,7 @@
 	--body-font: 'Nunito', sans-serif;
 	--normal-font-size: 1rem;
 	--z-fixed: 100;
+	--gray-body: #e9ecef;
 }
 
 *,
@@ -23,6 +24,7 @@ body {
 	padding-left: 1rem;
 	font-family: var(--body-font);
 	font-size: var(--normal-font-size);
+	background-color: var(--gray-body) !important;
 }
 
 a {
@@ -194,6 +196,7 @@ a {
 	body {
 		margin: calc(var(--header-height) + 2rem) 0 0 0;
 		padding-left: calc(var(--nav-width) + 1rem);
+		background-color: var(--gray-body) !important;
 	}
 
 	.header {
@@ -336,7 +339,31 @@ a {
 	border-radius: 12px;
 }
 
+/* === TABLEs === */
+th .btn{
+	width: 100%;
+	justify-content: space-between;
+	text-align: left;
+	padding-left: 0.6rem;
+	font-weight: bold;
+	border: none;
+}
+
+#bootstrap-override .sort-icon-single{
+	width: 40px;
+}
+
+th .sort-icon{
+	float: right;
+	margin-top: .2rem;
+}
+
+td{
+	padding-left: 1rem !important;
+}
+
 /* === DOCUMENTS === */
+
 .pdf path{
 	stroke: #dc3545;
 }
@@ -353,6 +380,47 @@ a {
 	stroke: #20c997;
 }
 
-.misc path{
+.misc path, .pic path{
 	stroke: #6c757d;
+}
+
+/* === CARDS === */
+#bootstrap-override .card{
+	margin-bottom: 1rem;
+}
+
+#bootstrap-override .card-header,
+#bootstrap-override .card-footer{
+	background-color: #fff;
+}
+
+.card-header{
+	font-weight: bold;
+}
+
+/* === FORM === */
+#bootstrap-override form .btn{
+	height: 58px;
+}
+
+.form-floating > .form-select{
+	margin-bottom: 1rem;
+}
+
+.small-upload{
+	display: none;
+}
+
+.big-upload{
+	display: block;
+}
+
+@media(max-width: 425px){
+	.small-upload{
+		display: block;
+	}
+	
+	.big-upload{
+		display: none;
+	}
 }

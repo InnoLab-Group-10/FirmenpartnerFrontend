@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Container, Collapse, Table, Card, Col, Row} from 'react-bootstrap';
+import {Container, Collapse, Table, Card, Col, Row, Button} from 'react-bootstrap';
 import {BiInfoCircle, 
         BiSortAZ, 
         BiSortZA, 
@@ -16,7 +16,7 @@ const CollapsibleTable = () => {
         <Card.Header>
             <Row>
                 <Col>
-                    Test
+                    Partnerunternehmen
                 </Col>
                 <Col>
                     <BiInfoCircle className="info-button"></BiInfoCircle>
@@ -34,24 +34,32 @@ const CollapsibleTable = () => {
                 <thead>
                     <tr>
                     <th>
-                        Firmenname
-                        <BiSortAZ className="sort-icon"/>
-                        <BiSortZA className="sort-icon" hidden/>
+                        <Button variant="light">
+                            Firmenname
+                            <BiSortAZ className="sort-icon"/>
+                            <BiSortZA className="sort-icon" hidden/>
+                        </Button>
                     </th>
                     <th>
-                        Ansprechperson
-                        <BiSortAZ className="sort-icon"/>
-                        <BiSortZA className="sort-icon" hidden/>
-                        </th>
-                    <th>
-                        E-Mail
-                        <BiSortAZ className="sort-icon"/>
-                        <BiSortZA className="sort-icon" hidden/>
+                        <Button variant="light">
+                            Ansprechperson
+                            <BiSortAZ className="sort-icon"/>
+                            <BiSortZA className="sort-icon" hidden/>
+                        </Button>
                     </th>
                     <th>
-                        Telefonnummer
-                        <BiSortDown className="sort-icon"/>
-                        <BiSortUp hidden/>
+                        <Button variant="light">
+                            E-Mail
+                            <BiSortAZ className="sort-icon"/>
+                            <BiSortZA className="sort-icon" hidden/>
+                        </Button>
+                    </th>
+                    <th>
+                        <Button variant="light">
+                            Telefonnummer
+                            <BiSortDown className="sort-icon"/>
+                            <BiSortUp hidden/>
+                        </Button>
                     </th>
                     </tr>
                 </thead>
