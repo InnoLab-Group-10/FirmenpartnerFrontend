@@ -1,16 +1,15 @@
-import React, {useState} from 'react';
-import {Container, Collapse, Table, Card, Col, Row, Button} from 'react-bootstrap';
+import React from 'react';
+import {Container, Table, Card, Col, Row, Button} from 'react-bootstrap';
 import {BiInfoCircle, 
         BiSortAZ, 
         BiSortZA, 
         BiSortDown, 
         BiSortUp} from 'react-icons/bi';
+import PartnerRow from './PartnerRow';
 
 import 'bootstrap/js/src/collapse.js';
 
 const CollapsibleTable = () => {
-	const [open, setOpen] = useState(false);
-
   return (<Container>
     <Card>
         <Card.Header>
@@ -35,7 +34,7 @@ const CollapsibleTable = () => {
                     <tr>
                     <th>
                         <Button variant="light">
-                            Firmenname
+                            Partner
                             <BiSortAZ className="sort-icon"/>
                             <BiSortZA className="sort-icon" hidden/>
                         </Button>
@@ -56,7 +55,7 @@ const CollapsibleTable = () => {
                     </th>
                     <th>
                         <Button variant="light">
-                            Telefonnummer
+                            Telefon
                             <BiSortDown className="sort-icon"/>
                             <BiSortUp hidden/>
                         </Button>
@@ -64,24 +63,42 @@ const CollapsibleTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr
-                        onClick={() => setOpen(!open)}
-                        aria-controls="example-collapse-text"
-                        aria-expanded={open}
-                    >
-                        <td>Testname</td>
-                        <td>Test Tester</td>
-                        <td>name@name.name</td>
-                        <td>+43 (0) 000 000 00 00</td>
-                    </tr>
-                    <Collapse in={open}>
-                        <tr id="example-collapse-text">
-                            <td colSpan="4">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-                                            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-                                            labore wes anderson cred nesciunt sapiente ea proident.
-                            </td>
-                        </tr>
-                    </Collapse>
+                    <PartnerRow 
+                        activity="1"
+                        name="Testname"
+                        maincontactname="Test Tester"
+                        email="name@name.name"
+                        phone="+43 (0) 000 000 00 00"
+                        text="Text"
+                        adress="Teststraße 104a/14"
+                        zipcode="1150"
+                        city="Wien"
+                        studentsPerYear="99"
+                    />
+                    <PartnerRow 
+                        activity="0"
+                        name="Testname"
+                        maincontactname="Test Tester"
+                        email="name@name.name"
+                        phone="+43 (0) 000 000 00 00"
+                        text="Text"
+                        adress="Teststraße 104a/14"
+                        zipcode="1150"
+                        city="Wien"
+                        studentsPerYear="99"
+                    />
+                    <PartnerRow 
+                        activity="2"
+                        name="Testname"
+                        maincontactname="Test Tester"
+                        email="name@name.name"
+                        phone="+43 (0) 000 000 00 00"
+                        text="Text"
+                        adress="Teststraße 104a/14"
+                        zipcode="1150"
+                        city="Wien"
+                        studentsPerYear="99"
+                    />
                 </tbody>
                 </Table>
         </Card.Body>

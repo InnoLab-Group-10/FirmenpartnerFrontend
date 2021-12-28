@@ -339,7 +339,11 @@ a {
 	border-radius: 12px;
 }
 
-/* === TABLEs === */
+/* === TABLES === */
+#bootstrap-override .main-table{
+	margin-bottom: 4rem;
+}
+
 th .btn{
 	width: 100%;
 	justify-content: space-between;
@@ -347,10 +351,11 @@ th .btn{
 	padding-left: 0.6rem;
 	font-weight: bold;
 	border: none;
+	margin-left: -.4rem;
 }
 
 #bootstrap-override .sort-icon-single{
-	width: 40px;
+	width: 36px;
 }
 
 th .sort-icon{
@@ -359,11 +364,22 @@ th .sort-icon{
 }
 
 td{
-	padding-left: 1rem !important;
+	padding-left: .7rem !important;
+}
+
+.active-row{
+	border-left: 12px solid #198754;
+}
+
+.deactivated-row{
+	border-left: 12px solid #dc3545;
+}
+
+.pending-row{
+	border-left: 12px solid #fd7e14;
 }
 
 /* === DOCUMENTS === */
-
 .pdf path{
 	stroke: #dc3545;
 }
@@ -384,9 +400,28 @@ td{
 	stroke: #6c757d;
 }
 
+#bootstrap-override .document-download-button{
+	width: 100%;
+	text-align: left;
+	padding: 0;
+	color: #6c757d;
+	background-color: rgba(0,0,0,0);
+	border-color: rgba(0,0,0,0);
+}
+
+.document-download-button svg{
+	float: right;
+	margin-right: 1rem;
+	margin-top: .2rem;
+}
+
 /* === CARDS === */
 #bootstrap-override .card{
 	margin-bottom: 1rem;
+}
+
+#bootstrap-override .card:last-of-type{
+	margin-bottom: 2rem;
 }
 
 #bootstrap-override .card-header,

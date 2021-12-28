@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Container, Collapse, Table, Card, Col, Row, Button} from 'react-bootstrap';
+import React from 'react';
+import {Container, Table, Card, Col, Row, Button} from 'react-bootstrap';
 import {BiInfoCircle, 
     BiSortAZ, 
     BiSortZA, 
@@ -7,9 +7,9 @@ import {BiInfoCircle,
     BiSortUp} from 'react-icons/bi';
 
 import 'bootstrap/js/src/collapse.js';
+import UserRow from './UserRow';
 
 const CollapsibleTable = () => {
-	const [open, setOpen] = useState(false);
 
   return (<Container>
     <Card>
@@ -58,24 +58,12 @@ const CollapsibleTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr
-                        onClick={() => setOpen(!open)}
-                        aria-controls="example-collapse-text"
-                        aria-expanded={open}
-                    >
-                        <td>Testname</td>
-                        <td>Tester</td>
-                        <td>name@name.name</td>
-                        <td>BUTTON</td>
-                    </tr>
-                    <Collapse in={open}>
-                        <tr id="example-collapse-text">
-                            <td colSpan="5">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-                                            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-                                            labore wes anderson cred nesciunt sapiente ea proident.
-                            </td>
-                        </tr>
-                    </Collapse>
+                    <UserRow
+                        username="Testname"
+                        userrole="Tester"
+                        useremail="name@name.name"
+                        text="text"
+                    />
                 </tbody>
                 </Table>
         </Card.Body>

@@ -5,12 +5,9 @@ import { BiInfoCircle,
         BiSortZA, 
         BiSortDown, 
         BiSortUp } from 'react-icons/bi';
-import {GrDocumentPdf, 
-        GrDocumentPpt, 
-        GrDocumentExcel,
-        GrDocumentWord,
-        GrDocument,
-        GrDocumentImage} from 'react-icons/gr';
+import {GrDocumentWord} from 'react-icons/gr';
+
+import DocumentRow from './DocumentRow';
 
 const Documents = () => {
 	return <Container className="document-table">
@@ -29,84 +26,72 @@ const Documents = () => {
         <Table hover responsive>
             <thead>
                 <tr>
-                <th>
-                    <Button variant="light" className="sort-icon-single">
-                        <BiSortDown className="sort-icon-center"/>
-                        <BiSortUp className="sort-icon-center" hidden/>
-                    </Button>
-                </th>
-                <th>
-                    <Button variant="light">
-                        Dateiname
-                        <BiSortAZ className="sort-icon"/>
-                        <BiSortZA className="sort-icon" hidden/>
-                    </Button>
-                </th>
-                <th>
-                    <Button variant="light">
-                        Author
-                        <BiSortAZ className="sort-icon"/>
-                        <BiSortZA className="sort-icon" hidden/>
-                    </Button>  
-                </th>
-                <th>
-                    <Button variant="light">
-                        Änderungsdatum
-                        <BiSortDown className="sort-icon"/>
-                        <BiSortUp hidden/>
-                    </Button>
-                </th>
+                    <th>
+                        <Button className="sort-icon-single" variant="light">
+                            <BiSortDown className="sort-icon-center"/>
+                            <BiSortUp className="sort-icon-center" hidden/>
+                        </Button>
+                    </th>
+                    <th>
+                        <Button variant="light">
+                            Dateiname
+                            <BiSortAZ className="sort-icon"/>
+                            <BiSortZA className="sort-icon" hidden/>
+                        </Button>
+                    </th>
+                    <th>
+                        <Button variant="light">
+                            Author
+                            <BiSortAZ className="sort-icon"/>
+                            <BiSortZA className="sort-icon" hidden/>
+                        </Button>  
+                    </th>
+                    <th>
+                        <Button variant="light">
+                            Änderungsdatum
+                            <BiSortDown className="sort-icon"/>
+                            <BiSortUp className="sort-icon" hidden/>
+                        </Button>
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <GrDocumentPdf className="pdf"/>
-                    </td>
-                    <td>Dokumentename.pdf</td>
-                    <td>Benutzername</td>
-                    <td>00.00.0000 00:00</td>
-                </tr>
-                <tr>
-                    <td>
-                        <GrDocumentWord className="word"/>
-                    </td>
-                    <td>Bezeichner.docx</td>
-                    <td>Benutzername</td>
-                    <td>00.00.0000 00:00</td>
-                </tr>
-                <tr>
-                    <td>
-                        <GrDocumentPpt className="ppt"/>
-                    </td>
-                    <td>Präsentation.ppt</td>
-                    <td>Benutzername</td>
-                    <td>00.00.0000 00:00</td>
-                </tr>
-                <tr>
-                    <td>
-                        <GrDocumentExcel className="excel"/>
-                    </td>
-                    <td>Tabelle.xlx</td>
-                    <td>Benutzername</td>
-                    <td>00.00.0000 00:00</td>
-                </tr>
-                <tr>
-                    <td>
-                        <GrDocument className="misc"/>
-                    </td>
-                    <td>Sonstiges.csv</td>
-                    <td>Benutzername</td>
-                    <td>00.00.0000 00:00</td>
-                </tr>
-                <tr>
-                    <td>
-                        <GrDocumentImage className="pic"/>
-                    </td>
-                    <td>Logo.jpg</td>
-                    <td>Benutzername</td>
-                    <td>00.00.0000 00:00</td>
-                </tr>
+                <DocumentRow
+                    icon="pdf"
+                    name="Dokument.pdf"
+                    author="Test"
+                    timestamp="00.00.0000 00:00"
+                />
+                <DocumentRow
+                    icon="word"
+                    name="Bezeichner.docx"
+                    author="Test"
+                    timestamp="00.00.0000 00:00"
+                />
+                <DocumentRow
+                    icon="ppt"
+                    name="Präsentation.ppt"
+                    author="Test"
+                    timestamp="00.00.0000 00:00"
+                />
+                <DocumentRow
+                    icon="excel"
+                    name="Tabelle.xlx"
+                    author="Test"
+                    timestamp="00.00.0000 00:00"
+                />
+                <DocumentRow
+                    icon="misc"
+                    name="Sonstiges.csv"
+                    author="Test"
+                    timestamp="00.00.0000 00:00"
+                />
+                <DocumentRow
+                    icon="jpg"
+                    name="Logo.jpg"
+                    author="Test"
+                    timestamp="00.00.0000 00:00"
+                />
             </tbody>
             </Table>
         </Card.Body>
