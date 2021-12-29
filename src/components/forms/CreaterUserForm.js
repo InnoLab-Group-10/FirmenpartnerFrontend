@@ -51,6 +51,19 @@ const CreatUserForm = () => {
                                                 </Form.Select>
                                             </FloatingLabel>
                                         </Col>
+                                    </Row>
+                                    <Row className="textarea">
+                                        <Col lg>
+                                            <FloatingLabel controlId="floatingTextarea2" label="Notizen">
+                                                <Form.Control
+                                                as="textarea"
+                                                placeholder="Notizen anlegen"
+                                                style={{ height: '100px' }}
+                                                />
+                                            </FloatingLabel>
+                                        </Col>
+                                    </Row>
+                                    <Row>
                                         <Col lg>
                                             <div className="d-grid">
                                                 <Button variant="primary" type="submit" size="lg">

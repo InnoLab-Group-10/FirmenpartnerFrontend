@@ -40,6 +40,8 @@ const CreatePartnerForm = () => {
                                             <Form.Control type="text" placeholder="Vorname Nachname" />
                                         </FloatingLabel>
                                     </Col>
+                                </Row>
+                                <Row>
                                     <Col lg>
                                         <FloatingLabel
                                             controlId="floatingInput"
@@ -58,6 +60,66 @@ const CreatePartnerForm = () => {
                                             <Form.Control type="tel" placeholder="+43 (0) 000 000 00 00" />
                                         </FloatingLabel>
                                     </Col>
+                                </Row>
+                                <Row>
+                                    <Col lg>
+                                        <FloatingLabel
+                                            controlId="floatingInput"
+                                            label="Straße"
+                                            className="mb-3"
+                                        >
+                                            <Form.Control type="text" placeholder="Vorname Nachname" />
+                                        </FloatingLabel>
+                                    </Col>
+                                    <Col lg>
+                                        <FloatingLabel
+                                            controlId="floatingInput"
+                                            label="Hausnummer"
+                                            className="mb-3"
+                                        >
+                                            <Form.Control type="text" placeholder="Vorname Nachname" />
+                                        </FloatingLabel>
+                                    </Col>
+                                    <Col lg>
+                                        <FloatingLabel
+                                            controlId="floatingInput"
+                                            label="Postleitzahl"
+                                            className="mb-3"
+                                        >
+                                            <Form.Control type="text" placeholder="Vorname Nachname" />
+                                        </FloatingLabel>
+                                    </Col>
+                                    <Col lg>
+                                        <FloatingLabel
+                                            controlId="floatingInput"
+                                            label="Ort"
+                                            className="mb-3"
+                                        >
+                                            <Form.Control type="text" placeholder="Vorname Nachname" />
+                                        </FloatingLabel>
+                                    </Col>
+                                    <Col lg>
+                                        <FloatingLabel
+                                            controlId="floatingInput"
+                                            label="Studenten pro Jahr"
+                                            className="mb-3"
+                                        >
+                                            <Form.Control type="number" placeholder="Vorname Nachname" />
+                                        </FloatingLabel>
+                                    </Col>
+                                </Row>
+                                <Row className="textarea">
+                                    <Col lg>
+                                        <FloatingLabel controlId="floatingTextarea2" label="Notizen">
+                                            <Form.Control
+                                            as="textarea"
+                                            placeholder="Notizen anlegen"
+                                            style={{ height: '100px' }}
+                                            />
+                                        </FloatingLabel>
+                                    </Col>
+                                </Row>
+                                <Row>
                                     <Col lg>
                                         <div className="d-grid">
                                             <Button variant="primary" type="submit" size="lg">

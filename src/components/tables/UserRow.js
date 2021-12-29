@@ -18,14 +18,14 @@ const UserRow = (props) => {
                 <Collapse in={open}>
                     <tr id="example-collapse-text">
                         <td colSpan="1">
-                            <strong>Test 1:</strong>
+                            <strong>Name:</strong>
                             <br/>
-                            <strong>Test 2:</strong>
+                            <strong>Telefonnummer:</strong>
                         </td>
                             <td colSpan="3">
-                            {props.text}
+                            Titel Vorname Nachname Titel
                             <br/>
-                            {props.text}
+                            +43 (0) 000 000 00 00
                         </td>
                     </tr>
                 </Collapse>
