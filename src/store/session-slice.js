@@ -3,7 +3,20 @@ import { sessionLogin, sessionRefresh, sessionInvalidate } from './session-thunk
 
 const sessionSlice = createSlice({
 	name: 'session',
-	initialState: { token: null, refreshToken: null, isLoggedIn: false },
+	initialState: {
+		token: null,
+		refreshToken: null,
+		isLoggedIn: false,
+		refreshInterval: null,
+	},
+	reducers: {
+		setRefreshInterval: (state, action) => {
+			state.refreshInterval = action.payload.interval;
+		},
+		clearRefreshInterval: state => {
+			clearInterval(state.refreshInterval);
+		},
+	},
 	extraReducers: {
 		[sessionLogin.fulfilled]: (state, action) => {
 			state.token = action.payload.token;

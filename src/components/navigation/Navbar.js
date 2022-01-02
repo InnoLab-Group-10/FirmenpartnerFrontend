@@ -11,8 +11,14 @@ import {
 	BiLogOut,
 } from 'react-icons/bi';
 import { LinkContainer } from 'react-router-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { sessionInvalidate } from '../../store/session-thunks';
 
 const Navbar = () => {
+	const refreshToken = useSelector(state => state.session.refreshToken);
+	const dispatch = useDispatch();
+
 	return (
 		<div className='l-navbar' id='nav-bar'>
 			<nav className='nav'>
@@ -62,13 +68,15 @@ const Navbar = () => {
 						</LinkContainer>
 					</div>
 				</div>
-				<LinkContainer to='/abmelden' activeClassName='active'>
-					<Nav.Link className='nav_link'>
-						{/*route not yet implemented*/}
-						<BiLogOut className='bx bx-log-out nav_icon'></BiLogOut>
-						<span className='nav_name'>Abmelden</span>
-					</Nav.Link>
-				</LinkContainer>
+				<Nav.Link
+					className='nav_link'
+					onClick={() => {
+						dispatch(sessionInvalidate({ refreshToken }));
+					}}
+				>
+					<BiLogOut className='bx bx-log-out nav_icon'></BiLogOut>
+					<span className='nav_name'>Abmelden</span>
+				</Nav.Link>
 			</nav>
 		</div>
 	);
