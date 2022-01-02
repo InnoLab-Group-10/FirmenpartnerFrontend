@@ -344,6 +344,10 @@ a {
 	margin-bottom: 4rem;
 }
 
+.textarea{
+	margin-bottom: 1rem;
+}
+
 th .btn{
 	width: 100%;
 	justify-content: space-between;
