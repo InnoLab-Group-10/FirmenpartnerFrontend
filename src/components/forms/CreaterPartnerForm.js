@@ -1,8 +1,41 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { Form, Container, Card, Row, Col, FloatingLabel, Button, Accordion } from 'react-bootstrap';
-import {BiInfoCircle} from 'react-icons/bi'
+import {BiInfoCircle} from 'react-icons/bi';
+import { useDispatch } from 'react-redux';
+
+import { newCompany } from '../../store/company-thunks';
 
 const CreatePartnerForm = () => {
+    const dispatch = useDispatch();
+    const companyNameRef = useRef(); 
+    const contactPersonRef = useRef(); 
+    const emailRef = useRef();
+    const phoneRef = useRef(); 
+    const streetRef = useRef();
+    const houseNumberRef = useRef();
+    const postcodeRef = useRef();
+    const cityRef = useRef();
+    const studentsPerYearRef = useRef();
+    const notesRef = useRef();
+
+	const submitHandler = e => {
+		e.preventDefault();
+		dispatch(
+			newCompany({
+                companyName: companyNameRef.current.value,
+                contactPerson: contactPersonRef.current.value,
+				email: emailRef.current.value,
+                phone: phoneRef.current.value,
+                street: streetRef.current.value,
+                houseNumber: houseNumberRef.current.value,
+                postcode: postcodeRef.current.value,
+                city: cityRef.current.value,
+                studentsPerYear: studentsPerYearRef.current.value,
+                notes: notesRef.current.value,
+			})
+		);
+	};
+
 	return (
         <Container>
             <Card>
@@ -28,7 +61,7 @@ const CreatePartnerForm = () => {
                                             label="Firmenname"
                                             className="mb-3"
                                         >
-                                            <Form.Control type="text" placeholder="Firmenname" />
+                                            <Form.Control type="text" placeholder="Firmenname" ref={companyNameRef} />
                                         </FloatingLabel>
                                     </Col>
                                     <Col lg>
@@ -37,7 +70,7 @@ const CreatePartnerForm = () => {
                                             label="Ansprechperson"
                                             className="mb-3"
                                         >
-                                            <Form.Control type="text" placeholder="Vorname Nachname" />
+                                            <Form.Control type="text" placeholder="Vorname Nachname" ref={contactPersonRef}/>
                                         </FloatingLabel>
                                     </Col>
                                 </Row>
@@ -48,7 +81,7 @@ const CreatePartnerForm = () => {
                                             label="E-Mail-Adresse"
                                             className="mb-3"
                                         >
-                                            <Form.Control type="email" placeholder="name@example.com" />
+                                            <Form.Control type="email" placeholder="name@example.com" ref={emailRef}/>
                                         </FloatingLabel>
                                     </Col>
                                     <Col lg>
@@ -57,7 +90,7 @@ const CreatePartnerForm = () => {
                                             label="Telefonnummer"
                                             className="mb-3"
                                         >
-                                            <Form.Control type="tel" placeholder="+43 (0) 000 000 00 00" />
+                                            <Form.Control type="tel" placeholder="+43 (0) 000 000 00 00" ref={phoneRef}/>
                                         </FloatingLabel>
                                     </Col>
                                 </Row>
@@ -68,7 +101,7 @@ const CreatePartnerForm = () => {
                                             label="Straße"
                                             className="mb-3"
                                         >
-                                            <Form.Control type="text" placeholder="Vorname Nachname" />
+                                            <Form.Control type="text" placeholder="Vorname Nachname" ref={streetRef}/>
                                         </FloatingLabel>
                                     </Col>
                                     <Col lg>
@@ -77,7 +110,7 @@ const CreatePartnerForm = () => {
                                             label="Hausnummer"
                                             className="mb-3"
                                         >
-                                            <Form.Control type="text" placeholder="Vorname Nachname" />
+                                            <Form.Control type="text" placeholder="Vorname Nachname" ref={houseNumberRef}/>
                                         </FloatingLabel>
                                     </Col>
                                     <Col lg>
@@ -86,7 +119,7 @@ const CreatePartnerForm = () => {
                                             label="Postleitzahl"
                                             className="mb-3"
                                         >
-                                            <Form.Control type="text" placeholder="Vorname Nachname" />
+                                            <Form.Control type="text" placeholder="Vorname Nachname" ref={postcodeRef}/>
                                         </FloatingLabel>
                                     </Col>
                                     <Col lg>
@@ -95,7 +128,7 @@ const CreatePartnerForm = () => {
                                             label="Ort"
                                             className="mb-3"
                                         >
-                                            <Form.Control type="text" placeholder="Vorname Nachname" />
+                                            <Form.Control type="text" placeholder="Vorname Nachname" ref={cityRef}/>
                                         </FloatingLabel>
                                     </Col>
                                     <Col lg>
@@ -104,13 +137,13 @@ const CreatePartnerForm = () => {
                                             label="Studenten pro Jahr"
                                             className="mb-3"
                                         >
-                                            <Form.Control type="number" placeholder="Vorname Nachname" />
+                                            <Form.Control type="number" placeholder="Vorname Nachname" ref={studentsPerYearRef}/>
                                         </FloatingLabel>
                                     </Col>
                                 </Row>
                                 <Row className="textarea">
                                     <Col lg>
-                                        <FloatingLabel controlId="floatingTextarea2" label="Notizen">
+                                        <FloatingLabel controlId="floatingTextarea2" label="Notizen" ref={notesRef}>
                                             <Form.Control
                                             as="textarea"
                                             placeholder="Notizen anlegen"
@@ -122,7 +155,7 @@ const CreatePartnerForm = () => {
                                 <Row>
                                     <Col lg>
                                         <div className="d-grid">
-                                            <Button variant="primary" type="submit" size="lg">
+                                            <Button variant="primary" type="submit" size="lg" onClick={submitHandler}>
                                                 Anlegen
                                             </Button>
                                         </div>

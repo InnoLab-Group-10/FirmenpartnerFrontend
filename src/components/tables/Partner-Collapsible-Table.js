@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Container, Table, Card, Col, Row, Button} from 'react-bootstrap';
 import {BiInfoCircle, 
         BiSortAZ, 
@@ -6,10 +6,22 @@ import {BiInfoCircle,
         BiSortDown, 
         BiSortUp} from 'react-icons/bi';
 import PartnerRow from './PartnerRow';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { companyGetAll } from '../../store/company-thunks';
 import 'bootstrap/js/src/collapse.js';
 
 const CollapsibleTable = () => {
+    const dispatch = useDispatch();
+    const companies = useSelector(state => state.company.companies);
+    const token = useSelector(state => state.session.token);
+
+    useEffect(() => {
+        dispatch(companyGetAll({token}))
+    }, [dispatch])
+
+    //map verwenden um die companies in der tabelle anzuzeigen
+
   return (<Container>
     <Card>
         <Card.Header>
