@@ -38,11 +38,15 @@ const PartnerRow = (props) => {
                             <strong>Anschrift:</strong>
                             <br/>
                             <strong>Studierende:</strong>
+                            <br/>
+                            <strong>Notiz:</strong>
                         </td>
                         <td colSpan="3">
                             {props.adress}, {props.zipcode}, {props.city}
                             <br/>
                             {props.studentsPerYear} pro Jahr
+                            <br/>
+                            Beispieltext
                         </td>
                     </tr>
                 </Collapse>

@@ -21,11 +21,15 @@ const UserRow = (props) => {
                             <strong>Name:</strong>
                             <br/>
                             <strong>Telefonnummer:</strong>
+                            <br/>
+                            <strong>Notiz:</strong>
                         </td>
-                            <td colSpan="3">
+                        <td colSpan="3">
                             Titel Vorname Nachname Titel
                             <br/>
                             +43 (0) 000 000 00 00
+                            <br/>
+                            Beispieltext
                         </td>
                     </tr>
                 </Collapse>

@@ -2,8 +2,9 @@ import React from 'react';
 import { Container, Row, Col, Image, Card } from 'react-bootstrap';
 
 import LoginForm from '../components/forms/LoginForm.js';
-import Alerts from '../components/Alerts.js';
+// import Alerts from '../components/Alerts.js';
 import './Login.css';
+import logo from "../media/fh_technikum_wien_logo_4c_2020.svg";
 
 const Login = () => {
 	return (
@@ -13,16 +14,13 @@ const Login = () => {
 					<Col className='login-form'>
 						<Card>
 							<Card.Body>
-								<Image src='holder.js/100px250' fluid />
-								<h1>Überschrift</h1>
-								<p>
-									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-									eirmod tempor invidunt ut l.
-								</p>
+								<Image src={logo} fluid />
 								<LoginForm />
+								{/*
 								<Alerts variant='success' />
 								<Alerts variant='warning' />
 								<Alerts variant='danger' />
+								*/}
 							</Card.Body>
 						</Card>
 					</Col>

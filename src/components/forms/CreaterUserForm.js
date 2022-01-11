@@ -42,6 +42,15 @@ const CreatUserForm = () => {
                                             </FloatingLabel>
                                         </Col>
                                         <Col lg>
+                                            <FloatingLabel
+                                                controlId="floatingInput"
+                                                label="Telefonnummer"
+                                                className="mb-3"
+                                            >
+                                                <Form.Control type="text" placeholder="Telefonnummer" />
+                                            </FloatingLabel>
+                                        </Col>
+                                        <Col lg>
                                             <FloatingLabel controlId="floatingSelect" label="Rolle">
                                                 <Form.Select aria-label="Floating label select example">
                                                     <option>Wählen</option>

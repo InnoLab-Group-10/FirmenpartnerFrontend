@@ -37,30 +37,33 @@ const App = () => {
 		}
 	}, [isLoggedIn, dispatch]);
 
-	return (
-		<div id='bootstrap-override'>
-			<div id='body-pd'>
-				{isLoggedIn ? (
-					<>
-						<Header />
-						<Navbar />
-						<div className='content'>
-							<Routes>
-								<Route path='dashboard' element={<Dashboard />} />
-								<Route path='benutzer' element={<Benutzer />} />
-								<Route path='partnerfirmen' element={<Partnerfirmen />} />
-								<Route path='studierende' element={<Studierende />} />
-								<Route path='dokumente' element={<Dokumente />} />
-								<Route path='statistiken' element={<Statistiken />} />
-							</Routes>
+	return (<>{isLoggedIn ? (
+					<div className="body">
+					<div id='bootstrap-override'>
+						<div id='body-pd'>
+							<Header />
+							<Navbar />
+							<div className='content'>
+								<Routes>
+									<Route path='dashboard' element={<Dashboard />} />
+									<Route path='benutzer' element={<Benutzer />} />
+									<Route path='partnerfirmen' element={<Partnerfirmen />} />
+									<Route path='studierende' element={<Studierende />} />
+									<Route path='dokumente' element={<Dokumente />} />
+									<Route path='statistiken' element={<Statistiken />} />
+								</Routes>
+							</div>
 						</div>
-					</>
+					</div>
+					</div>
 				) : (
-					<Login />
+				<div id='bootstrap-override'>
+						<div className="login-background">
+							<Login />
+						</div>
+				</div>
 				)}
-			</div>
-		</div>
-	);
-};
+			</>);
+}
 
 export default App;

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Form, Button, Container, FloatingLabel } from 'react-bootstrap';
+import { Form, Button, Container, FloatingLabel, Row, Col } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { sessionLogin } from '../../store/session-thunks';
@@ -21,19 +21,24 @@ const LoginForm = () => {
 
 	return (
 		<Container>
-			<Form>
-				<FloatingLabel controlId='floatingInput' label='E-Mail-Adresse' className='mb-3'>
-					<Form.Control type='email' placeholder='name@example.com' ref={emailRef} />
-				</FloatingLabel>
-				<FloatingLabel controlId='floatingPassword' label='Passwort'>
-					<Form.Control type='password' placeholder='Passwort' ref={passwordRef} />
-				</FloatingLabel>
-				<div className='d-grid gap-2'>
-					<Button variant='primary' type='submit' onClick={submitHandler}>
-						Anmelden
-					</Button>
-				</div>
-			</Form>
+			<Row>
+				<Col>
+				<Form>
+					<FloatingLabel controlId='floatingInput' label='E-Mail-Adresse' className='mb-3'>
+						<Form.Control type='email' placeholder='name@example.com' ref={emailRef} />
+					</FloatingLabel>
+					<FloatingLabel controlId='floatingPassword' label='Passwort'>
+						<Form.Control type='password' placeholder='Passwort' ref={passwordRef} />
+					</FloatingLabel>
+					<br/>
+					<div className='d-grid gap-2'>
+						<Button variant='primary' type='submit' onClick={submitHandler}>
+							Anmelden
+						</Button>
+					</div>
+				</Form>
+				</Col>
+			</Row>
 		</Container>
 	);
 };

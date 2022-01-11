@@ -21,8 +21,12 @@ const StudentRow = (props) => {
                             <strong>Test 1:</strong>
                             <br/>
                             <strong>Test 2:</strong>
+                            <br/>
+                            <strong>Notiz:</strong>
                         </td>
                         <td colSpan="3">
+                            {props.text}
+                            <br/>
                             {props.text}
                             <br/>
                             {props.text}
