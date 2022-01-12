@@ -3,8 +3,6 @@ import 'holderjs';
 import { Routes, Route } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { sessionRefresh } from './store/session-thunks.js';
-import { sessionActions } from './store/session-slice.js';
 import { userGetCurrent } from './store/user-thunks';
 import './functions.js';
 import Dashboard from './pages/Dashboard';
@@ -18,26 +16,19 @@ import Navbar from './components/navigation/Navbar';
 import Login from './pages/Login';
 
 const App = () => {
-	const { token, refreshToken, isLoggedIn } = useSelector(state => state.session);
+	const { token, isLoggedIn } = useSelector(state => state.session);
 	const dispatch = useDispatch();
-	// TODO make less janky, precall refresh if token is expired?
+
 	useEffect(() => {
 		if (isLoggedIn) {
-			// set token refresh
-			const interval = setInterval(() => {
-				dispatch(sessionRefresh({ token, refreshToken }));
-			}, 60001);
-			dispatch(sessionActions.setRefreshInterval({ interval }));
-			// get user data
 			dispatch(userGetCurrent({ token }));
-		} else {
-			// clear token refresh
-			dispatch(sessionActions.clearRefreshInterval());
 		}
 	}, [isLoggedIn, dispatch]);
 
-	return (<>{isLoggedIn ? (
-					<div className="body">
+	return (
+		<>
+			{isLoggedIn ? (
+				<div className='body'>
 					<div id='bootstrap-override'>
 						<div id='body-pd'>
 							<Header />
@@ -54,15 +45,16 @@ const App = () => {
 							</div>
 						</div>
 					</div>
-					</div>
-				) : (
-				<div id='bootstrap-override'>
-						<div className="login-background">
-							<Login />
-						</div>
 				</div>
-				)}
-			</>);
-}
+			) : (
+				<div id='bootstrap-override'>
+					<div className='login-background'>
+						<Login />
+					</div>
+				</div>
+			)}
+		</>
+	);
+};
 
 export default App;
