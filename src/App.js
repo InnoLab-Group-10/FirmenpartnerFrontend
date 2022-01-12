@@ -20,7 +20,6 @@ import Login from './pages/Login';
 const App = () => {
 	const { token, refreshToken, isLoggedIn } = useSelector(state => state.session);
 	const dispatch = useDispatch();
-
 	// TODO make less janky, precall refresh if token is expired?
 	useEffect(() => {
 		if (isLoggedIn) {

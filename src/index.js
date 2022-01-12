@@ -8,6 +8,11 @@ import store from './store/index';
 import './default.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// inject store for refresh token calls
+// fixes circular dependencies
+import { injectStore } from './store/axios';
+injectStore(store);
+
 ReactDOM.render(
 	<React.StrictMode>
 		<Provider store={store}>
