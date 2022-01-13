@@ -1,4 +1,4 @@
-#bootstrap-override .login-form{
+#bootstrap-override-login .login-form{
     margin-top: 4rem;
     margin-left: auto;
     margin-right: auto;
@@ -10,12 +10,12 @@
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 }
 
-#bootstrap-override .login-form img{
+#bootstrap-override-login .login-form img{
     margin-bottom: 3rem;
     margin-top: 2rem;
     width: 80%;
 }
 
-#bootstrap-override .login-form .btn{
+#bootstrap-override-login .login-form .btn{
     margin-bottom: 2rem;
 }

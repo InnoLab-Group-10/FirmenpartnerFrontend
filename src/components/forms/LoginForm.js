@@ -6,14 +6,14 @@ import { sessionLogin } from '../../store/session-thunks';
 
 const LoginForm = () => {
 	const dispatch = useDispatch();
-	const emailRef = useRef();
+	const usernameRef = useRef();
 	const passwordRef = useRef();
 
 	const submitHandler = e => {
 		e.preventDefault();
 		dispatch(
 			sessionLogin({
-				email: emailRef.current.value,
+				email: usernameRef.current.value,
 				password: passwordRef.current.value,
 			})
 		);
@@ -24,15 +24,15 @@ const LoginForm = () => {
 			<Row>
 				<Col>
 				<Form>
-					<FloatingLabel controlId='floatingInput' label='E-Mail-Adresse' className='mb-3'>
-						<Form.Control type='email' placeholder='name@example.com' ref={emailRef} />
+					<FloatingLabel controlId='floatingInput' label='Benutzername' className='mb-3'>
+						<Form.Control type='text' placeholder='Benutzername' ref={usernameRef} />
 					</FloatingLabel>
 					<FloatingLabel controlId='floatingPassword' label='Passwort'>
 						<Form.Control type='password' placeholder='Passwort' ref={passwordRef} />
 					</FloatingLabel>
 					<br/>
 					<div className='d-grid gap-2'>
-						<Button variant='primary' type='submit' onClick={submitHandler}>
+						<Button size="lg" variant='primary' type='submit' onClick={submitHandler}>
 							Anmelden
 						</Button>
 					</div>
