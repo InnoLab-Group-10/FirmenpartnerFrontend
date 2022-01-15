@@ -56,8 +56,8 @@ const Header = () => {
 					<Col>
 						<header className='header' id='header'>
 							<div className='header_toggle'>
-								<BiMenu id='header-toggle' className='header-toggle-show'></BiMenu>
-								<BiX id='header-close' className='header-close-hide'></BiX>
+								<BiMenu id='header-toggle' className='header-toggle-show' ></BiMenu>
+								<BiX id='header-close' className='header-close-hide' ></BiX>
 							</div>
 							<div className='user-notification'>
 								<Button
