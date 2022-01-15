@@ -16,12 +16,12 @@ import Navbar from './components/navigation/Navbar';
 import Login from './pages/Login';
 
 const App = () => {
-	const { token, isLoggedIn } = useSelector(state => state.session);
+	const { isLoggedIn } = useSelector(state => state.session);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (isLoggedIn) {
-			dispatch(userGetCurrent({ token }));
+			dispatch(userGetCurrent());
 		}
 	}, [isLoggedIn, dispatch]);
 

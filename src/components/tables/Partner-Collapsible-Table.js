@@ -5,17 +5,20 @@ import PartnerRow from './PartnerRow';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { companyGetAll } from '../../store/company-thunks';
+import { companyActions } from '../../store/company-slice';
 import 'bootstrap/js/src/collapse.js';
 
 const CollapsibleTable = () => {
 	const dispatch = useDispatch();
-	const companies = useSelector(state => state.company.companies);
+	const { companies, shouldReload } = useSelector(state => state.company);
 
 	useEffect(() => {
-		dispatch(companyGetAll());
-	}, [dispatch]);
-
-	//map verwenden um die companies in der tabelle anzuzeigen
+		if (shouldReload) {
+			dispatch(companyGetAll());
+			// reset
+			dispatch(companyActions.setShouldReload({ shouldReload: false }));
+		}
+	}, [dispatch, shouldReload]);
 
 	return (
 		<Container>
@@ -69,42 +72,9 @@ const CollapsibleTable = () => {
 							</tr>
 						</thead>
 						<tbody>
-							<PartnerRow
-								activity='1'
-								name='Testname'
-								maincontactname='Test Tester'
-								email='name@name.name'
-								phone='+43 (0) 000 000 00 00'
-								text='Text'
-								adress='Teststraße 104a/14'
-								zipcode='1150'
-								city='Wien'
-								studentsPerYear='99'
-							/>
-							<PartnerRow
-								activity='0'
-								name='Testname'
-								maincontactname='Test Tester'
-								email='name@name.name'
-								phone='+43 (0) 000 000 00 00'
-								text='Text'
-								adress='Teststraße 104a/14'
-								zipcode='1150'
-								city='Wien'
-								studentsPerYear='99'
-							/>
-							<PartnerRow
-								activity='2'
-								name='Testname'
-								maincontactname='Test Tester'
-								email='name@name.name'
-								phone='+43 (0) 000 000 00 00'
-								text='Text'
-								adress='Teststraße 104a/14'
-								zipcode='1150'
-								city='Wien'
-								studentsPerYear='99'
-							/>
+							{companies.map(entry => (
+								<PartnerRow key={entry.company.id} activity='1' entry={entry} />
+							))}
 						</tbody>
 					</Table>
 				</Card.Body>
