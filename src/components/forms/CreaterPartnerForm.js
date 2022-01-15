@@ -78,7 +78,7 @@ const CreatePartnerForm = () => {
 						<Accordion.Body>
 							<Form>
 								<Row>
-									<Col sm>
+									<Col lg>
 										<FloatingLabel
 											controlId='floatingInput'
 											label='Firmenname'
@@ -87,10 +87,10 @@ const CreatePartnerForm = () => {
 											<Form.Control type='text' placeholder='Firmenname' ref={nameRef} />
 										</FloatingLabel>
 									</Col>
-									<Col sm>
+									<Col lg>
 										<FloatingLabel
 											controlId='floatingInput'
-											label='Ansprechperson Vorname'
+											label='Vorname'
 											className='mb-3'
 										>
 											<Form.Control
@@ -100,10 +100,10 @@ const CreatePartnerForm = () => {
 											/>
 										</FloatingLabel>
 									</Col>
-									<Col sm>
+									<Col lg>
 										<FloatingLabel
 											controlId='floatingInput'
-											label='Ansprechperson Nachname'
+											label='Nachname'
 											className='mb-3'
 										>
 											<Form.Control
