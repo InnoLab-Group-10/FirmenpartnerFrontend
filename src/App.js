@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { userGetCurrent } from './store/user-thunks';
-import './functions.js';
+// import './functions.js';
 import Dashboard from './pages/Dashboard';
 import Benutzer from './pages/Benutzer';
 import Partnerfirmen from './pages/Partnerfirmen';
@@ -27,7 +27,7 @@ const App = () => {
 
 	return (
 		<>
-			{ isLoggedIn ? (
+			{isLoggedIn ? (
 				<div className='body'>
 					<div id='bootstrap-override'>
 						<div id='body-pd'>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Dropdown, Button, Offcanvas } from 'react-bootstrap';
 import {
 	BiMenu,
@@ -13,7 +13,46 @@ import Timeline from '../cards/Timeline';
 
 import { sessionInvalidate } from '../../store/session-thunks';
 
+const showNavbar = (toggleId, closeId, navId, bodyId, headerId) => {
+	const toggle = document.getElementById(toggleId),
+		close = document.getElementById(closeId),
+		nav = document.getElementById(navId),
+		bodypd = document.getElementById(bodyId),
+		headerpd = document.getElementById(headerId);
+
+	// Validate that all variables exist
+	if (toggle && close && nav && bodypd && headerpd) {
+		toggle.addEventListener('click', () => {
+			// show navbar
+			nav.classList.toggle('showing');
+			// change icon
+			toggle.setAttribute('class', 'header-toggle-hide');
+			close.setAttribute('class', 'header-close-show');
+			// add padding to body
+			bodypd.classList.toggle('body-pd');
+			// add padding to header
+			headerpd.classList.toggle('body-pd');
+		});
+
+		close.addEventListener('click', () => {
+			// show navbar
+			nav.classList.toggle('showing');
+			// change icon
+			toggle.setAttribute('class', 'header-toggle-show');
+			close.setAttribute('class', 'header-close-hide');
+			// add padding to body
+			bodypd.classList.toggle('body-pd');
+			// add padding to header
+			headerpd.classList.toggle('body-pd');
+		});
+	}
+};
+
 const Header = () => {
+	useEffect(() => {
+		showNavbar('header-toggle', 'header-close', 'nav-bar', 'body-pd', 'header');
+	}, []);
+
 	const [showCanvas, setShow] = useState(false);
 	const [showNotes, setShowNotes] = useState(false);
 
@@ -56,8 +95,8 @@ const Header = () => {
 					<Col>
 						<header className='header' id='header'>
 							<div className='header_toggle'>
-								<BiMenu id='header-toggle' className='header-toggle-show' ></BiMenu>
-								<BiX id='header-close' className='header-close-hide' ></BiX>
+								<BiMenu id='header-toggle' className='header-toggle-show'></BiMenu>
+								<BiX id='header-close' className='header-close-hide'></BiX>
 							</div>
 							<div className='user-notification'>
 								<Button

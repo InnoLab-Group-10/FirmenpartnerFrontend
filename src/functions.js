@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
 				// show navbar
 				nav.classList.toggle('showing');
 				// change icon
-				toggle.setAttribute("class", 'header-toggle-hide');
-				close.setAttribute("class", 'header-close-show');
+				toggle.setAttribute('class', 'header-toggle-hide');
+				close.setAttribute('class', 'header-close-show');
 				// add padding to body
 				bodypd.classList.toggle('body-pd');
 				// add padding to header
@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
 				// show navbar
 				nav.classList.toggle('showing');
 				// change icon
-				toggle.setAttribute("class", 'header-toggle-show');
-				close.setAttribute("class", 'header-close-hide');
+				toggle.setAttribute('class', 'header-toggle-show');
+				close.setAttribute('class', 'header-close-hide');
 				// add padding to body
 				bodypd.classList.toggle('body-pd');
 				// add padding to header
