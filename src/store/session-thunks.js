@@ -11,6 +11,8 @@ export const sessionRefresh = createAsyncThunk('session/refresh', async args => 
 	return response.data;
 });
 
+// TODO maybe check expiry of refresh token before trying to invalidate
+// since refresh token invalidates after 30 days
 export const sessionInvalidate = createAsyncThunk('session/invalidate', async args => {
 	const response = await axiosPrivate.post('/session/invalidate', args);
 	return response.data;
