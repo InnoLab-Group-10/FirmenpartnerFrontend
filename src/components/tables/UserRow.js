@@ -7,7 +7,7 @@ const UserRow = props => {
 	return (
 		<>
 			<tr
-				onClick={() => setOpen(!open)}
+				onClick={() => setOpen(prevState => !prevState)}
 				aria-controls='example-collapse-text'
 				aria-expanded={open}
 			>

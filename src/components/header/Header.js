@@ -27,31 +27,35 @@ const Header = () => {
 	const [showCanvas, setShow] = useState(false);
 	const [showNotes, setShowNotes] = useState(false);
 
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
-
-	const handleCloseNotes = () => setShowNotes(false);
-	const handleShowNotes = () => setShowNotes(true);
-
 	return (
 		<>
 			{/* Timeline-Canvas */}
-			<Offcanvas show={showCanvas} onHide={handleClose} placement='end' scroll='true'>
+			<Offcanvas
+				show={showCanvas}
+				onHide={() => setShow(false)}
+				placement='end'
+				scroll='true'
+			>
 				<Offcanvas.Header closeButton>
 					<Offcanvas.Title>Timeline</Offcanvas.Title>
 				</Offcanvas.Header>
 				<Offcanvas.Body>
-					<Timeline></Timeline>
+					<Timeline />
 				</Offcanvas.Body>
 			</Offcanvas>
 
 			{/* Notification-Canvas */}
-			<Offcanvas show={showNotes} onHide={handleCloseNotes} placement='end' scroll='true'>
+			<Offcanvas
+				show={showNotes}
+				onHide={() => setShowNotes(false)}
+				placement='end'
+				scroll='true'
+			>
 				<Offcanvas.Header closeButton>
 					<Offcanvas.Title>Benachrichtigungen</Offcanvas.Title>
 				</Offcanvas.Header>
 				<Offcanvas.Body>
-					<Notifications></Notifications>
+					<Notifications />
 				</Offcanvas.Body>
 			</Offcanvas>
 
@@ -62,25 +66,26 @@ const Header = () => {
 						<header className={`header ${showNavbar ? 'body-pd' : ''}`} id='header'>
 							<div className='header_toggle'>
 								{showNavbar ? (
-									<BiX
-										onClick={toggleShowNavbarHandler}
-										className='header-close-show'
-									></BiX>
+									<BiX onClick={toggleShowNavbarHandler} className='header-close-show' />
 								) : (
-									<BiMenu onClick={toggleShowNavbarHandler}></BiMenu>
+									<BiMenu onClick={toggleShowNavbarHandler} />
 								)}
 							</div>
 							<div className='user-notification'>
 								<Button
 									className='timeline-button'
 									variant='light'
-									onClick={handleShowNotes}
+									onClick={() => setShowNotes(true)}
 								>
 									<BiNotification />
 								</Button>
 							</div>
 							<div className='user-notification'>
-								<Button className='timeline-button' variant='light' onClick={handleShow}>
+								<Button
+									className='timeline-button'
+									variant='light'
+									onClick={() => setShow(true)}
+								>
 									<BiCalendarWeek />
 								</Button>
 							</div>

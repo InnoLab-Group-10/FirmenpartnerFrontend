@@ -68,7 +68,7 @@ const CreatePartnerForm = () => {
 					<Row>
 						<Col>Partnerunternehmen anlegen</Col>
 						<Col>
-							<BiInfoCircle className='info-button'></BiInfoCircle>
+							<BiInfoCircle className='info-button' />
 						</Col>
 					</Row>
 				</Card.Header>

@@ -19,7 +19,7 @@ const CreatUserForm = () => {
 					<Row>
 						<Col>Benutzer anlegen</Col>
 						<Col>
-							<BiInfoCircle className='info-button'></BiInfoCircle>
+							<BiInfoCircle className='info-button' />
 						</Col>
 					</Row>
 				</Card.Header>
