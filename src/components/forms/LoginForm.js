@@ -23,20 +23,24 @@ const LoginForm = () => {
 		<Container>
 			<Row>
 				<Col>
-				<Form>
-					<FloatingLabel controlId='floatingInput' label='Benutzername' className='mb-3'>
-						<Form.Control type='text' placeholder='Benutzername' ref={usernameRef} />
-					</FloatingLabel>
-					<FloatingLabel controlId='floatingPassword' label='Passwort'>
-						<Form.Control type='password' placeholder='Passwort' ref={passwordRef} />
-					</FloatingLabel>
-					<br/>
-					<div className='d-grid gap-2'>
-						<Button size="lg" variant='primary' type='submit' onClick={submitHandler}>
-							Anmelden
-						</Button>
-					</div>
-				</Form>
+					<Form>
+						<FloatingLabel
+							controlId='floatingInput'
+							label='Benutzername'
+							className='mb-3'
+						>
+							<Form.Control type='text' placeholder='Benutzername' ref={usernameRef} />
+						</FloatingLabel>
+						<FloatingLabel controlId='floatingPassword' label='Passwort'>
+							<Form.Control type='password' placeholder='Passwort' ref={passwordRef} />
+						</FloatingLabel>
+						<br />
+						<div className='d-grid gap-2'>
+							<Button size='lg' variant='primary' type='submit' onClick={submitHandler}>
+								Anmelden
+							</Button>
+						</div>
+					</Form>
 				</Col>
 			</Row>
 		</Container>

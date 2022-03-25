@@ -18,7 +18,7 @@
 	box-sizing: border-box;
 }
 
-html{
+html {
 	background-color: var(--gray-body) !important;
 }
 
@@ -34,14 +34,14 @@ a {
 	text-decoration: none;
 }
 
-.login-background{
+.login-background {
 	height: 100vh;
-	background-image: url("../src/media/fh_technikum_wien_tag_gross.jpg");
+	background-image: url('../src/media/fh_technikum_wien_tag_gross.jpg');
 	background-position: center;
 	background-size: cover;
 }
 
-.content{
+.content {
 	margin-top: 5rem;
 	margin-right: 1rem;
 	height: calc(100vh - var(--header-height) - 1rem);
@@ -69,7 +69,7 @@ a {
 	margin-right: auto;
 }
 
-.header-close-show{
+.header-close-show {
 	margin-left: 1rem;
 }
 
@@ -121,7 +121,7 @@ a {
 	display: none;
 }
 
-.showing .nav_logo-name{
+.showing .nav_logo-name {
 	margin-left: 0.8rem;
 	display: none;
 }
@@ -130,7 +130,7 @@ a {
 	display: none;
 }
 
-.showing .nav_name{
+.showing .nav_name {
 	margin-left: 0.8rem;
 	display: none;
 }
@@ -176,29 +176,18 @@ a {
 	height: 100vh;
 }
 
-.sort-icon{
+.sort-icon {
 	margin-left: 0.3rem;
 }
 
-.sort-icon-center{
+.sort-icon-center {
 	margin-left: 0;
 }
 
 /* === MENU TOGGLE === */
-.header-toggle-show{
+
+.header-close-show {
 	display: inline-block;
-}
-
-.header-toggle-hide{
-	display: none;
-}
-
-.header-close-show{
-	display: inline-block;
-}
-
-.header-close-hide{
-	display: none;
 }
 
 @media screen and (min-width: 768px) {
@@ -214,10 +203,9 @@ a {
 		margin-left: var(--nav-width);
 	}
 
-	.header-close-show{
+	.header-close-show {
 		margin-left: calc(var(--nav-width) + 1rem);
 	}
-
 
 	.l-navbar {
 		left: 0;
@@ -228,8 +216,8 @@ a {
 		width: calc(var(--nav-width) + 156px);
 	}
 
-	.showing .nav_logo-name, .showing .nav_name  
-	{
+	.showing .nav_logo-name,
+	.showing .nav_name {
 		display: inline-block;
 	}
 
@@ -239,236 +227,237 @@ a {
 }
 
 /* === TOOLTIPS === */
-.info-button{
+.info-button {
 	float: right;
 	width: 24px;
 	height: 24px;
 }
 
 /* === HEADER USER-BADGE === */
-.user-badge{
+.user-badge {
 	height: 70%;
 	margin-right: 2rem;
 }
 
-.user-badge h6{
+.user-badge h6 {
 	margin-bottom: 0;
 }
 
-.user-badge span{
+.user-badge span {
 	color: #adb5bd;
 }
 
-.user-notification{
+.user-notification {
 	height: 70%;
 	padding-left: 1rem;
 	padding-right: 1rem;
 	border-right: 1px solid #adb5bd;
 }
 
-.user-notification .timeline-button svg{
+.user-notification .timeline-button svg {
 	margin-top: 0;
 }
 
-.user-notification svg{
+.user-notification svg {
 	margin-top: 0.6rem;
 	width: 24px;
-	height:24px;
+	height: 24px;
 }
 
-@media(max-width: 494px){
-	.user-badge{
+@media (max-width: 494px) {
+	.user-badge {
 		display: none;
 	}
 }
 
-.user-badge-menu .btn{
+.user-badge-menu .btn {
 	display: flex;
 	text-align: left;
 }
 
-.user-badge-menu svg{
+.user-badge-menu svg {
 	margin-top: 0.5rem;
 	margin-right: 1rem;
 	height: 24px;
 	width: 24px;
 }
 
-.dropdown-toggle::after{
+.dropdown-toggle::after {
 	margin-top: 1.1rem;
 }
 
-.dropdown-menu{
+.dropdown-menu {
 	width: 100%;
 }
 
-@media(max-width: 494px){
-	.user-badge-menu svg{
+@media (max-width: 494px) {
+	.user-badge-menu svg {
 		margin-bottom: 0.6rem;
 	}
 }
 
-@media(max-width: 320px){
-	.user-notification{
+@media (max-width: 320px) {
+	.user-notification {
 		padding-left: 0;
 		padding-right: 0;
 	}
 
-	.user-badge-menu svg{
+	.user-badge-menu svg {
 		margin-right: 0.3rem;
 	}
 }
 
 /* === SITE-TITLE === */
-.site-title{
+.site-title {
 	margin-bottom: 2rem;
 }
 
 /* === TIMELINE === */
-.toast-message{
+.toast-message {
 	margin-bottom: 1rem;
 }
 
-.toast-button{
+.toast-button {
 	margin-bottom: 0.8rem;
 }
 
-.appointment-card{
+.appointment-card {
 	margin-bottom: 1rem;
 }
 
-.appointment-card .btn{
+.appointment-card .btn {
 	border: 2px solid #fff;
 }
 
-.timeline-year, 
-.timeline-month{
-	background-color:#f7f6fb;
-	padding: .4rem .6rem;
+.timeline-year,
+.timeline-month {
+	background-color: #f7f6fb;
+	padding: 0.4rem 0.6rem;
 	border-radius: 12px;
 }
 
 /* === TABLES === */
-#bootstrap-override .main-table{
+#bootstrap-override .main-table {
 	margin-bottom: 4rem;
 }
 
-.textarea{
+.textarea {
 	margin-bottom: 1rem;
 }
 
-th .btn{
+th .btn {
 	width: 100%;
 	justify-content: space-between;
 	text-align: left;
 	padding-left: 0.6rem;
 	font-weight: bold;
 	border: none;
-	margin-left: -.4rem;
+	margin-left: -0.4rem;
 }
 
-#bootstrap-override .sort-icon-single{
+#bootstrap-override .sort-icon-single {
 	width: 36px;
 }
 
-th .sort-icon{
+th .sort-icon {
 	float: right;
-	margin-top: .2rem;
+	margin-top: 0.2rem;
 }
 
-td{
-	padding-left: .7rem !important;
+td {
+	padding-left: 0.7rem !important;
 }
 
-.active-row{
+.active-row {
 	border-left: 12px solid #198754;
 }
 
-.deactivated-row{
+.deactivated-row {
 	border-left: 12px solid #dc3545;
 }
 
-.pending-row{
+.pending-row {
 	border-left: 12px solid #fd7e14;
 }
 
 /* === DOCUMENTS === */
-.pdf path{
+.pdf path {
 	stroke: #dc3545;
 }
 
-.ppt path{
+.ppt path {
 	stroke: #fd7e14;
 }
 
-.word path{
+.word path {
 	stroke: #0d6efd;
 }
 
-.excel path{
+.excel path {
 	stroke: #20c997;
 }
 
-.misc path, .pic path{
+.misc path,
+.pic path {
 	stroke: #6c757d;
 }
 
-#bootstrap-override .document-download-button{
+#bootstrap-override .document-download-button {
 	width: 100%;
 	text-align: left;
 	padding: 0;
 	color: #6c757d;
-	background-color: rgba(0,0,0,0);
-	border-color: rgba(0,0,0,0);
+	background-color: rgba(0, 0, 0, 0);
+	border-color: rgba(0, 0, 0, 0);
 }
 
-.document-download-button svg{
+.document-download-button svg {
 	float: right;
 	margin-right: 1rem;
-	margin-top: .2rem;
+	margin-top: 0.2rem;
 }
 
 /* === CARDS === */
-#bootstrap-override .card{
+#bootstrap-override .card {
 	margin-bottom: 1rem;
 }
 
-#bootstrap-override .card:last-of-type{
+#bootstrap-override .card:last-of-type {
 	margin-bottom: 2rem;
 }
 
 #bootstrap-override .card-header,
-#bootstrap-override .card-footer{
+#bootstrap-override .card-footer {
 	background-color: #fff;
 }
 
-.card-header{
+.card-header {
 	font-weight: bold;
 }
 
 /* === FORM === */
-#bootstrap-override form .btn{
+#bootstrap-override form .btn {
 	height: 58px;
 }
 
-.form-floating > .form-select{
+.form-floating > .form-select {
 	margin-bottom: 1rem;
 }
 
-.small-upload{
+.small-upload {
 	display: none;
 }
 
-.big-upload{
+.big-upload {
 	display: block;
 }
 
-@media(max-width: 425px){
-	.small-upload{
+@media (max-width: 425px) {
+	.small-upload {
 		display: block;
 	}
-	
-	.big-upload{
+
+	.big-upload {
 		display: none;
 	}
 }

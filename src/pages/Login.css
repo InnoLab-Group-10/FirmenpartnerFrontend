@@ -1,21 +1,21 @@
-#bootstrap-override-login .login-form{
-    margin-top: 4rem;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    max-width: 480px;
+#bootstrap-override-login .login-form {
+	margin-top: 4rem;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	max-width: 480px;
 }
 
-.login-form .card{
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+.login-form .card {
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-#bootstrap-override-login .login-form img{
-    margin-bottom: 3rem;
-    margin-top: 2rem;
-    width: 80%;
+#bootstrap-override-login .login-form img {
+	margin-bottom: 3rem;
+	margin-top: 2rem;
+	width: 80%;
 }
 
-#bootstrap-override-login .login-form .btn{
-    margin-bottom: 2rem;
+#bootstrap-override-login .login-form .btn {
+	margin-bottom: 2rem;
 }
