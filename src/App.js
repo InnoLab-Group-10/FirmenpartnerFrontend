@@ -4,7 +4,6 @@ import { Routes, Route } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { userGetCurrent } from './store/user-thunks';
-// import './functions.js';
 import Dashboard from './pages/Dashboard';
 import Benutzer from './pages/Benutzer';
 import Partnerfirmen from './pages/Partnerfirmen';
@@ -17,6 +16,7 @@ import Login from './pages/Login';
 
 const App = () => {
 	const { isLoggedIn } = useSelector(state => state.session);
+	const { showNavbar } = useSelector(state => state.ui);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -30,11 +30,13 @@ const App = () => {
 			{isLoggedIn ? (
 				<div className='body'>
 					<div id='bootstrap-override'>
-						<div id='body-pd'>
+						<div id='body-pd' className={`${showNavbar ? 'body-pd' : ''}`}>
 							<Header />
 							<Navbar />
 							<div className='content'>
 								<Routes>
+									{/* TODO replace default route with splace screen or keep dashboard */}
+									<Route path='/' element={<Dashboard />} />
 									<Route path='dashboard' element={<Dashboard />} />
 									<Route path='benutzer' element={<Benutzer />} />
 									<Route path='partnerfirmen' element={<Partnerfirmen />} />

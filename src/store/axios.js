@@ -21,7 +21,7 @@ axiosPrivate.interceptors.request.use(
 	async config => {
 		const session = store.getState().session;
 		const currentDate = new Date();
-		// check if token is set, not really unnecessary
+		// check if token is set, not really necessary
 		if (session.token) {
 			const { exp } = jwt_decode(session.token);
 			// check if token is expired

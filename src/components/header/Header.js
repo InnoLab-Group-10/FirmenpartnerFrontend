@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Dropdown, Button, Offcanvas } from 'react-bootstrap';
 import {
 	BiMenu,
@@ -12,46 +12,17 @@ import Notifications from '../cards/Notifications';
 import Timeline from '../cards/Timeline';
 
 import { sessionInvalidate } from '../../store/session-thunks';
-
-const showNavbar = (toggleId, closeId, navId, bodyId, headerId) => {
-	const toggle = document.getElementById(toggleId),
-		close = document.getElementById(closeId),
-		nav = document.getElementById(navId),
-		bodypd = document.getElementById(bodyId),
-		headerpd = document.getElementById(headerId);
-
-	// Validate that all variables exist
-	if (toggle && close && nav && bodypd && headerpd) {
-		toggle.addEventListener('click', () => {
-			// show navbar
-			nav.classList.toggle('showing');
-			// change icon
-			toggle.setAttribute('class', 'header-toggle-hide');
-			close.setAttribute('class', 'header-close-show');
-			// add padding to body
-			bodypd.classList.toggle('body-pd');
-			// add padding to header
-			headerpd.classList.toggle('body-pd');
-		});
-
-		close.addEventListener('click', () => {
-			// show navbar
-			nav.classList.toggle('showing');
-			// change icon
-			toggle.setAttribute('class', 'header-toggle-show');
-			close.setAttribute('class', 'header-close-hide');
-			// add padding to body
-			bodypd.classList.toggle('body-pd');
-			// add padding to header
-			headerpd.classList.toggle('body-pd');
-		});
-	}
-};
+import { uiActions } from '../../store/ui-slice';
 
 const Header = () => {
-	useEffect(() => {
-		showNavbar('header-toggle', 'header-close', 'nav-bar', 'body-pd', 'header');
-	}, []);
+	const showNavbar = useSelector(state => state.ui.showNavbar);
+	const refreshToken = useSelector(state => state.session.refreshToken);
+	const { username, roles } = useSelector(state => state.user);
+	const dispatch = useDispatch();
+
+	const toggleShowNavbarHandler = () => {
+		dispatch(uiActions.toggleShowNavbar());
+	};
 
 	const [showCanvas, setShow] = useState(false);
 	const [showNotes, setShowNotes] = useState(false);
@@ -61,11 +32,6 @@ const Header = () => {
 
 	const handleCloseNotes = () => setShowNotes(false);
 	const handleShowNotes = () => setShowNotes(true);
-
-	const refreshToken = useSelector(state => state.session.refreshToken);
-	const dispatch = useDispatch();
-
-	const { username, roles } = useSelector(state => state.user);
 
 	return (
 		<>
@@ -93,10 +59,16 @@ const Header = () => {
 			<Container>
 				<Row>
 					<Col>
-						<header className='header' id='header'>
+						<header className={`header ${showNavbar ? 'body-pd' : ''}`} id='header'>
 							<div className='header_toggle'>
-								<BiMenu id='header-toggle' className='header-toggle-show'></BiMenu>
-								<BiX id='header-close' className='header-close-hide'></BiX>
+								{showNavbar ? (
+									<BiX
+										onClick={toggleShowNavbarHandler}
+										className='header-close-show'
+									></BiX>
+								) : (
+									<BiMenu onClick={toggleShowNavbarHandler}></BiMenu>
+								)}
 							</div>
 							<div className='user-notification'>
 								<Button

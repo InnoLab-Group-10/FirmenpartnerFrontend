@@ -17,10 +17,11 @@ import { sessionInvalidate } from '../../store/session-thunks';
 
 const Navbar = () => {
 	const refreshToken = useSelector(state => state.session.refreshToken);
+	const showNavbar = useSelector(state => state.ui.showNavbar);
 	const dispatch = useDispatch();
 
 	return (
-		<div className='l-navbar' id='nav-bar'>
+		<div className={`l-navbar ${showNavbar ? 'showing' : ''}`} id='nav-bar'>
 			<nav className='nav'>
 				<div>
 					<LinkContainer to='/'>
