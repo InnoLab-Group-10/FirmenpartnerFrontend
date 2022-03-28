@@ -5,7 +5,6 @@ import PartnerRow from './PartnerRow';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { companyGetAll } from '../../store/company-thunks';
-import { companyActions } from '../../store/company-slice';
 import 'bootstrap/js/src/collapse.js';
 
 const CollapsibleTable = () => {
@@ -15,8 +14,6 @@ const CollapsibleTable = () => {
 	useEffect(() => {
 		if (shouldReload) {
 			dispatch(companyGetAll());
-			// reset
-			dispatch(companyActions.setShouldReload({ shouldReload: false }));
 		}
 	}, [dispatch, shouldReload]);
 
