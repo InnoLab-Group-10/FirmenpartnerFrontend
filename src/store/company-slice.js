@@ -15,6 +15,8 @@ const companySlice = createSlice({
 	extraReducers: {
 		[companyGetAll.fulfilled]: (state, action) => {
 			state.companies = action.payload;
+			// reset
+			state.shouldReload = false;
 		},
 		[companyNew.fulfilled]: state => {
 			state.shouldReload = true;

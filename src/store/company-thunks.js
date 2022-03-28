@@ -10,13 +10,13 @@ export const companyNew = createAsyncThunk('company/new', async arg => {
 		notes: arg.notes,
 	};
 	const responseCompany = await axiosPrivate.post('/company', companyData);
-	const personData = {
+	const contactData = {
 		firstName: arg.firstName,
 		lastName: arg.lastName,
 		email: arg.email,
 		phone: arg.phone,
 	};
-	const responsePerson = await axiosPrivate.post('/person', personData);
+	const responsePerson = await axiosPrivate.post('/contact', contactData);
 	const assignmentData = {
 		companyId: responseCompany.data.id,
 		personId: responsePerson.data.id,
