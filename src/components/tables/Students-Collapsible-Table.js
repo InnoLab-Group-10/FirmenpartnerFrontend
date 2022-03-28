@@ -1,11 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Container, Table, Card, Col, Row, Button } from 'react-bootstrap';
 import { BiInfoCircle, BiSortAZ, BiSortZA } from 'react-icons/bi';
+import { useDispatch, useSelector } from 'react-redux';
 
 import 'bootstrap/js/src/collapse.js';
 import StudentRow from './StudentRow';
 
+import { studentGetAll } from '../../store/student-thunks';
+
 const CollapsibleTable = () => {
+
+	const dispatch = useDispatch();
+	const { students, shouldReload } = useSelector(state => state.company);
+
+	useEffect(() => {
+		if (shouldReload) {
+			dispatch(studentGetAll());
+		}
+	}, [dispatch, shouldReload]);
+
 	return (
 		<Container>
 			<Card>
@@ -58,13 +71,9 @@ const CollapsibleTable = () => {
 							</tr>
 						</thead>
 						<tbody>
-							<StudentRow
-								id='i00b00'
-								name='Vorname Nachname'
-								studiengang='BIFA3'
-								email='name@name.name'
-								text='text'
-							/>
+							{students.map(entry => (
+								<StudentRow key={entry.student.id} entry={entry} />
+							))}
 						</tbody>
 					</Table>
 				</Card.Body>

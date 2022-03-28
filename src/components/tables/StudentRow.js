@@ -3,6 +3,7 @@ import { Collapse } from 'react-bootstrap';
 
 const StudentRow = props => {
 	const [open, setOpen] = useState(false);
+	const student = props.entry;
 
 	return (
 		<>
@@ -11,26 +12,18 @@ const StudentRow = props => {
 				aria-controls='example-collapse-text'
 				aria-expanded={open}
 			>
-				<td>{props.id}</td>
-				<td>{props.name}</td>
-				<td>{props.studiengang}</td>
-				<td>{props.email}</td>
+				<td>{student.studentId}</td>
+				<td>{student.firstName} {student.lastName}</td>
+				<td>{student.program}{student.semester}</td>
+				<td>{student.email}</td>
 			</tr>
 			<Collapse in={open}>
 				<tr id='example-collapse-text'>
 					<td colSpan='1'>
-						<strong>Test 1:</strong>
-						<br />
-						<strong>Test 2:</strong>
-						<br />
 						<strong>Notiz:</strong>
 					</td>
 					<td colSpan='3'>
-						{props.text}
-						<br />
-						{props.text}
-						<br />
-						{props.text}
+						{student.notes}
 					</td>
 				</tr>
 			</Collapse>

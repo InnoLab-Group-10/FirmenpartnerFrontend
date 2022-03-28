@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
 	Form,
 	Container,
@@ -10,8 +10,47 @@ import {
 	Accordion,
 } from 'react-bootstrap';
 import { BiInfoCircle } from 'react-icons/bi';
+import { useDispatch } from 'react-redux';
+
+import { studentNew } from '../../store/student-thunks';
 
 const CreateStudentForm = () => {
+
+	const dispatch = useDispatch();
+
+	const studentIdRef = useRef();
+	const firstNameRef = useRef();
+	const lastNameRef = useRef();
+	const emailRef = useRef();
+
+	const programRef = useRef();
+	const semesterRef = useRef();
+
+	const notesRef = useRef();
+
+	const submitHandler = e => {
+		e.preventDefault();
+		dispatch(
+			studentNew({
+				studentId: studentIdRef.current.value,
+				firstName: firstNameRef.current.value,
+				lastName: lastNameRef.current.value,
+				email: emailRef.current.value,
+				programId: programRef.current.value,
+				semester: semesterRef.current.value,
+				notes: notesRef.current.value,
+			})
+		);
+		// reset fields
+		studentIdRef.current.value = '';
+		firstNameRef.current.value = '';
+		lastNameRef.current.value = '';
+		emailRef.current.value = '';
+		programRef.current.value = '';
+		semesterRef.current.value = '';
+		notesRef.current.value = '';
+	};
+
 	return (
 		<Container>
 			<Card>
@@ -35,25 +74,45 @@ const CreateStudentForm = () => {
 											label='Studenten-ID'
 											className='mb-3'
 										>
-											<Form.Control type='text' placeholder='iXXbXXX' />
+											<Form.Control type='text' placeholder='iXXbXXX' ref={studentIdRef} />
 										</FloatingLabel>
 									</Col>
 									<Col lg>
 										<FloatingLabel
 											controlId='floatingInput'
-											label='Name'
+											label='Firstname'
 											className='mb-3'
 										>
-											<Form.Control type='text' placeholder='Vorname Nachname' />
+											<Form.Control type='text' placeholder='Vorname' ref={firstNameRef}/>
+										</FloatingLabel>
+									</Col>
+									<Col lg>
+										<FloatingLabel
+											controlId='floatingInput'
+											label='Lastname'
+											className='mb-3'
+										>
+											<Form.Control type='text' placeholder='Nachname' ref={lastNameRef}/>
 										</FloatingLabel>
 									</Col>
 									<Col lg>
 										<FloatingLabel controlId='floatingSelect' label='Studiengang'>
-											<Form.Select aria-label='Floating label select example'>
+											<Form.Select aria-label='Floating label select example' ref={programRef}>
 												<option>Wählen</option>
-												<option value='1'>One</option>
-												<option value='2'>Two</option>
-												<option value='3'>Three</option>
+												<option value='5018209c-0398-4cac-bbbc-95941a41911b'>BIF</option>
+											</Form.Select>
+										</FloatingLabel>
+									</Col>
+									<Col lg>
+										<FloatingLabel controlId='floatingSelect' label='Semester'>
+											<Form.Select aria-label='Floating label select example' ref={semesterRef}>
+												<option>Wählen</option>
+												<option value='1'>1</option>
+												<option value='2'>2</option>
+												<option value='3'>3</option>
+												<option value='4'>4</option>
+												<option value='5'>5</option>
+												<option value='6'>6</option>
 											</Form.Select>
 										</FloatingLabel>
 									</Col>
@@ -63,7 +122,7 @@ const CreateStudentForm = () => {
 											label='E-Mail-Adresse'
 											className='mb-3'
 										>
-											<Form.Control type='email' placeholder='name@example.com' />
+											<Form.Control type='email' placeholder='name@example.com' ref={emailRef}/>
 										</FloatingLabel>
 									</Col>
 								</Row>
@@ -74,6 +133,7 @@ const CreateStudentForm = () => {
 												as='textarea'
 												placeholder='Notizen anlegen'
 												style={{ height: '100px' }}
+												ref={notesRef}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -81,7 +141,7 @@ const CreateStudentForm = () => {
 								<Row>
 									<Col lg>
 										<div className='d-grid'>
-											<Button variant='primary' type='submit' size='lg'>
+											<Button variant='primary' type='submit' size='lg' onClick={submitHandler}>
 												Anlegen
 											</Button>
 										</div>
