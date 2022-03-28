@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
 	Form,
 	Container,
@@ -10,8 +10,36 @@ import {
 	Accordion,
 } from 'react-bootstrap';
 import { BiInfoCircle } from 'react-icons/bi';
+import { useDispatch } from 'react-redux';
+
+import { userNew } from '../../store/user-thunks';
 
 const CreatUserForm = () => {
+	const dispatch = useDispatch();
+
+	const nameRef = useRef();
+	const emailRef = useRef();
+	const passwordRef = useRef();
+	// TODO allow more than one role (maybe tag field)
+	const roleRef = useRef();
+
+	const submitHandler = e => {
+		e.preventDefault();
+		dispatch(
+			userNew({
+				name: nameRef.current.value,
+				email: emailRef.current.value,
+				password: passwordRef.current.value,
+				role: roleRef.current.value,
+			})
+		);
+		// reset fields
+		nameRef.current.value = '';
+		emailRef.current.value = '';
+		passwordRef.current.value = '';
+		roleRef.current.value = '';
+	};
+
 	return (
 		<Container>
 			<Card>
@@ -32,10 +60,10 @@ const CreatUserForm = () => {
 									<Col lg>
 										<FloatingLabel
 											controlId='floatingInput'
-											label='Benutzername'
+											label='Name'
 											className='mb-3'
 										>
-											<Form.Control type='text' placeholder='Benutzername' />
+											<Form.Control type='text' placeholder='Name' ref={nameRef} />
 										</FloatingLabel>
 									</Col>
 									<Col lg>
@@ -44,44 +72,50 @@ const CreatUserForm = () => {
 											label='E-Mail-Adresse'
 											className='mb-3'
 										>
-											<Form.Control type='email' placeholder='name@example.com' />
-										</FloatingLabel>
-									</Col>
-									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Telefonnummer'
-											className='mb-3'
-										>
-											<Form.Control type='text' placeholder='Telefonnummer' />
-										</FloatingLabel>
-									</Col>
-									<Col lg>
-										<FloatingLabel controlId='floatingSelect' label='Rolle'>
-											<Form.Select aria-label='Floating label select example'>
-												<option>Wählen</option>
-												<option value='1'>One</option>
-												<option value='2'>Two</option>
-												<option value='3'>Three</option>
-											</Form.Select>
-										</FloatingLabel>
-									</Col>
-								</Row>
-								<Row className='textarea'>
-									<Col lg>
-										<FloatingLabel controlId='floatingTextarea2' label='Notizen'>
 											<Form.Control
-												as='textarea'
-												placeholder='Notizen anlegen'
-												style={{ height: '100px' }}
+												type='email'
+												placeholder='name@example.com'
+												ref={emailRef}
 											/>
 										</FloatingLabel>
 									</Col>
 								</Row>
 								<Row>
 									<Col lg>
+										<FloatingLabel
+											controlId='floatingInput'
+											label='Password'
+											className='mb-3'
+										>
+											<Form.Control
+												type='password'
+												placeholder='Password'
+												ref={passwordRef}
+											/>
+										</FloatingLabel>
+									</Col>
+									<Col lg>
+										<FloatingLabel controlId='floatingSelect' label='Rolle'>
+											<Form.Select
+												aria-label='Floating label select example'
+												ref={roleRef}
+											>
+												<option>Wählen</option>
+												<option value='1'>User</option>
+												<option value='2'>Administrator</option>
+											</Form.Select>
+										</FloatingLabel>
+									</Col>
+								</Row>
+								<Row>
+									<Col lg>
 										<div className='d-grid'>
-											<Button variant='primary' type='submit' size='lg'>
+											<Button
+												variant='primary'
+												type='submit'
+												size='lg'
+												onClick={submitHandler}
+											>
 												Anlegen
 											</Button>
 										</div>

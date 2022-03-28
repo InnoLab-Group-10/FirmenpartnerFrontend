@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Table, Card, Col, Row, Button } from 'react-bootstrap';
 import { BiInfoCircle, BiSortAZ, BiSortZA, BiSortDown, BiSortUp } from 'react-icons/bi';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { userGetAll } from '../../store/user-thunks';
 import 'bootstrap/js/src/collapse.js';
 import UserRow from './UserRow';
 
 const CollapsibleTable = () => {
+	const dispatch = useDispatch();
+	const { users, shouldReload } = useSelector(state => state.user);
+
+	useEffect(() => {
+		if (shouldReload) {
+			dispatch(userGetAll());
+		}
+	}, [dispatch, shouldReload]);
+
 	return (
 		<Container>
 			<Card>
@@ -52,12 +63,9 @@ const CollapsibleTable = () => {
 							</tr>
 						</thead>
 						<tbody>
-							<UserRow
-								username='Testname'
-								userrole='Tester'
-								useremail='name@name.name'
-								text='text'
-							/>
+							{users.map(entry => (
+								<UserRow key={entry.user.id} entry={entry} />
+							))}
 						</tbody>
 					</Table>
 				</Card.Body>
