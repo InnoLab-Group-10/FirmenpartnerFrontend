@@ -14,8 +14,8 @@ const studentSlice = createSlice({
 	},
 	extraReducers: {
 		[studentGetAll.fulfilled]: (state, action) => {
-			state.companies = action.payload;
-      state.shouldReload = false;
+			state.students = action.payload.results;
+			state.shouldReload = false;
 		},
 		[studentNew.fulfilled]: state => {
 			state.shouldReload = true;

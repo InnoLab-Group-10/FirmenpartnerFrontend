@@ -13,8 +13,13 @@ const StudentRow = props => {
 				aria-expanded={open}
 			>
 				<td>{student.studentId}</td>
-				<td>{student.firstName} {student.lastName}</td>
-				<td>{student.program}{student.semester}</td>
+				<td>
+					{student.firstName} {student.lastName}
+				</td>
+				<td>
+					{student.program.name}
+					{student.semester}
+				</td>
 				<td>{student.email}</td>
 			</tr>
 			<Collapse in={open}>
@@ -22,9 +27,7 @@ const StudentRow = props => {
 					<td colSpan='1'>
 						<strong>Notiz:</strong>
 					</td>
-					<td colSpan='3'>
-						{student.notes}
-					</td>
+					<td colSpan='3'>{student.notes}</td>
 				</tr>
 			</Collapse>
 		</>

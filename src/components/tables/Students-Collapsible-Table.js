@@ -71,7 +71,7 @@ const CollapsibleTable = () => {
 						</thead>
 						<tbody>
 							{students.map(entry => (
-								<StudentRow key={entry.student.id} entry={entry} />
+								<StudentRow key={entry.id} entry={entry} />
 							))}
 						</tbody>
 					</Table>

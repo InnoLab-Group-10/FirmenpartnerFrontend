@@ -35,6 +35,6 @@ export const companyNew = createAsyncThunk('company/new', async arg => {
 });
 
 export const companyGetAll = createAsyncThunk('company/getAll', async () => {
-	const response = await axiosPrivate.get('/company/full');
+	const response = await axiosPrivate.get('/company');
 	return response.data;
 });

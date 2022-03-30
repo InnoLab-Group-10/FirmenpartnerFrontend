@@ -25,7 +25,7 @@ const userSlice = createSlice({
 			state.roles = action.payload.roles;
 		},
 		[userGetAll.fulfilled]: (state, action) => {
-			state.users = action.payload;
+			state.users = action.payload.results;
 			state.shouldReload = false;
 		},
 		[userNew.fulfilled]: state => {

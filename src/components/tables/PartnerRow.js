@@ -59,7 +59,7 @@ const PartnerRow = props => {
 						<br />
 						{company.maxStudents} pro Jahr
 						<br />
-						Beispieltext
+						{company.notes}
 					</td>
 				</tr>
 			</Collapse>

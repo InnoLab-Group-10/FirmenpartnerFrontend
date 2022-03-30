@@ -100,9 +100,8 @@ const CreatUserForm = () => {
 												aria-label='Floating label select example'
 												ref={roleRef}
 											>
-												<option>Wählen</option>
-												<option value='1'>User</option>
-												<option value='2'>Administrator</option>
+												<option value='User'>User</option>
+												<option value='Administrator'>Administrator</option>
 											</Form.Select>
 										</FloatingLabel>
 									</Col>

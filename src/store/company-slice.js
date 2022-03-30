@@ -14,8 +14,8 @@ const companySlice = createSlice({
 	},
 	extraReducers: {
 		[companyGetAll.fulfilled]: (state, action) => {
+			// TODO add .results as soon as api changes
 			state.companies = action.payload;
-			// reset
 			state.shouldReload = false;
 		},
 		[companyNew.fulfilled]: state => {
