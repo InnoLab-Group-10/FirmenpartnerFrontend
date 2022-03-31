@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Dropdown, Button, Offcanvas } from 'react-bootstrap';
+import { Container, Row, Col, Dropdown, Button, Offcanvas, Modal } from 'react-bootstrap';
 import {
 	BiMenu,
+	BiAddToQueue,
 	BiX,
 	BiNotification,
 	BiCalendarWeek,
@@ -13,6 +14,8 @@ import Timeline from '../cards/Timeline';
 
 import { sessionInvalidate } from '../../store/session-thunks';
 import { uiActions } from '../../store/ui-slice';
+import CreateNewAppointment from '../forms/CreateNewAppointment';
+import CreateNewNotification from '../forms/CreateNewNotification';
 
 const Header = () => {
 	const showNavbar = useSelector(state => state.ui.showNavbar);
@@ -27,6 +30,25 @@ const Header = () => {
 	const [showCanvas, setShow] = useState(false);
 	const [showNotes, setShowNotes] = useState(false);
 
+	const [fullscreen, setFullscreen] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+	const [headline, setHeadline] = useState(true);
+	const [modalType, setModalType] = useState(true);
+
+    function handleShowModal(breakpoint, headline, modalType) {
+        setFullscreen(breakpoint);
+        setShowModal(true);
+		setHeadline(headline);
+		setModalType(modalType);
+    }
+
+	let modalModule;
+	if(modalType === "timeline"){
+		modalModule = <CreateNewAppointment/>;
+	}else if(modalType === "notification"){
+		modalModule = <CreateNewNotification/>;
+	}
+
 	return (
 		<>
 			{/* Timeline-Canvas */}
@@ -38,6 +60,15 @@ const Header = () => {
 			>
 				<Offcanvas.Header closeButton>
 					<Offcanvas.Title>Timeline</Offcanvas.Title>
+					<div className='timeline-edit-button'>
+						<Button
+							className='timeline-button'
+							variant='light'
+							onClick={() => handleShowModal("sm-down", "Neuen Eintrag erstellen", "timeline")}
+						>
+							<BiAddToQueue/>
+						</Button>
+					</div>
 				</Offcanvas.Header>
 				<Offcanvas.Body>
 					<Timeline />
@@ -53,6 +84,15 @@ const Header = () => {
 			>
 				<Offcanvas.Header closeButton>
 					<Offcanvas.Title>Benachrichtigungen</Offcanvas.Title>
+					<div className='timeline-edit-button'>
+						<Button
+							className='timeline-button'
+							variant='light'
+							onClick={() => handleShowModal("sm-down", "Neue Erinnerung erstellen", "notification")}
+						>
+							<BiAddToQueue/>
+						</Button>
+					</div>
 				</Offcanvas.Header>
 				<Offcanvas.Body>
 					<Notifications />
@@ -116,6 +156,18 @@ const Header = () => {
 					</Col>
 				</Row>
 			</Container>
+			<Modal show={showModal} fullscreen={fullscreen} onHide={() => setShowModal(false)}>
+				<Modal.Header closeButton>
+					<Modal.Title>{headline}</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					{modalModule}
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="light">Zurücksetzen</Button>
+					<Button variant="primary">Speichern</Button>
+				</Modal.Footer>
+			</Modal>
 		</>
 	);
 };

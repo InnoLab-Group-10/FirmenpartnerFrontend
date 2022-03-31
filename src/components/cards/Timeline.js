@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import Appointment from './Appointment';
 
 const Timeline = props => {
@@ -11,16 +11,14 @@ const Timeline = props => {
 				title='Typ 1'
 				info='Erstellt am 07.12.21'
 				text='Hier kann etwas stehen.'
-				button='Jetzt absenden'
-				link='https://www.google.at'
+				button='Nachricht senden'
 				variant='primary'
 			/>
 			<Appointment
 				title='Typ 2'
 				info='Läuft am 10.12.21 ab'
 				text='Hier kann etwas anderes stehen.'
-				button='Nachricht verfassen'
-				link='partnerfirmen'
+				button='Nachricht senden'
 				variant='warning'
 			/>
 			<Appointment
@@ -28,7 +26,6 @@ const Timeline = props => {
 				info='Sonstige Info'
 				text='Allerhand Möglichkeiten.'
 				button='Sonstiges'
-				link=''
 				variant='info'
 			/>
 			<h4 className='timeline-year'>2022</h4>
@@ -38,7 +35,6 @@ const Timeline = props => {
 				info='Sonstige Info'
 				text='Allerhand Möglichkeiten.'
 				button='Sonstiges'
-				link=''
 				variant='success'
 			/>
 			<Appointment
@@ -46,7 +42,6 @@ const Timeline = props => {
 				info='Sonstige Info'
 				text='Allerhand Möglichkeiten.'
 				button='Sonstiges'
-				link=''
 				variant='light'
 			/>
 			<Appointment
@@ -54,7 +49,6 @@ const Timeline = props => {
 				info='Sonstige Info'
 				text='Allerhand Möglichkeiten.'
 				button='Sonstiges'
-				link=''
 				variant='danger'
 			/>
 		</Container>
