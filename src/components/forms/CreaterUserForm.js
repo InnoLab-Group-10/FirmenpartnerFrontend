@@ -58,20 +58,12 @@ const CreatUserForm = () => {
 							<Form>
 								<Row>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Name'
-											className='mb-3'
-										>
+										<FloatingLabel label='Name' className='mb-3'>
 											<Form.Control type='text' placeholder='Name' ref={nameRef} />
 										</FloatingLabel>
 									</Col>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='E-Mail-Adresse'
-											className='mb-3'
-										>
+										<FloatingLabel label='E-Mail-Adresse' className='mb-3'>
 											<Form.Control
 												type='email'
 												placeholder='name@example.com'
@@ -82,11 +74,7 @@ const CreatUserForm = () => {
 								</Row>
 								<Row>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Password'
-											className='mb-3'
-										>
+										<FloatingLabel label='Password' className='mb-3'>
 											<Form.Control
 												type='password'
 												placeholder='Password'

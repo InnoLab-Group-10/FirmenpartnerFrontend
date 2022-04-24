@@ -15,7 +15,6 @@ import { useDispatch } from 'react-redux';
 import { studentNew } from '../../store/student-thunks';
 
 const CreateStudentForm = () => {
-
 	const dispatch = useDispatch();
 
 	const studentIdRef = useRef();
@@ -69,35 +68,38 @@ const CreateStudentForm = () => {
 							<Form>
 								<Row>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Studenten-ID'
-											className='mb-3'
-										>
-											<Form.Control type='text' placeholder='iXXbXXX' ref={studentIdRef} />
+										<FloatingLabel label='Studenten-ID' className='mb-3'>
+											<Form.Control
+												type='text'
+												placeholder='iXXbXXX'
+												ref={studentIdRef}
+											/>
 										</FloatingLabel>
 									</Col>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Firstname'
-											className='mb-3'
-										>
-											<Form.Control type='text' placeholder='Vorname' ref={firstNameRef}/>
+										<FloatingLabel label='Firstname' className='mb-3'>
+											<Form.Control
+												type='text'
+												placeholder='Vorname'
+												ref={firstNameRef}
+											/>
 										</FloatingLabel>
 									</Col>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Lastname'
-											className='mb-3'
-										>
-											<Form.Control type='text' placeholder='Nachname' ref={lastNameRef}/>
+										<FloatingLabel label='Lastname' className='mb-3'>
+											<Form.Control
+												type='text'
+												placeholder='Nachname'
+												ref={lastNameRef}
+											/>
 										</FloatingLabel>
 									</Col>
 									<Col lg>
 										<FloatingLabel controlId='floatingSelect' label='Studiengang'>
-											<Form.Select aria-label='Floating label select example' ref={programRef}>
+											<Form.Select
+												aria-label='Floating label select example'
+												ref={programRef}
+											>
 												<option>Wählen</option>
 												<option value='5018209c-0398-4cac-bbbc-95941a41911b'>BIF</option>
 											</Form.Select>
@@ -105,7 +107,10 @@ const CreateStudentForm = () => {
 									</Col>
 									<Col lg>
 										<FloatingLabel controlId='floatingSelect' label='Semester'>
-											<Form.Select aria-label='Floating label select example' ref={semesterRef}>
+											<Form.Select
+												aria-label='Floating label select example'
+												ref={semesterRef}
+											>
 												<option>Wählen</option>
 												<option value='1'>1</option>
 												<option value='2'>2</option>
@@ -117,12 +122,12 @@ const CreateStudentForm = () => {
 										</FloatingLabel>
 									</Col>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='E-Mail-Adresse'
-											className='mb-3'
-										>
-											<Form.Control type='email' placeholder='name@example.com' ref={emailRef}/>
+										<FloatingLabel label='E-Mail-Adresse' className='mb-3'>
+											<Form.Control
+												type='email'
+												placeholder='name@example.com'
+												ref={emailRef}
+											/>
 										</FloatingLabel>
 									</Col>
 								</Row>
@@ -141,7 +146,12 @@ const CreateStudentForm = () => {
 								<Row>
 									<Col lg>
 										<div className='d-grid'>
-											<Button variant='primary' type='submit' size='lg' onClick={submitHandler}>
+											<Button
+												variant='primary'
+												type='submit'
+												size='lg'
+												onClick={submitHandler}
+											>
 												Anlegen
 											</Button>
 										</div>

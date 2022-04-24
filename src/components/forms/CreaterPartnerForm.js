@@ -79,20 +79,12 @@ const CreatePartnerForm = () => {
 							<Form>
 								<Row>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Firmenname'
-											className='mb-3'
-										>
+										<FloatingLabel label='Firmenname' className='mb-3'>
 											<Form.Control type='text' placeholder='Firmenname' ref={nameRef} />
 										</FloatingLabel>
 									</Col>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Vorname'
-											className='mb-3'
-										>
+										<FloatingLabel label='Vorname' className='mb-3'>
 											<Form.Control
 												type='text'
 												placeholder='Vorname'
@@ -101,11 +93,7 @@ const CreatePartnerForm = () => {
 										</FloatingLabel>
 									</Col>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Nachname'
-											className='mb-3'
-										>
+										<FloatingLabel label='Nachname' className='mb-3'>
 											<Form.Control
 												type='text'
 												placeholder='Nachname'
@@ -116,11 +104,7 @@ const CreatePartnerForm = () => {
 								</Row>
 								<Row>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='E-Mail-Adresse'
-											className='mb-3'
-										>
+										<FloatingLabel label='E-Mail-Adresse' className='mb-3'>
 											<Form.Control
 												type='email'
 												placeholder='name@example.com'
@@ -129,11 +113,7 @@ const CreatePartnerForm = () => {
 										</FloatingLabel>
 									</Col>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Telefonnummer'
-											className='mb-3'
-										>
+										<FloatingLabel label='Telefonnummer' className='mb-3'>
 											<Form.Control
 												type='tel'
 												placeholder='+43 (0) 000 000 00 00'
@@ -144,11 +124,7 @@ const CreatePartnerForm = () => {
 								</Row>
 								<Row>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Straße'
-											className='mb-3'
-										>
+										<FloatingLabel label='Straße' className='mb-3'>
 											<Form.Control
 												type='text'
 												placeholder='Vorname Nachname'
@@ -157,11 +133,7 @@ const CreatePartnerForm = () => {
 										</FloatingLabel>
 									</Col>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Hausnummer'
-											className='mb-3'
-										>
+										<FloatingLabel label='Hausnummer' className='mb-3'>
 											<Form.Control
 												type='text'
 												placeholder='Vorname Nachname'
@@ -170,11 +142,7 @@ const CreatePartnerForm = () => {
 										</FloatingLabel>
 									</Col>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Postleitzahl'
-											className='mb-3'
-										>
+										<FloatingLabel label='Postleitzahl' className='mb-3'>
 											<Form.Control
 												type='text'
 												placeholder='Vorname Nachname'
@@ -183,7 +151,7 @@ const CreatePartnerForm = () => {
 										</FloatingLabel>
 									</Col>
 									<Col lg>
-										<FloatingLabel controlId='floatingInput' label='Ort' className='mb-3'>
+										<FloatingLabel label='Ort' className='mb-3'>
 											<Form.Control
 												type='text'
 												placeholder='Vorname Nachname'
@@ -192,11 +160,7 @@ const CreatePartnerForm = () => {
 										</FloatingLabel>
 									</Col>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Studenten pro Jahr'
-											className='mb-3'
-										>
+										<FloatingLabel label='Studenten pro Jahr' className='mb-3'>
 											<Form.Control
 												type='number'
 												placeholder='Vorname Nachname'

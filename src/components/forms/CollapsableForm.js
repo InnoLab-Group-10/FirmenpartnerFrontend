@@ -21,20 +21,12 @@ const CollapsableForm = () => {
 							<Form>
 								<Row>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Studenten-ID'
-											className='mb-3'
-										>
+										<FloatingLabel label='Studenten-ID' className='mb-3'>
 											<Form.Control type='text' placeholder='iXXbXXX' />
 										</FloatingLabel>
 									</Col>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='Name'
-											className='mb-3'
-										>
+										<FloatingLabel label='Name' className='mb-3'>
 											<Form.Control type='text' placeholder='Vorname Nachname' />
 										</FloatingLabel>
 									</Col>
@@ -49,11 +41,7 @@ const CollapsableForm = () => {
 										</FloatingLabel>
 									</Col>
 									<Col lg>
-										<FloatingLabel
-											controlId='floatingInput'
-											label='E-Mail-Adresse'
-											className='mb-3'
-										>
+										<FloatingLabel label='E-Mail-Adresse' className='mb-3'>
 											<Form.Control type='email' placeholder='name@example.com' />
 										</FloatingLabel>
 									</Col>

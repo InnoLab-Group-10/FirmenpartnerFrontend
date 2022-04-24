@@ -24,11 +24,7 @@ const LoginForm = () => {
 			<Row>
 				<Col>
 					<Form>
-						<FloatingLabel
-							controlId='floatingInput'
-							label='Benutzername'
-							className='mb-3'
-						>
+						<FloatingLabel label='Benutzername' className='mb-3'>
 							<Form.Control type='text' placeholder='Benutzername' ref={usernameRef} />
 						</FloatingLabel>
 						<FloatingLabel controlId='floatingPassword' label='Passwort'>
