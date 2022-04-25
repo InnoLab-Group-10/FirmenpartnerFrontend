@@ -111,27 +111,6 @@ const CreatUserForm = () => {
 							</Form>
 						</Accordion.Body>
 					</Accordion.Item>
-					<Accordion.Item eventKey='1'>
-						<Accordion.Header>Exportieren</Accordion.Header>
-						<Accordion.Body>
-							<div className='d-grid gap-2'>
-								<Button variant='primary' size='lg'>
-									Als CSV exportieren
-								</Button>
-							</div>
-						</Accordion.Body>
-					</Accordion.Item>
-					<Accordion.Item eventKey='2'>
-						<Accordion.Header>Importieren</Accordion.Header>
-						<Accordion.Body>
-							<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
-								<Form.Label>
-									Hier stehen Informationen über die hochladbaren Dateien.
-								</Form.Label>
-								<Form.Control type='file' size='lg' multiple />
-							</Form.Group>
-						</Accordion.Body>
-					</Accordion.Item>
 				</Accordion>
 			</Card>
 		</Container>
