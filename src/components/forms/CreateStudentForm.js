@@ -13,9 +13,11 @@ import { BiInfoCircle } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 
 import { studentNew } from '../../store/student-thunks';
+import useCSV, { csvOptions } from '../../hooks/useCSV';
 
 const CreateStudentForm = () => {
 	const dispatch = useDispatch();
+	const [getStudentsCsv] = useCSV(csvOptions.STUDENT);
 
 	const studentIdRef = useRef();
 	const firstNameRef = useRef();
@@ -164,7 +166,11 @@ const CreateStudentForm = () => {
 						<Accordion.Header>Exportieren</Accordion.Header>
 						<Accordion.Body>
 							<div className='d-grid gap-2'>
-								<Button variant='primary' size='lg'>
+								<Button
+									variant='primary'
+									size='lg'
+									onClick={() => getStudentsCsv(csvOptions.STUDENT)}
+								>
 									Als CSV exportieren
 								</Button>
 							</div>
