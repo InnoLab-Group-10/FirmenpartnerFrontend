@@ -55,11 +55,23 @@ const PartnerRow = props => {
 						<strong>Notiz:</strong>
 					</td>
 					<td colSpan='3'>
-						{locations[0].address}, {locations[0].zipcode}, {locations[0].city}
-						<br />
-						{company.maxStudents} pro Jahr
-						<br />
-						{company.notes}
+						{locations.length !== 0 ? (
+							<>
+								{locations[0].address}, {locations[0].zipcode}, {locations[0].city}
+								<br />
+								{company.maxStudents} pro Jahr
+								<br />
+								{company.notes}
+							</>
+						) : (
+							<>
+								N/A, N/A, N/A
+								<br />
+								N/A pro Jahr
+								<br />
+								N/A
+							</>
+						)}
 					</td>
 				</tr>
 			</Collapse>
