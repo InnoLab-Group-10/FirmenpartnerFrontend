@@ -10,10 +10,9 @@ const useCSV = option => {
 	const getCSV = () => {
 		axiosPrivate.get(option).then(
 			result => {
-				const blob = new Blob([result.data.csv], { type: 'text/csv' });
+				const blob = new Blob([result.data], { type: 'text/csv' });
 				const link = URL.createObjectURL(blob);
 				window.location = link;
-				console.log(link);
 				URL.revokeObjectURL(link);
 			},
 			() => {
