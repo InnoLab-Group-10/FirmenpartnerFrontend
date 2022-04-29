@@ -14,3 +14,10 @@ export const studentGetAll = createAsyncThunk('student/getAll', async () => {
 	const response = await axiosPrivate.get('/student');
 	return response.data;
 });
+
+export const studentImport = createAsyncThunk('student/import', async arg => {
+	const data = new FormData();
+	data.append('file', arg.file[0]);
+	const response = await axiosPrivate.post('/student/csv', data);
+	return response.data;
+});

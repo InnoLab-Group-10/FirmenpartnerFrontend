@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { companyGetAll, companyNew } from './company-thunks';
+import { companyGetAll, companyNew, companyImport } from './company-thunks';
 
 const companySlice = createSlice({
 	name: 'company',
@@ -18,6 +18,9 @@ const companySlice = createSlice({
 			state.shouldReload = false;
 		},
 		[companyNew.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		[companyImport.fulfilled]: state => {
 			state.shouldReload = true;
 		},
 	},

@@ -38,3 +38,10 @@ export const companyGetAll = createAsyncThunk('company/getAll', async () => {
 	const response = await axiosPrivate.get('/company');
 	return response.data;
 });
+
+export const companyImport = createAsyncThunk('company/import', async arg => {
+	const data = new FormData();
+	data.append('file', arg.file[0]);
+	const response = await axiosPrivate.post('/company/csv', data);
+	return response.data;
+});

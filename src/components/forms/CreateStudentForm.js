@@ -11,8 +11,9 @@ import {
 } from 'react-bootstrap';
 import { BiInfoCircle } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 
-import { studentNew } from '../../store/student-thunks';
+import { studentNew, studentImport } from '../../store/student-thunks';
 import useCSV, { csvOptions } from '../../hooks/useCSV';
 
 const CreateStudentForm = () => {
@@ -51,6 +52,9 @@ const CreateStudentForm = () => {
 		semesterRef.current.value = '';
 		notesRef.current.value = '';
 	};
+
+	// import
+	const { register: registerImport, handleSubmit: handleSubmitImport } = useForm();
 
 	return (
 		<Container>
@@ -179,12 +183,27 @@ const CreateStudentForm = () => {
 					<Accordion.Item eventKey='2'>
 						<Accordion.Header>Importieren</Accordion.Header>
 						<Accordion.Body>
-							<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
-								<Form.Label>
-									Hier stehen Informationen über die hochladbaren Dateien.
-								</Form.Label>
-								<Form.Control type='file' size='lg' multiple />
-							</Form.Group>
+							<Form onSubmit={handleSubmitImport(data => dispatch(studentImport(data)))}>
+								<Row>
+									<Col lg>
+										<Form.Group className='mb-3 big-upload'>
+											<Form.Label>
+												Hier stehen Informationen über die hochladbaren Dateien.
+											</Form.Label>
+											<Form.Control type='file' size='lg' {...registerImport('file')} />
+										</Form.Group>
+									</Col>
+								</Row>
+								<Row>
+									<Col lg>
+										<div className='d-grid'>
+											<Button variant='primary' type='submit' size='lg'>
+												Import
+											</Button>
+										</div>
+									</Col>
+								</Row>
+							</Form>
 						</Accordion.Body>
 					</Accordion.Item>
 				</Accordion>
