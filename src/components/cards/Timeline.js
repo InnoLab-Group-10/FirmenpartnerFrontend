@@ -1,56 +1,28 @@
-import React from 'react';
-import { Container} from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { Container } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { timelineGetAll } from '../../store/timeline-thunks';
+
 import Appointment from './Appointment';
 
+// TODO automatically insert year and month, depending on if an entry actually exists
 const Timeline = props => {
+	const dispatch = useDispatch();
+	const { appointments, shouldReload } = useSelector(state => state.timeline);
+
+	useEffect(() => {
+		if (shouldReload) {
+			dispatch(timelineGetAll());
+		}
+	}, [dispatch, shouldReload]);
+
 	return (
 		<Container>
-			<h4 className='timeline-year'>2021</h4>
-			<h5 className='timeline-month'>Dezember</h5>
-			<Appointment
-				title='Typ 1'
-				info='Erstellt am 07.12.21'
-				text='Hier kann etwas stehen.'
-				button='Nachricht senden'
-				variant='primary'
-			/>
-			<Appointment
-				title='Typ 2'
-				info='Läuft am 10.12.21 ab'
-				text='Hier kann etwas anderes stehen.'
-				button='Nachricht senden'
-				variant='warning'
-			/>
-			<Appointment
-				title='Typ 3'
-				info='Sonstige Info'
-				text='Allerhand Möglichkeiten.'
-				button='Sonstiges'
-				variant='info'
-			/>
-			<h4 className='timeline-year'>2022</h4>
-			<h5 className='timeline-month'>Januar</h5>
-			<Appointment
-				title='Typ 4'
-				info='Sonstige Info'
-				text='Allerhand Möglichkeiten.'
-				button='Sonstiges'
-				variant='success'
-			/>
-			<Appointment
-				title='Typ 5'
-				info='Sonstige Info'
-				text='Allerhand Möglichkeiten.'
-				button='Sonstiges'
-				variant='light'
-			/>
-			<Appointment
-				title='Typ 6'
-				info='Sonstige Info'
-				text='Allerhand Möglichkeiten.'
-				button='Sonstiges'
-				variant='danger'
-			/>
+			{/* <h4 className='timeline-year'>2021</h4>
+			<h5 className='timeline-month'>Dezember</h5> */}
+			{appointments.map(entry => (
+				<Appointment key={entry.id} entry={entry} />
+			))}
 		</Container>
 	);
 };

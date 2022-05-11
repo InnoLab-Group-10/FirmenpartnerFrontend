@@ -66,7 +66,7 @@ const CreateNotificationForm = () => {
 						</Button>
 					</div>
 				</Col>
-				<Col lg className='mt-2'>
+				<Col lg>
 					<div className='d-grid'>
 						<Button variant='primary' type='submit'>
 							Speichern

@@ -6,6 +6,7 @@ import companyReducer from './company-slice';
 import studentReducer from './student-slice';
 import uiReducer from './ui-slice';
 import notificationReducer from './notification-slice';
+import timelineReducer from './timeline-slice';
 
 // TODO table site (company, user, etc.) only get reloaded when client inserts new user
 // maybe periodically call api for new data, or make refresh button
@@ -17,6 +18,7 @@ const store = configureStore({
 		student: studentReducer,
 		ui: uiReducer,
 		notification: notificationReducer,
+		timeline: timelineReducer,
 	},
 });
 
