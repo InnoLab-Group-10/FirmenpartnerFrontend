@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
 	Form,
 	Container,
@@ -65,18 +65,18 @@ const CreatePartnerForm = () => {
 	};
 
 	// import
-	// TODO reset form
 	const {
 		register: registerImport,
 		handleSubmit: handleSubmitImport,
-		// reset: resetImport,
-		// isSubmitSuccessful: isSubmitSuccessfulImport,
+		reset: resetImport,
+		formState: { isSubmitSuccessful: isSubmitSuccessfulImport },
 	} = useForm();
 
-	// useEffect(() => {
-	// 	console.log('test');
-	// 	resetImport({});
-	// }, [isSubmitSuccessfulImport]);
+	useEffect(() => {
+		if (isSubmitSuccessfulImport) {
+			resetImport();
+		}
+	}, [isSubmitSuccessfulImport, resetImport]);
 
 	return (
 		<Container>

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
 	Form,
 	Container,
@@ -54,7 +54,18 @@ const CreateStudentForm = () => {
 	};
 
 	// import
-	const { register: registerImport, handleSubmit: handleSubmitImport } = useForm();
+	const {
+		register: registerImport,
+		handleSubmit: handleSubmitImport,
+		reset: resetImport,
+		formState: { isSubmitSuccessful: isSubmitSuccessfulImport },
+	} = useForm();
+
+	useEffect(() => {
+		if (isSubmitSuccessfulImport) {
+			resetImport();
+		}
+	}, [isSubmitSuccessfulImport, resetImport]);
 
 	return (
 		<Container>
