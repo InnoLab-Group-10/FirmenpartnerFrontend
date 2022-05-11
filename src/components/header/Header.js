@@ -14,8 +14,8 @@ import Timeline from '../cards/Timeline';
 
 import { sessionInvalidate } from '../../store/session-thunks';
 import { uiActions } from '../../store/ui-slice';
-import CreateNewAppointment from '../forms/CreateNewAppointment';
-import CreateNewNotification from '../forms/CreateNewNotification';
+import CreateAppointmentForm from '../forms/CreateAppointmentForm';
+import CreateNotificationForm from '../forms/CreateNotificationForm';
 
 const Header = () => {
 	const showNavbar = useSelector(state => state.ui.showNavbar);
@@ -31,22 +31,22 @@ const Header = () => {
 	const [showNotes, setShowNotes] = useState(false);
 
 	const [fullscreen, setFullscreen] = useState(true);
-    const [showModal, setShowModal] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 	const [headline, setHeadline] = useState(true);
 	const [modalType, setModalType] = useState(true);
 
-    function handleShowModal(breakpoint, headline, modalType) {
-        setFullscreen(breakpoint);
-        setShowModal(true);
+	function handleShowModal(breakpoint, headline, modalType) {
+		setFullscreen(breakpoint);
+		setShowModal(true);
 		setHeadline(headline);
 		setModalType(modalType);
-    }
+	}
 
 	let modalModule;
-	if(modalType === "timeline"){
-		modalModule = <CreateNewAppointment/>;
-	}else if(modalType === "notification"){
-		modalModule = <CreateNewNotification/>;
+	if (modalType === 'timeline') {
+		modalModule = <CreateAppointmentForm />;
+	} else if (modalType === 'notification') {
+		modalModule = <CreateNotificationForm />;
 	}
 
 	return (
@@ -64,9 +64,11 @@ const Header = () => {
 						<Button
 							className='timeline-button'
 							variant='light'
-							onClick={() => handleShowModal("sm-down", "Neuen Eintrag erstellen", "timeline")}
+							onClick={() =>
+								handleShowModal('sm-down', 'Neuen Eintrag erstellen', 'timeline')
+							}
 						>
-							<BiAddToQueue/>
+							<BiAddToQueue />
 						</Button>
 					</div>
 				</Offcanvas.Header>
@@ -88,9 +90,11 @@ const Header = () => {
 						<Button
 							className='timeline-button'
 							variant='light'
-							onClick={() => handleShowModal("sm-down", "Neue Erinnerung erstellen", "notification")}
+							onClick={() =>
+								handleShowModal('sm-down', 'Neue Erinnerung erstellen', 'notification')
+							}
 						>
-							<BiAddToQueue/>
+							<BiAddToQueue />
 						</Button>
 					</div>
 				</Offcanvas.Header>
@@ -160,13 +164,7 @@ const Header = () => {
 				<Modal.Header closeButton>
 					<Modal.Title>{headline}</Modal.Title>
 				</Modal.Header>
-				<Modal.Body>
-					{modalModule}
-				</Modal.Body>
-				<Modal.Footer>
-					<Button variant="light">Zurücksetzen</Button>
-					<Button variant="primary">Speichern</Button>
-				</Modal.Footer>
+				<Modal.Body>{modalModule}</Modal.Body>
 			</Modal>
 		</>
 	);

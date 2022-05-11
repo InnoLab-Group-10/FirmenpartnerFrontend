@@ -3,7 +3,11 @@ import { Toast, Container, Row } from 'react-bootstrap';
 
 const Note = props => {
 	return (
-		<Toast className='appointment-card' bg={props.variant}>
+		<Toast
+			className='appointment-card'
+			bg={props.variant}
+			onClose={() => console.log('close ' + props.id)}
+		>
 			<Toast.Header>
 				<strong className='me-auto'>{props.title}</strong>
 				<small>{props.info}</small>

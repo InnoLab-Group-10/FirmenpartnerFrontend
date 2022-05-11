@@ -1,24 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { notificationGetUser } from '../../store/notification-thunks';
 import Note from './Note';
 
+// NOTE: notifications actually only show up as new if the site is reloaded or a new one is added
+// it could be changed to work basically live, but it's not really that necessary
+
+// split notifications into two arrays, map over them
 const Notifications = () => {
+	const dispatch = useDispatch();
+	const { pastNotifications, futureNotifications, shouldReload } = useSelector(
+		state => state.notification
+	);
+	const { id } = useSelector(state => state.user);
+
+	useEffect(() => {
+		if (shouldReload) {
+			dispatch(notificationGetUser({ id }));
+		}
+	}, [dispatch, shouldReload, id]);
+
 	return (
 		<Container>
-			<h4 className='timeline-year'>Ungelesen</h4>
-			<Note
-				title='Typ 1'
-				info='Erstellt am 07.12.21'
-				text='Hier kann etwas stehen.'
-				variant='light'
-			/>
-			<h4 className='timeline-year'>Gelesen</h4>
-			<Note
-				title='Typ 2'
-				info='Erstellt am 07.12.21'
-				text='Hier kann etwas stehen.'
-				variant='light'
-			/>
+			<h4 className='timeline-year'>Benachrichtigungen</h4>
+			{pastNotifications.map(entry => (
+				<Note
+					key={entry.id}
+					id={entry.id}
+					info={entry.timestamp}
+					text={entry.message}
+					title='dummy'
+					variant='light'
+				/>
+			))}
+			<h4 className='timeline-year'>Zukünftige Benachrichtigungen</h4>
+			{futureNotifications.map(entry => (
+				<Note
+					key={entry.id}
+					id={entry.id}
+					info={entry.timestamp}
+					text={entry.message}
+					title='dummy'
+					variant='light'
+				/>
+			))}
 		</Container>
 	);
 };
