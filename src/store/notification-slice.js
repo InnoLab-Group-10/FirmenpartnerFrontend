@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { notificationGetUser, notificationNew } from './notification-thunks';
+import {
+	notificationDelete,
+	notificationGetUser,
+	notificationNew,
+} from './notification-thunks';
 
 const notificationSlice = createSlice({
 	name: 'notification',
@@ -27,6 +31,9 @@ const notificationSlice = createSlice({
 			state.shouldReload = false;
 		},
 		[notificationNew.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		[notificationDelete.fulfilled]: state => {
 			state.shouldReload = true;
 		},
 	},
