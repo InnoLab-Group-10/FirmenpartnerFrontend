@@ -1,12 +1,17 @@
 import React from 'react';
 import { Toast, Container, Row } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+
+import { notificationDelete } from '../../store/notification-thunks';
 
 const Note = props => {
+	const dispatch = useDispatch();
+
 	return (
 		<Toast
 			className='appointment-card'
 			bg={props.variant}
-			onClose={() => console.log('close ' + props.id)}
+			onClose={() => dispatch(notificationDelete({ id: props.id }))}
 		>
 			<Toast.Header>
 				<strong className='me-auto'>{props.title}</strong>

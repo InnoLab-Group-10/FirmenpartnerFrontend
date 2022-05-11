@@ -14,3 +14,8 @@ export const notificationGetUser = createAsyncThunk('notification/getUser', asyn
 	const response = await axiosPrivate.get(`/notification/user/${arg.id}`);
 	return response.data;
 });
+
+export const notificationDelete = createAsyncThunk('notification/delete', async arg => {
+	const response = await axiosPrivate.delete(`/notification/${arg.id}`);
+	return response.data;
+});
