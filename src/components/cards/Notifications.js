@@ -29,8 +29,8 @@ const Notifications = () => {
 				<Note
 					key={entry.id}
 					id={entry.id}
-					info={entry.timestamp}
-					text={entry.message}
+					timestamp={entry.timestamp}
+					message={entry.message}
 					title='dummy'
 					variant='light'
 				/>
@@ -40,8 +40,8 @@ const Notifications = () => {
 				<Note
 					key={entry.id}
 					id={entry.id}
-					info={entry.timestamp}
-					text={entry.message}
+					timestamp={entry.timestamp}
+					message={entry.message}
 					title='dummy'
 					variant='light'
 				/>

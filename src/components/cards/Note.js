@@ -15,11 +15,11 @@ const Note = props => {
 		>
 			<Toast.Header>
 				<strong className='me-auto'>{props.title}</strong>
-				<small>{props.info}</small>
+				<small>{props.timestamp}</small>
 			</Toast.Header>
 			<Toast.Body>
 				<Container>
-					<Row className='toast-message'>{props.text}</Row>
+					<Row className='toast-message'>{props.message}</Row>
 				</Container>
 			</Toast.Body>
 		</Toast>
