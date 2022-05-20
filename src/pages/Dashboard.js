@@ -1,8 +1,6 @@
 import React from 'react';
-import Calendar from 'react-calendar';
 import SiteTitle from '../components/SiteTitle';
-
-import 'react-calendar/dist/Calendar.css';
+import CalendarComponent from '../components/CalendarComponent';
 
 const Dashboard = () => {
 	return (
@@ -12,7 +10,7 @@ const Dashboard = () => {
 				subtitle='Unterüberschrift zum Dashboard'
 				text='Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.'
 			/>
-			<Calendar/>
+			<CalendarComponent/>
 		</div>
 	);
 };
