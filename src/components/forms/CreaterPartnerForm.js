@@ -13,12 +13,10 @@ import { BiInfoCircle } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
-import { companyNew, companyImport } from '../../store/company-thunks';
-import useCSV, { csvOptions } from '../../hooks/useCSV';
+import { companyNew, companyImport, companyExport } from '../../store/company-thunks';
 
 const CreatePartnerForm = () => {
 	const dispatch = useDispatch();
-	const [getCompanyCsv] = useCSV(csvOptions.COMPANY);
 
 	const nameRef = useRef();
 	const maxStudentsRef = useRef();
@@ -222,7 +220,7 @@ const CreatePartnerForm = () => {
 								<Button
 									variant='primary'
 									size='lg'
-									onClick={() => getCompanyCsv(csvOptions.COMPANY)}
+									onClick={() => dispatch(companyExport())}
 								>
 									Als CSV exportieren
 								</Button>

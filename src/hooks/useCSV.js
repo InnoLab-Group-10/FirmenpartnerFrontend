@@ -1,4 +1,5 @@
 import { axiosPrivate } from '../store/axios';
+const fileDownload = require('js-file-download');
 
 export const csvOptions = {
 	COMPANY: '/company/csv',
@@ -8,15 +9,12 @@ export const csvOptions = {
 // get csvOption
 const useCSV = option => {
 	const getCSV = () => {
-		axiosPrivate.get(option).then(
+		axiosPrivate.get(option, { responseType: 'blob' }).then(
 			result => {
-				const blob = new Blob([result.data], { type: 'text/csv' });
-				const link = URL.createObjectURL(blob);
-				window.location = link;
-				URL.revokeObjectURL(link);
+				fileDownload(result.data, 'test.csv');
 			},
 			() => {
-				console.log('failed to fetch csv data');
+				console.log('failed to fetch data');
 			}
 		);
 	};

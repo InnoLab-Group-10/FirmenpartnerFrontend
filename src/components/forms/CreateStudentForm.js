@@ -13,12 +13,10 @@ import { BiInfoCircle } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
-import { studentNew, studentImport } from '../../store/student-thunks';
-import useCSV, { csvOptions } from '../../hooks/useCSV';
+import { studentNew, studentImport, studentExport } from '../../store/student-thunks';
 
 const CreateStudentForm = () => {
 	const dispatch = useDispatch();
-	const [getStudentsCsv] = useCSV(csvOptions.STUDENT);
 
 	const studentIdRef = useRef();
 	const firstNameRef = useRef();
@@ -184,7 +182,7 @@ const CreateStudentForm = () => {
 								<Button
 									variant='primary'
 									size='lg'
-									onClick={() => getStudentsCsv(csvOptions.STUDENT)}
+									onClick={() => dispatch(studentExport())}
 								>
 									Als CSV exportieren
 								</Button>
