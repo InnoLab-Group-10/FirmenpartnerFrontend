@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import { Collapse, Button, Modal } from 'react-bootstrap';
 import { BiTrash, BiPencil } from 'react-icons/bi';
+import EditPartnerForm from '../forms/EditPartnerForm.js';
 
 const PartnerRow = props => {
 	const [open, setOpen] = useState(false);
 	const { company, contacts, locations } = props.entry;
 
 	const [show, setShow] = useState(false);
+	const [showEdit, setEditShow] = useState(false);
+
 	const handleClose = () => setShow(false);
-  	const handleShow = () => setShow(true);
+	const handleShow = () => setShow(true);
+
+	const handleEditClose = () => setEditShow(false);
+	const handleEditShow = () => setEditShow(true);
 
 	let activity = '';
 
@@ -56,7 +62,11 @@ const PartnerRow = props => {
 					>
 						<BiTrash/>
 					</Button>
-					<Button variant="secondary" className="table-icons">
+					<Button 
+						variant="secondary" 
+						className="table-icons"
+						onClick={handleEditShow}	
+					>
 						<BiPencil/>
 					</Button>
 				</td>
@@ -91,6 +101,8 @@ const PartnerRow = props => {
 					</td>
 				</tr>
 			</Collapse>
+			
+			{/* Delete Confirmation Modal */}
 			<Modal
 				show={show}
 				onHide={handleClose}
@@ -101,13 +113,33 @@ const PartnerRow = props => {
 				<Modal.Title>Löschen bestätigen</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					Sind Sie sicher dass Sie "Benutzername" entfernen möchten?
+					Sind Sie sicher dass Sie "Partnerfirmenname" entfernen möchten?
 				</Modal.Body>
 				<Modal.Footer>
 				<Button variant="secondary" onClick={handleClose}>
 					Abbrechen
 				</Button>
 				<Button variant="danger">Löschen</Button>
+				</Modal.Footer>
+			</Modal>
+			{/* Edit Form Modal */}
+			<Modal
+				size="xl"
+				show={showEdit}
+				onHide={handleEditClose}
+				keyboard={false}
+			>
+				<Modal.Header closeButton>
+				<Modal.Title>Partnerfirma bearbeiten</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<EditPartnerForm />
+				</Modal.Body>
+				<Modal.Footer>
+				<Button variant="secondary" onClick={handleEditClose}>
+					Abbrechen
+				</Button>
+				<Button variant="primary">Speichern</Button>
 				</Modal.Footer>
 			</Modal>
 		</>

@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import CollapsibleTable from '../components/tables/User-Collapsible-Table.js';
 import SiteTitle from '../components/SiteTitle.js';
 import Alerts from '../components/Alerts.js';
-import CreateUserForm from '../components/forms/CreaterUserForm';
+import AccordionUserMenu from '../components/forms/AccordionUserMenu';
 
 const Benutzer = () => {
 	return (
@@ -18,7 +18,7 @@ const Benutzer = () => {
 				<Alerts variant='warning' text='Warnung' />
 				<Alerts variant='danger' text='Fehlschlag' />
 			</Container>
-			<CreateUserForm />
+			<AccordionUserMenu />
 			<CollapsibleTable />
 		</div>
 	);
