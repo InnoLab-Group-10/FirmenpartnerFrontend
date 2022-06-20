@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Collapse, Button } from 'react-bootstrap';
+import { Collapse, Button, Modal } from 'react-bootstrap';
 import { BiTrash, BiPencil } from 'react-icons/bi';
 
 const PartnerRow = props => {
 	const [open, setOpen] = useState(false);
 	const { company, contacts, locations } = props.entry;
+
+	const [show, setShow] = useState(false);
+	const handleClose = () => setShow(false);
+  	const handleShow = () => setShow(true);
 
 	let activity = '';
 
@@ -46,7 +50,10 @@ const PartnerRow = props => {
 					</>
 				)}
 				<td className="table-icon-column-two-icons">
-					<Button variant="danger" className="table-icons table-delete-icon">
+					<Button variant="danger"
+							className="table-icons table-delete-icon"
+							onClick={handleShow}		
+					>
 						<BiTrash/>
 					</Button>
 					<Button variant="secondary" className="table-icons">
@@ -84,6 +91,25 @@ const PartnerRow = props => {
 					</td>
 				</tr>
 			</Collapse>
+			<Modal
+				show={show}
+				onHide={handleClose}
+				backdrop="static"
+				keyboard={false}
+			>
+				<Modal.Header closeButton>
+				<Modal.Title>Löschen bestätigen</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					Sind Sie sicher dass Sie "Benutzername" entfernen möchten?
+				</Modal.Body>
+				<Modal.Footer>
+				<Button variant="secondary" onClick={handleClose}>
+					Abbrechen
+				</Button>
+				<Button variant="danger">Löschen</Button>
+				</Modal.Footer>
+			</Modal>
 		</>
 	);
 };
