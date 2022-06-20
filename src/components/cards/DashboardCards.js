@@ -7,16 +7,16 @@ const DashboardCards = () => {
         <Container>
             <Row>
                 <Col>
-                    <DashboardCard/>
+                    <DashboardCard header="Partner" counter="100" text="Aktive Unternehmen"/>
                 </Col>
                 <Col>
-                    <DashboardCard/>
+                    <DashboardCard header="Partner" counter="100" text="Inaktive Unternehmen"/>
                 </Col>
                 <Col>
-                    <DashboardCard/>
+                    <DashboardCard header="Studierende" counter="100" text="Derzeit vermittelt"/>
                 </Col>
                 <Col>
-                    <DashboardCard/>
+                    <DashboardCard header="Studierende" counter="100" text="Insgesamt vermittelt"/>
                 </Col>
             </Row>
         </Container>

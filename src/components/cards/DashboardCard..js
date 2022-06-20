@@ -1,15 +1,15 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-const DashboardCard = () => {
+const DashboardCard = (props) => {
 	return (
 		<div>
 			<Card style={{ width: '100%' }}>
                 <Card.Body>
-                    <Card.Subtitle>Subheader</Card.Subtitle>
-                    <Card.Title style={{ fontWeight: '700', fontSize: '2rem'}}>100</Card.Title>
+                    <Card.Subtitle>{props.header}</Card.Subtitle>
+                    <Card.Title style={{ fontWeight: '700', fontSize: '2rem'}}>{props.counter}</Card.Title>
                     <Card.Text>
-                        Example Text
+                        {props.text}
                     </Card.Text>
                 </Card.Body>
             </Card>

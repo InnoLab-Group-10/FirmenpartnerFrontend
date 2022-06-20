@@ -478,3 +478,18 @@ td {
 	border-radius: 3px;
 	border: 1px solid rgba(0,0,0,.1);
 }
+
+/* === UPCOMING DATES === */
+.dashboard-tabs{
+	justify-content: left;
+	flex-direction: unset;
+	background-color: #f7f6fb;
+}
+
+#bootstrap-override .dashboard-tabs .nav-link{
+	color: #6c757d;
+}
+
+#bootstrap-override .dashboard-tabs .nav-item .active{
+	color: #0d6efd;
+}
