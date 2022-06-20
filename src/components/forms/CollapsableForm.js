@@ -14,7 +14,7 @@ const CollapsableForm = () => {
 	return (
 		<Container>
 			<Card>
-				<Accordion defaultActiveKey='0' flush>
+				<Accordion flush>
 					<Accordion.Item eventKey='0'>
 						<Accordion.Header>Anlegen</Accordion.Header>
 						<Accordion.Body>

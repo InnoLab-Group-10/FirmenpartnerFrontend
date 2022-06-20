@@ -378,6 +378,10 @@ td {
 	padding-left: 0.7rem !important;
 }
 
+.detailed-row{
+	background-color: #e9ecef;
+}
+
 .active-row {
 	border-left: 12px solid #198754;
 }
@@ -388,6 +392,28 @@ td {
 
 .pending-row {
 	border-left: 12px solid #fd7e14;
+}
+
+.table-icons{
+	width: 32px;
+	height: 32px;
+	padding: 0 0 .2rem 0 !important;
+	border-radius: 50% !important;
+	margin-left: .5rem;
+	display: inline !important;
+	float: right;
+}
+
+.table-delete-icon{
+	
+}
+
+.table-icon-column-two-icons{
+	min-width: 100px;
+}
+
+.table-icon-column-three-icons{
+	min-width: 140px;
 }
 
 /* === DOCUMENTS === */

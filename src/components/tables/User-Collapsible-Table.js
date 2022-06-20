@@ -59,7 +59,6 @@ const CollapsibleTable = () => {
 										<BiSortZA className='sort-icon' hidden />
 									</Button>
 								</th>
-								<th>Passwort</th>
 							</tr>
 						</thead>
 						<tbody>

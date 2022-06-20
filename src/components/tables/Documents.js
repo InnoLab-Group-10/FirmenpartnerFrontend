@@ -46,7 +46,7 @@ const Documents = () => {
 								</th>
 								<th>
 									<Button variant='light'>
-										Änderungsdatum
+										Datum
 										<BiSortDown className='sort-icon' />
 										<BiSortUp className='sort-icon' hidden />
 									</Button>

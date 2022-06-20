@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Collapse } from 'react-bootstrap';
+import { Collapse, Button } from 'react-bootstrap';
+import { BiTrash, BiPencil } from 'react-icons/bi';
 
 const StudentRow = props => {
 	const [open, setOpen] = useState(false);
@@ -21,9 +22,17 @@ const StudentRow = props => {
 					{student.semester}
 				</td>
 				<td>{student.email}</td>
+				<td className="table-icon-column-two-icons">
+					<Button variant="danger" className="table-icons table-delete-icon">
+						<BiTrash/>
+					</Button>
+					<Button variant="secondary" className="table-icons">
+						<BiPencil/>
+					</Button>
+				</td>
 			</tr>
 			<Collapse in={open}>
-				<tr id='example-collapse-text'>
+				<tr id='example-collapse-text' className="detailed-row">
 					<td colSpan='1'>
 						<strong>Notiz:</strong>
 					</td>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { BiArrowToBottom } from 'react-icons/bi';
+import { BiArrowToBottom, BiTrash } from 'react-icons/bi';
 import {
 	GrDocumentPdf,
 	GrDocument,
@@ -55,6 +55,11 @@ const DocumentRow = props => {
 				</Button>
 			</td>
 			<td>{new Date(entry.timestamp).toLocaleString()}</td>
+			<td>
+				<Button variant="danger" className="table-icons table-delete-icon">
+					<BiTrash/>
+				</Button>
+			</td>
 		</tr>
 	);
 };

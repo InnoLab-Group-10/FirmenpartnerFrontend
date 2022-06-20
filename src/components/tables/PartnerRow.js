@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Collapse } from 'react-bootstrap';
+import { Collapse, Button } from 'react-bootstrap';
+import { BiTrash, BiPencil } from 'react-icons/bi';
 
 const PartnerRow = props => {
 	const [open, setOpen] = useState(false);
@@ -44,9 +45,17 @@ const PartnerRow = props => {
 						<td>N/A</td>
 					</>
 				)}
+				<td className="table-icon-column-two-icons">
+					<Button variant="danger" className="table-icons table-delete-icon">
+						<BiTrash/>
+					</Button>
+					<Button variant="secondary" className="table-icons">
+						<BiPencil/>
+					</Button>
+				</td>
 			</tr>
 			<Collapse in={open}>
-				<tr id='example-collapse-text'>
+				<tr id='example-collapse-text' className="detailed-row">
 					<td colSpan='1'>
 						<strong>Anschrift:</strong>
 						<br />
@@ -54,7 +63,7 @@ const PartnerRow = props => {
 						<br />
 						<strong>Notiz:</strong>
 					</td>
-					<td colSpan='3'>
+					<td colSpan='4'>
 						{locations.length !== 0 ? (
 							<>
 								{locations[0].address}, {locations[0].zipcode}, {locations[0].city}
