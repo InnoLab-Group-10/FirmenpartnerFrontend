@@ -515,3 +515,8 @@ td {
 #bootstrap-override .dashboard-tabs .nav-item .active{
 	color: #0d6efd;
 }
+
+/* === NOTIFICATION === */
+.notification-container{
+	height: 50%;
+}

@@ -23,19 +23,9 @@ const Notifications = () => {
 	}, [dispatch, shouldReload, id]);
 
 	return (
-		<Container>
-			<h4 className='timeline-year'>Benachrichtigungen</h4>
-			{pastNotifications.map(entry => (
-				<Note
-					key={entry.id}
-					id={entry.id}
-					timestamp={entry.timestamp}
-					message={entry.message}
-					title='dummy'
-					variant='light'
-				/>
-			))}
-			<h4 className='timeline-year'>Zukünftige Benachrichtigungen</h4>
+		<>
+		<h4 className='timeline-year'>Zukünftige Benachrichtigungen</h4>
+		<Container className="overflow-auto">
 			{futureNotifications.map(entry => (
 				<Note
 					key={entry.id}
@@ -47,6 +37,20 @@ const Notifications = () => {
 				/>
 			))}
 		</Container>
+		<h4 className='timeline-year'>Benachrichtigungen</h4>
+		<Container className="notification-container overflow-auto">
+			{pastNotifications.map(entry => (
+				<Note
+					key={entry.id}
+					id={entry.id}
+					timestamp={entry.timestamp}
+					message={entry.message}
+					title='dummy'
+					variant='light'
+				/>
+			))}
+		</Container>
+		</>
 	);
 };
 

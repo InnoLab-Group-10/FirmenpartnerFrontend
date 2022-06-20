@@ -82,7 +82,7 @@ const Header = () => {
 				show={showNotes}
 				onHide={() => setShowNotes(false)}
 				placement='end'
-				scroll='true'
+				scroll='false'
 			>
 				<Offcanvas.Header closeButton>
 					<Offcanvas.Title>Benachrichtigungen</Offcanvas.Title>
