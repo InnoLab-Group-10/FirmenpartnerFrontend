@@ -15,6 +15,8 @@ const timelineSlice = createSlice({
 	extraReducers: {
 		[timelineGetAll.fulfilled]: (state, action) => {
 			state.appointments = action.payload.results;
+			// sort by timestamp
+			state.appointments.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
 			state.shouldReload = false;
 		},
 		[timelineNew.fulfilled]: state => {

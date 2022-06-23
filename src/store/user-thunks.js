@@ -7,9 +7,8 @@ export const userGetCurrent = createAsyncThunk('user/current', async () => {
 });
 
 export const userNew = createAsyncThunk('user/new', async arg => {
-	// TODO change to username as soon as api gets updated
 	const userData = {
-		name: arg.name,
+		username: arg.name,
 		email: arg.email,
 		password: arg.password,
 	};

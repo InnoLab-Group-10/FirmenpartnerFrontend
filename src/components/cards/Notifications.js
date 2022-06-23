@@ -24,32 +24,32 @@ const Notifications = () => {
 
 	return (
 		<>
-		<h4 className='timeline-year'>Zukünftige Benachrichtigungen</h4>
-		<Container className="overflow-auto">
-			{futureNotifications.map(entry => (
-				<Note
-					key={entry.id}
-					id={entry.id}
-					timestamp={entry.timestamp}
-					message={entry.message}
-					title='dummy'
-					variant='light'
-				/>
-			))}
-		</Container>
-		<h4 className='timeline-year'>Benachrichtigungen</h4>
-		<Container className="notification-container overflow-auto">
-			{pastNotifications.map(entry => (
-				<Note
-					key={entry.id}
-					id={entry.id}
-					timestamp={entry.timestamp}
-					message={entry.message}
-					title='dummy'
-					variant='light'
-				/>
-			))}
-		</Container>
+			<h4 className='timeline-year'>Zukünftige Benachrichtigungen</h4>
+			<Container className='overflow-auto'>
+				{futureNotifications.map(entry => (
+					<Note
+						key={entry.id}
+						id={entry.id}
+						timestamp={entry.timestamp}
+						message={entry.message}
+						title='dummy'
+						variant='light'
+					/>
+				))}
+			</Container>
+			<h4 className='timeline-year'>Benachrichtigungen</h4>
+			<Container className='notification-container overflow-auto'>
+				{pastNotifications.map(entry => (
+					<Note
+						key={entry.id}
+						id={entry.id}
+						timestamp={entry.timestamp}
+						message={entry.message}
+						title='dummy'
+						variant='light'
+					/>
+				))}
+			</Container>
 		</>
 	);
 };
