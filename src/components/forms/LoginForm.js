@@ -26,12 +26,8 @@ const LoginForm = () => {
 			<Row>
 				<Col>
 					<Form onSubmit={handleSubmit(data => dispatch(sessionLogin(data)))}>
-						<FloatingLabel label='Benutzername' className='mb-3'>
-							<Form.Control
-								type='text'
-								placeholder='Benutzername'
-								{...register('username')}
-							/>
+						<FloatingLabel label='Email' className='mb-3'>
+							<Form.Control type='text' placeholder='Email' {...register('email')} />
 						</FloatingLabel>
 						<FloatingLabel controlId='floatingPassword' label='Passwort'>
 							<Form.Control
