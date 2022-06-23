@@ -4,7 +4,7 @@ import { BiTrash, BiPencil, BiReset } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { userDelete } from '../../store/user-thunks';
 
-import CreateUserForm from '../forms/CreateUserForm';
+import EditUserForm from '../forms/EditUserForm';
 
 const UserRow = props => {
 	const user = props.entry;
@@ -66,13 +66,12 @@ const UserRow = props => {
 					<Modal.Title>Benutzer bearbeiten</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<CreateUserForm />
+					<EditUserForm entry={user} toggleHandler={toggleEditShow} />
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant='secondary' onClick={toggleEditShow}>
 						Abbrechen
 					</Button>
-					<Button variant='primary'>Speichern</Button>
 				</Modal.Footer>
 			</Modal>
 		</>

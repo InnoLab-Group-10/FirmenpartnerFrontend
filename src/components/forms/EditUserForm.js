@@ -3,9 +3,10 @@ import { Form, Row, Col, Button, FloatingLabel } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
-import { userNew } from '../../store/user-thunks';
+import { userUpdate } from '../../store/user-thunks';
 
-const CreateUserForm = () => {
+const EditUserForm = props => {
+	const user = props.entry;
 	const dispatch = useDispatch();
 
 	// new user
@@ -22,12 +23,26 @@ const CreateUserForm = () => {
 		}
 	}, [isSubmitSuccessful, reset]);
 
+	const handleUpdate = data => {
+		dispatch(userUpdate(data));
+		props.toggleHandler();
+	};
+
 	return (
-		<Form onSubmit={handleSubmit(data => dispatch(userNew(data)))}>
+		<Form
+			onSubmit={handleSubmit(data =>
+				handleUpdate({ ...data, id: user.id, currentRoles: user.roles })
+			)}
+		>
 			<Row>
 				<Col lg>
 					<FloatingLabel label='Name' className='mb-3'>
-						<Form.Control type='text' placeholder='Name' {...register('username')} />
+						<Form.Control
+							type='text'
+							placeholder='Name'
+							defaultValue={user.username}
+							{...register('username')}
+						/>
 					</FloatingLabel>
 				</Col>
 				<Col lg>
@@ -35,6 +50,7 @@ const CreateUserForm = () => {
 						<Form.Control
 							type='email'
 							placeholder='name@example.com'
+							defaultValue={user.email}
 							{...register('email')}
 						/>
 					</FloatingLabel>
@@ -42,17 +58,12 @@ const CreateUserForm = () => {
 			</Row>
 			<Row>
 				<Col lg>
-					<FloatingLabel label='Password' className='mb-3'>
-						<Form.Control
-							type='password'
-							placeholder='Password'
-							{...register('password')}
-						/>
-					</FloatingLabel>
-				</Col>
-				<Col lg>
 					<FloatingLabel controlId='floatingSelect' label='Rolle'>
-						<Form.Select aria-label='Floating label select example' {...register('role')}>
+						<Form.Select
+							aria-label='Floating label select example'
+							defaultValue={user.roles[user.roles.length - 1]}
+							{...register('role')}
+						>
 							<option value='User'>User</option>
 							<option value='Administrator'>Administrator</option>
 						</Form.Select>
@@ -63,7 +74,7 @@ const CreateUserForm = () => {
 				<Col lg>
 					<div className='d-grid'>
 						<Button variant='primary' type='submit' size='lg'>
-							Anlegen
+							Ändern
 						</Button>
 					</div>
 				</Col>
@@ -72,4 +83,4 @@ const CreateUserForm = () => {
 	);
 };
 
-export default CreateUserForm;
+export default EditUserForm;

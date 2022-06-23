@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userGetAll, userGetCurrent, userNew, userDelete } from './user-thunks';
+import {
+	userGetAll,
+	userGetCurrent,
+	userNew,
+	userDelete,
+	userUpdate,
+} from './user-thunks';
 
 const userSlice = createSlice({
 	name: 'user',
@@ -30,6 +36,9 @@ const userSlice = createSlice({
 			state.shouldReload = false;
 		},
 		[userNew.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		[userUpdate.fulfilled]: state => {
 			state.shouldReload = true;
 		},
 		[userDelete.fulfilled]: state => {
