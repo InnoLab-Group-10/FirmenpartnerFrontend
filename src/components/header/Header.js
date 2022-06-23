@@ -140,7 +140,7 @@ const Header = () => {
 									</div>
 									<div className='user-badge'>
 										<h6>{username}</h6>
-										<span>{roles[0]}</span>
+										<span>{roles[roles.length - 1]}</span>
 									</div>
 								</Dropdown.Toggle>
 								<Dropdown.Menu>

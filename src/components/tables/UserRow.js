@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {Button, Modal} from 'react-bootstrap'
+import React, { useState } from 'react';
+import { Button, Modal } from 'react-bootstrap';
 import { BiTrash, BiPencil, BiReset } from 'react-icons/bi';
-import CreateUserForm from '../forms/CreateUserForm'
+import CreateUserForm from '../forms/CreateUserForm';
 
 const UserRow = props => {
 	const user = props.entry;
@@ -18,65 +18,52 @@ const UserRow = props => {
 		<>
 			<tr>
 				<td>{user.username}</td>
-				<td>{user.roles.toString()}</td>
+				<td>{user.roles[user.roles.length - 1]}</td>
 				<td>{user.email}</td>
-				<td className="table-icon-column-three-icons">
-					<Button 
-						variant="danger"
-						className="table-icons table-delete-icon"
+				<td className='table-icon-column-three-icons'>
+					<Button
+						variant='danger'
+						className='table-icons table-delete-icon'
 						onClick={handleShow}
 					>
-						<BiTrash/>
+						<BiTrash />
 					</Button>
-					<Button variant="secondary" className="table-icons">
-						<BiReset/>
+					<Button variant='secondary' className='table-icons'>
+						<BiReset />
 					</Button>
-					<Button 
-						variant="secondary" 
-						className="table-icons"
-						onClick={handleEditShow}
-						>
-						<BiPencil/>
+					<Button variant='secondary' className='table-icons' onClick={handleEditShow}>
+						<BiPencil />
 					</Button>
 				</td>
 			</tr>
 			{/* Delete Confirmation Modal */}
-			<Modal
-				show={show}
-				onHide={handleClose}
-				backdrop="static"
-				keyboard={false}
-			>
+			<Modal show={show} onHide={handleClose} backdrop='static' keyboard={false}>
 				<Modal.Header closeButton>
-				<Modal.Title>Löschen bestätigen</Modal.Title>
+					<Modal.Title>Löschen bestätigen</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					Sind Sie sicher dass Sie "Benutzername" entfernen möchten?
 				</Modal.Body>
 				<Modal.Footer>
-				<Button variant="secondary" onClick={handleClose}>
-					Abbrechen
-				</Button>
-				<Button variant="danger">Löschen</Button>
+					<Button variant='secondary' onClick={handleClose}>
+						Abbrechen
+					</Button>
+					<Button variant='danger'>Löschen</Button>
 				</Modal.Footer>
 			</Modal>
 			{/* Edit Form Modal */}
-			<Modal
-				show={showEdit}
-				onHide={handleEditClose}
-				keyboard={false}
-			>
+			<Modal show={showEdit} onHide={handleEditClose} keyboard={false}>
 				<Modal.Header closeButton>
-				<Modal.Title>Benutzer bearbeiten</Modal.Title>
+					<Modal.Title>Benutzer bearbeiten</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<CreateUserForm/>
+					<CreateUserForm />
 				</Modal.Body>
 				<Modal.Footer>
-				<Button variant="secondary" onClick={handleEditClose}>
-					Abbrechen
-				</Button>
-				<Button variant="primary">Speichern</Button>
+					<Button variant='secondary' onClick={handleEditClose}>
+						Abbrechen
+					</Button>
+					<Button variant='primary'>Speichern</Button>
 				</Modal.Footer>
 			</Modal>
 		</>
