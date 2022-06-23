@@ -30,3 +30,8 @@ export const userGetAll = createAsyncThunk('user/getAll', async () => {
 	const response = await axiosPrivate.get('/user');
 	return response.data;
 });
+
+export const userDelete = createAsyncThunk('user/delete', async arg => {
+	const response = await axiosPrivate.delete(`/user/${arg.id}`);
+	return response.data;
+});

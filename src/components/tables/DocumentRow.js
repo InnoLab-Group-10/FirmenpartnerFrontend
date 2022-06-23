@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { BiArrowToBottom, BiTrash } from 'react-icons/bi';
 import {
@@ -11,16 +11,20 @@ import {
 } from 'react-icons/gr';
 import { useDispatch } from 'react-redux';
 
-import { fileDownload } from '../../store/file-thunks';
+import { fileDelete, fileDownload } from '../../store/file-thunks';
 
 const DocumentRow = props => {
 	const { entry } = props;
 	const dispatch = useDispatch();
 
-	const [show, setShow] = useState(false);
+	const [deleteShow, setDeleteShow] = useState(false);
 
-  	const handleClose = () => setShow(false);
-  	const handleShow = () => setShow(true);
+	const toggleDeleteShow = () => setDeleteShow(prevState => !prevState);
+
+	const handleDelete = () => {
+		dispatch(fileDelete({ id: entry.id }));
+		toggleDeleteShow();
+	};
 
 	const IconHandler = extension => {
 		switch (extension) {
@@ -48,47 +52,45 @@ const DocumentRow = props => {
 
 	return (
 		<>
-		<tr>
-			<td>{IconHandler(entry.name.split('.')[1].toLowerCase())}</td>
-			<td>
-				<Button
-					variant='light'
-					className='document-download-button'
-					onClick={() => dispatch(fileDownload({ id: entry.id, name: entry.name }))}
-				>
-					{entry.name}
-					<BiArrowToBottom />
-				</Button>
-			</td>
-			<td>{new Date(entry.timestamp).toLocaleString()}</td>
-			<td>
-				<Button variant="danger" 
-						className="table-icons table-delete-icon"
-						onClick={handleShow}
-				>
-					<BiTrash/>
-				</Button>
-			</td>
-		</tr>
-		<Modal
-			show={show}
-			onHide={handleClose}
-			backdrop="static"
-			keyboard={false}
-		>
-			<Modal.Header closeButton>
-			<Modal.Title>Löschen bestätigen</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>
-				Sind Sie sicher dass Sie "Benutzername" entfernen möchten?
-			</Modal.Body>
-			<Modal.Footer>
-			<Button variant="secondary" onClick={handleClose}>
-				Abbrechen
-			</Button>
-			<Button variant="danger">Löschen</Button>
-			</Modal.Footer>
-		</Modal>
+			<tr>
+				<td>{IconHandler(entry.name.split('.')[1].toLowerCase())}</td>
+				<td>
+					<Button
+						variant='light'
+						className='document-download-button'
+						onClick={() => dispatch(fileDownload({ id: entry.id, name: entry.name }))}
+					>
+						{entry.name}
+						<BiArrowToBottom />
+					</Button>
+				</td>
+				<td>{new Date(entry.timestamp).toLocaleString()}</td>
+				<td>
+					<Button
+						variant='danger'
+						className='table-icons table-delete-icon'
+						onClick={toggleDeleteShow}
+					>
+						<BiTrash />
+					</Button>
+				</td>
+			</tr>
+			<Modal show={deleteShow} onHide={toggleDeleteShow} keyboard={false}>
+				<Modal.Header closeButton>
+					<Modal.Title>Löschen bestätigen</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					Sind Sie sicher dass Sie "{entry.name}" entfernen möchten?
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant='secondary' onClick={toggleDeleteShow}>
+						Abbrechen
+					</Button>
+					<Button variant='danger' onClick={handleDelete}>
+						Löschen
+					</Button>
+				</Modal.Footer>
+			</Modal>
 		</>
 	);
 };

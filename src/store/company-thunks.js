@@ -51,3 +51,9 @@ export const companyExport = createAsyncThunk('company/export', async () => {
 	const response = await axiosPrivate.get(`/company/csv`, { responseType: 'blob' });
 	fileDownloader(response.data, 'company-export.csv');
 });
+
+export const companyDelete = createAsyncThunk('company/delete', async arg => {
+	const response = await axiosPrivate.delete(`/company/${arg.id}`);
+	// TODO delete other data too?
+	return response.data;
+});

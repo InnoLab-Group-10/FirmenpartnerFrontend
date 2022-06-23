@@ -18,3 +18,8 @@ export const fileNew = createAsyncThunk('file/new', async arg => {
 	const response = await axiosPrivate.post('/file', data);
 	return response.data;
 });
+
+export const fileDelete = createAsyncThunk('file/delete', async arg => {
+	const response = await axiosPrivate.delete(`/file/${arg.id}`);
+	return response.data;
+});

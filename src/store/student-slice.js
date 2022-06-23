@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { studentGetAll, studentImport, studentNew } from './student-thunks';
+import {
+	studentDelete,
+	studentGetAll,
+	studentImport,
+	studentNew,
+} from './student-thunks';
 
 const studentSlice = createSlice({
 	name: 'student',
@@ -21,6 +26,9 @@ const studentSlice = createSlice({
 			state.shouldReload = true;
 		},
 		[studentImport.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		[studentDelete.fulfilled]: state => {
 			state.shouldReload = true;
 		},
 	},

@@ -27,3 +27,8 @@ export const studentExport = createAsyncThunk('student/export', async () => {
 	const response = await axiosPrivate.get(`/student/csv`, { responseType: 'blob' });
 	fileDownloader(response.data, 'student-export.csv');
 });
+
+export const studentDelete = createAsyncThunk('student/delete', async arg => {
+	const response = await axiosPrivate.delete(`/student/${arg.id}`);
+	return response.data;
+});

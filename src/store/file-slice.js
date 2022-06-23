@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fileGetAll, fileNew } from './file-thunks';
+import { fileDelete, fileGetAll, fileNew } from './file-thunks';
 
 const fileSlice = createSlice({
 	name: 'file',
@@ -18,6 +18,9 @@ const fileSlice = createSlice({
 			state.shouldReload = false;
 		},
 		[fileNew.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		[fileDelete.fulfilled]: state => {
 			state.shouldReload = true;
 		},
 	},
