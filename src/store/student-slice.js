@@ -4,6 +4,7 @@ import {
 	studentGetAll,
 	studentImport,
 	studentNew,
+	studentUpdate,
 } from './student-thunks';
 
 const studentSlice = createSlice({
@@ -26,6 +27,9 @@ const studentSlice = createSlice({
 			state.shouldReload = true;
 		},
 		[studentImport.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		[studentUpdate.fulfilled]: state => {
 			state.shouldReload = true;
 		},
 		[studentDelete.fulfilled]: state => {

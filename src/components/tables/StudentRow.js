@@ -84,13 +84,12 @@ const StudentRow = props => {
 					<Modal.Title>Studierende bearbeiten</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<EditStudentForm />
+					<EditStudentForm entry={student} toggleHandler={toggleEditShow} />
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant='secondary' onClick={toggleEditShow}>
 						Abbrechen
 					</Button>
-					<Button variant='primary'>Speichern</Button>
 				</Modal.Footer>
 			</Modal>
 		</>
