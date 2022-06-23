@@ -52,6 +52,35 @@ export const companyExport = createAsyncThunk('company/export', async () => {
 	fileDownloader(response.data, 'company-export.csv');
 });
 
+// TODO support for multiple contacts and locations
+// (e.g. show form twice if 2 contacts have to be modified)
+export const companyUpdate = createAsyncThunk('company/update', async arg => {
+	const companyData = {
+		name: arg.name,
+		contractSigned: arg.contractSigned,
+		maxStudents: arg.maxStudents,
+		notes: arg.notes,
+	};
+	const contactData = {
+		firstName: arg.firstName,
+		lastName: arg.lastName,
+		email: arg.email,
+		phone: arg.phone,
+	};
+	const locationData = {
+		address: arg.address,
+		city: arg.city,
+		zipcode: arg.zipcode,
+		companyId: arg.companyId,
+	};
+	const response = await Promise.all([
+		axiosPrivate.put(`/company/${arg.companyId}`, companyData),
+		axiosPrivate.put(`/contact/${arg.contactId}`, contactData),
+		axiosPrivate.put(`/companylocation/${arg.locationId}`, locationData),
+	]);
+	return response.data;
+});
+
 export const companyDelete = createAsyncThunk('company/delete', async arg => {
 	const response = await axiosPrivate.delete(`/company/${arg.id}`);
 	// TODO delete other data too?

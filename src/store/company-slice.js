@@ -4,6 +4,7 @@ import {
 	companyNew,
 	companyImport,
 	companyDelete,
+	companyUpdate,
 } from './company-thunks';
 
 const companySlice = createSlice({
@@ -23,6 +24,9 @@ const companySlice = createSlice({
 			state.shouldReload = false;
 		},
 		[companyNew.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		[companyUpdate.fulfilled]: state => {
 			state.shouldReload = true;
 		},
 		[companyDelete.fulfilled]: state => {

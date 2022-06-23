@@ -61,13 +61,7 @@ const CreatePartnerForm = () => {
 					<Accordion.Item eventKey='0'>
 						<Accordion.Header>Anlegen</Accordion.Header>
 						<Accordion.Body>
-							<Form
-								onSubmit={handleSubmit(data =>
-									dispatch(
-										companyNew({ ...data, address: `${data.street} ${data.houseNumber}` })
-									)
-								)}
-							>
+							<Form onSubmit={handleSubmit(data => dispatch(companyNew(data)))}>
 								<Row>
 									<Col lg>
 										<FloatingLabel label='Firmenname' className='mb-3'>
@@ -119,13 +113,8 @@ const CreatePartnerForm = () => {
 								</Row>
 								<Row>
 									<Col lg>
-										<FloatingLabel label='Straße' className='mb-3'>
-											<Form.Control type='text' {...register('street')} />
-										</FloatingLabel>
-									</Col>
-									<Col lg>
-										<FloatingLabel label='Hausnummer' className='mb-3'>
-											<Form.Control type='text' {...register('houseNumber')} />
+										<FloatingLabel label='Adresse' className='mb-3'>
+											<Form.Control type='text' {...register('address')} />
 										</FloatingLabel>
 									</Col>
 									<Col lg>

@@ -128,13 +128,12 @@ const PartnerRow = props => {
 					<Modal.Title>Partnerfirma bearbeiten</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<EditPartnerForm />
+					<EditPartnerForm entry={entry} toggleHandler={toggleEditShow} />
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant='secondary' onClick={toggleEditShow}>
 						Abbrechen
 					</Button>
-					<Button variant='primary'>Speichern</Button>
 				</Modal.Footer>
 			</Modal>
 		</>
