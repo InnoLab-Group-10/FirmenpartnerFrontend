@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import {
 	Form,
 	Container,
@@ -18,38 +18,19 @@ import { studentNew, studentImport, studentExport } from '../../store/student-th
 const CreateStudentForm = () => {
 	const dispatch = useDispatch();
 
-	const studentIdRef = useRef();
-	const firstNameRef = useRef();
-	const lastNameRef = useRef();
-	const emailRef = useRef();
+	// new student
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { isSubmitSuccessful },
+	} = useForm();
 
-	const programRef = useRef();
-	const semesterRef = useRef();
-
-	const notesRef = useRef();
-
-	const submitHandler = e => {
-		e.preventDefault();
-		dispatch(
-			studentNew({
-				studentId: studentIdRef.current.value,
-				firstName: firstNameRef.current.value,
-				lastName: lastNameRef.current.value,
-				email: emailRef.current.value,
-				programId: programRef.current.value,
-				semester: semesterRef.current.value,
-				notes: notesRef.current.value,
-			})
-		);
-		// reset fields
-		studentIdRef.current.value = '';
-		firstNameRef.current.value = '';
-		lastNameRef.current.value = '';
-		emailRef.current.value = '';
-		programRef.current.value = '';
-		semesterRef.current.value = '';
-		notesRef.current.value = '';
-	};
+	useEffect(() => {
+		if (isSubmitSuccessful) {
+			reset();
+		}
+	}, [isSubmitSuccessful, reset]);
 
 	// import
 	const {
@@ -80,14 +61,14 @@ const CreateStudentForm = () => {
 					<Accordion.Item eventKey='0'>
 						<Accordion.Header>Anlegen</Accordion.Header>
 						<Accordion.Body>
-							<Form>
+							<Form onSubmit={handleSubmit(data => dispatch(studentNew(data)))}>
 								<Row>
 									<Col lg>
 										<FloatingLabel label='Studenten-ID' className='mb-3'>
 											<Form.Control
 												type='text'
 												placeholder='iXXbXXX'
-												ref={studentIdRef}
+												{...register('studentId')}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -96,7 +77,7 @@ const CreateStudentForm = () => {
 											<Form.Control
 												type='text'
 												placeholder='Vorname'
-												ref={firstNameRef}
+												{...register('firstName')}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -105,7 +86,7 @@ const CreateStudentForm = () => {
 											<Form.Control
 												type='text'
 												placeholder='Nachname'
-												ref={lastNameRef}
+												{...register('lastName')}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -113,9 +94,10 @@ const CreateStudentForm = () => {
 										<FloatingLabel controlId='floatingSelect' label='Studiengang'>
 											<Form.Select
 												aria-label='Floating label select example'
-												ref={programRef}
+												{...register('programId')}
 											>
 												<option>Wählen</option>
+												{/* TODO fetch from API */}
 												<option value='5018209c-0398-4cac-bbbc-95941a41911b'>BIF</option>
 											</Form.Select>
 										</FloatingLabel>
@@ -124,7 +106,7 @@ const CreateStudentForm = () => {
 										<FloatingLabel controlId='floatingSelect' label='Semester'>
 											<Form.Select
 												aria-label='Floating label select example'
-												ref={semesterRef}
+												{...register('semester')}
 											>
 												<option>Wählen</option>
 												<option value='1'>1</option>
@@ -141,7 +123,7 @@ const CreateStudentForm = () => {
 											<Form.Control
 												type='email'
 												placeholder='name@example.com'
-												ref={emailRef}
+												{...register('email')}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -153,7 +135,7 @@ const CreateStudentForm = () => {
 												as='textarea'
 												placeholder='Notizen anlegen'
 												style={{ height: '100px' }}
-												ref={notesRef}
+												{...register('notes')}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -161,12 +143,7 @@ const CreateStudentForm = () => {
 								<Row>
 									<Col lg>
 										<div className='d-grid'>
-											<Button
-												variant='primary'
-												type='submit'
-												size='lg'
-												onClick={submitHandler}
-											>
+											<Button variant='primary' type='submit' size='lg'>
 												Anlegen
 											</Button>
 										</div>

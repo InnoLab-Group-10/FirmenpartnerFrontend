@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import {
 	Form,
 	Container,
@@ -18,49 +18,19 @@ import { companyNew, companyImport, companyExport } from '../../store/company-th
 const CreatePartnerForm = () => {
 	const dispatch = useDispatch();
 
-	const nameRef = useRef();
-	const maxStudentsRef = useRef();
-	const notesRef = useRef();
+	// new company
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { isSubmitSuccessful },
+	} = useForm();
 
-	const firstNameRef = useRef();
-	const lastNameRef = useRef();
-	const emailRef = useRef();
-	const phoneRef = useRef();
-
-	const streetRef = useRef();
-	const houseNumberRef = useRef();
-	const postcodeRef = useRef();
-	const cityRef = useRef();
-
-	const submitHandler = e => {
-		e.preventDefault();
-		dispatch(
-			companyNew({
-				name: nameRef.current.value,
-				maxStudents: maxStudentsRef.current.value,
-				notes: notesRef.current.value,
-				firstName: firstNameRef.current.value,
-				lastName: lastNameRef.current.value,
-				email: emailRef.current.value,
-				phone: phoneRef.current.value,
-				address: `${streetRef.current.value} ${houseNumberRef.current.value}`,
-				city: cityRef.current.value,
-				zipcode: postcodeRef.current.value,
-			})
-		);
-		// reset fields
-		nameRef.current.value = '';
-		maxStudentsRef.current.value = '';
-		notesRef.current.value = '';
-		firstNameRef.current.value = '';
-		lastNameRef.current.value = '';
-		emailRef.current.value = '';
-		phoneRef.current.value = '';
-		streetRef.current.value = '';
-		houseNumberRef.current.value = '';
-		cityRef.current.value = '';
-		postcodeRef.current.value = '';
-	};
+	useEffect(() => {
+		if (isSubmitSuccessful) {
+			reset();
+		}
+	}, [isSubmitSuccessful, reset]);
 
 	// import
 	const {
@@ -91,11 +61,21 @@ const CreatePartnerForm = () => {
 					<Accordion.Item eventKey='0'>
 						<Accordion.Header>Anlegen</Accordion.Header>
 						<Accordion.Body>
-							<Form>
+							<Form
+								onSubmit={handleSubmit(data =>
+									dispatch(
+										companyNew({ ...data, address: `${data.street} ${data.houseNumber}` })
+									)
+								)}
+							>
 								<Row>
 									<Col lg>
 										<FloatingLabel label='Firmenname' className='mb-3'>
-											<Form.Control type='text' placeholder='Firmenname' ref={nameRef} />
+											<Form.Control
+												type='text'
+												placeholder='Firmenname'
+												{...register('name')}
+											/>
 										</FloatingLabel>
 									</Col>
 									<Col lg>
@@ -103,7 +83,7 @@ const CreatePartnerForm = () => {
 											<Form.Control
 												type='text'
 												placeholder='Vorname'
-												ref={firstNameRef}
+												{...register('firstName')}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -112,7 +92,7 @@ const CreatePartnerForm = () => {
 											<Form.Control
 												type='text'
 												placeholder='Nachname'
-												ref={lastNameRef}
+												{...register('lastName')}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -123,7 +103,7 @@ const CreatePartnerForm = () => {
 											<Form.Control
 												type='email'
 												placeholder='name@example.com'
-												ref={emailRef}
+												{...register('email')}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -132,7 +112,7 @@ const CreatePartnerForm = () => {
 											<Form.Control
 												type='tel'
 												placeholder='+43 (0) 000 000 00 00'
-												ref={phoneRef}
+												{...register('phone')}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -140,47 +120,27 @@ const CreatePartnerForm = () => {
 								<Row>
 									<Col lg>
 										<FloatingLabel label='Straße' className='mb-3'>
-											<Form.Control
-												type='text'
-												placeholder='Vorname Nachname'
-												ref={streetRef}
-											/>
+											<Form.Control type='text' {...register('street')} />
 										</FloatingLabel>
 									</Col>
 									<Col lg>
 										<FloatingLabel label='Hausnummer' className='mb-3'>
-											<Form.Control
-												type='text'
-												placeholder='Vorname Nachname'
-												ref={houseNumberRef}
-											/>
+											<Form.Control type='text' {...register('houseNumber')} />
 										</FloatingLabel>
 									</Col>
 									<Col lg>
 										<FloatingLabel label='Postleitzahl' className='mb-3'>
-											<Form.Control
-												type='text'
-												placeholder='Vorname Nachname'
-												ref={postcodeRef}
-											/>
+											<Form.Control type='text' {...register('zipcode')} />
 										</FloatingLabel>
 									</Col>
 									<Col lg>
 										<FloatingLabel label='Ort' className='mb-3'>
-											<Form.Control
-												type='text'
-												placeholder='Vorname Nachname'
-												ref={cityRef}
-											/>
+											<Form.Control type='text' {...register('city')} />
 										</FloatingLabel>
 									</Col>
 									<Col lg>
 										<FloatingLabel label='Studenten pro Jahr' className='mb-3'>
-											<Form.Control
-												type='number'
-												placeholder='Vorname Nachname'
-												ref={maxStudentsRef}
-											/>
+											<Form.Control type='number' {...register('maxStudents')} />
 										</FloatingLabel>
 									</Col>
 								</Row>
@@ -191,7 +151,7 @@ const CreatePartnerForm = () => {
 												as='textarea'
 												placeholder='Notizen anlegen'
 												style={{ height: '100px' }}
-												ref={notesRef}
+												{...register('notes')}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -199,12 +159,7 @@ const CreatePartnerForm = () => {
 								<Row>
 									<Col lg>
 										<div className='d-grid'>
-											<Button
-												variant='primary'
-												type='submit'
-												size='lg'
-												onClick={submitHandler}
-											>
+											<Button variant='primary' type='submit' size='lg'>
 												Anlegen
 											</Button>
 										</div>

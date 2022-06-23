@@ -22,6 +22,7 @@ const DocumentUpload = () => {
 			reset();
 		}
 	}, [isSubmitSuccessful, reset]);
+
 	return (
 		<Container>
 			<Card>

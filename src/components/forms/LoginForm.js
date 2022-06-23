@@ -1,38 +1,48 @@
-import React, { useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Form, Button, Container, FloatingLabel, Row, Col } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 
 import { sessionLogin } from '../../store/session-thunks';
 
 const LoginForm = () => {
 	const dispatch = useDispatch();
-	const usernameRef = useRef();
-	const passwordRef = useRef();
 
-	const submitHandler = e => {
-		e.preventDefault();
-		dispatch(
-			sessionLogin({
-				email: usernameRef.current.value,
-				password: passwordRef.current.value,
-			})
-		);
-	};
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { isSubmitSuccessful },
+	} = useForm();
+
+	useEffect(() => {
+		if (isSubmitSuccessful) {
+			reset();
+		}
+	}, [isSubmitSuccessful, reset]);
 
 	return (
 		<Container>
 			<Row>
 				<Col>
-					<Form>
+					<Form onSubmit={handleSubmit(data => dispatch(sessionLogin(data)))}>
 						<FloatingLabel label='Benutzername' className='mb-3'>
-							<Form.Control type='text' placeholder='Benutzername' ref={usernameRef} />
+							<Form.Control
+								type='text'
+								placeholder='Benutzername'
+								{...register('username')}
+							/>
 						</FloatingLabel>
 						<FloatingLabel controlId='floatingPassword' label='Passwort'>
-							<Form.Control type='password' placeholder='Passwort' ref={passwordRef} />
+							<Form.Control
+								type='password'
+								placeholder='Passwort'
+								{...register('password')}
+							/>
 						</FloatingLabel>
 						<br />
 						<div className='d-grid gap-2'>
-							<Button size='lg' variant='primary' type='submit' onClick={submitHandler}>
+							<Button size='lg' variant='primary' type='submit'>
 								Anmelden
 							</Button>
 						</div>
