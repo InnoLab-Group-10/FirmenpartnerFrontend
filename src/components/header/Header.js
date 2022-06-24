@@ -44,9 +44,17 @@ const Header = () => {
 
 	let modalModule;
 	if (modalType === 'timeline') {
-		modalModule = <CreateAppointmentForm />;
+		modalModule = (
+			<CreateAppointmentForm
+				toggleHandler={() => setShowModal(prevState => !prevState)}
+			/>
+		);
 	} else if (modalType === 'notification') {
-		modalModule = <CreateNotificationForm />;
+		modalModule = (
+			<CreateNotificationForm
+				toggleHandler={() => setShowModal(prevState => !prevState)}
+			/>
+		);
 	}
 
 	return (

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { notificationNew } from '../../store/notification-thunks';
 
-const CreateNotificationForm = () => {
+const CreateNotificationForm = props => {
 	const {
 		register,
 		handleSubmit,
@@ -23,6 +23,7 @@ const CreateNotificationForm = () => {
 			timestamp: `${data.date}T${data.time}:00`,
 		};
 		dispatch(notificationNew(notificationData));
+		props.toggleHandler();
 	};
 
 	useEffect(() => {

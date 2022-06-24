@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { timelineNew } from '../../store/timeline-thunks';
 
-const CreateAppointmentForm = () => {
+const CreateAppointmentForm = props => {
 	const dispatch = useDispatch();
 
 	const {
@@ -25,6 +25,7 @@ const CreateAppointmentForm = () => {
 			timestamp: `${data.date}T${data.time}:00`,
 		};
 		dispatch(timelineNew(appointmentData));
+		props.toggleHandler();
 	};
 
 	useEffect(() => {
