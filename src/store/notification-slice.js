@@ -20,14 +20,24 @@ const notificationSlice = createSlice({
 	},
 	extraReducers: {
 		[notificationGetUser.fulfilled]: (state, action) => {
-			state.notifications = action.payload.results;
-			// sort
-			state.futureNotifications = action.payload.results.filter(
+			if (action.payload.results) {
+				state.notifications = action.payload.results;
+			} else {
+				state.notifications = [];
+			}
+			// sort by timestamp
+			state.notifications.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+			const index = state.notifications.findIndex(
 				entry => new Date(entry.timestamp).getTime() > new Date().getTime()
 			);
-			state.pastNotifications = action.payload.results.filter(
-				entry => new Date(entry.timestamp).getTime() <= new Date().getTime()
-			);
+
+			if (index !== -1) {
+				state.pastNotifications = state.notifications.slice(0, index);
+				state.futureNotifications = state.notifications.slice(index);
+			} else {
+				state.pastNotifications = state.notifications;
+			}
+
 			state.shouldReload = false;
 		},
 		[notificationNew.fulfilled]: state => {

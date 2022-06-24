@@ -1,36 +1,47 @@
 import React from 'react';
 import { Card, ListGroup, Tabs, Tab } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+
 import UpcomingDateListItem from './UpcomingDateListItem';
 
 const UpcomingDateCard = () => {
+	const { futureNotifications } = useSelector(state => state.notification);
+	const { appointments } = useSelector(state => state.timeline);
+
+	const getLimitedArray = sourceArray => {
+		const limitedArray = [];
+		for (let i = 0; i < 5; ++i) {
+			if (i < sourceArray.length) {
+				limitedArray.push(
+					<UpcomingDateListItem
+						key={i}
+						title={sourceArray[i].message}
+						timestamp={sourceArray[i].timestamp}
+					/>
+				);
+			} else {
+				limitedArray.push(<UpcomingDateListItem key={i} title='-' timestamp='-' />);
+			}
+		}
+		return limitedArray;
+	};
+
 	return (
 		<div>
 			<Card>
 				<Tabs
-					defaultActiveKey="notifications"
-					id="uncontrolled-tab-example"
-					className="dashboard-tabs"
-					>
-					<Tab eventKey="notifications" title="Notifications">
-						<ListGroup variant="flush">
-							<UpcomingDateListItem title="Note 1" date="10.06." time="14:00"/>
-							<UpcomingDateListItem title="Note 2" date="10.06." time="14:00"/>
-							<UpcomingDateListItem title="Note 3" date="10.06." time="14:00"/>
-							<UpcomingDateListItem title="Note 4" date="10.06." time="14:00"/>
-							<UpcomingDateListItem title="Note 5" date="10.06." time="14:00"/>
-						</ListGroup>
+					defaultActiveKey='notifications'
+					id='uncontrolled-tab-example'
+					className='dashboard-tabs'
+				>
+					<Tab eventKey='notifications' title='Notifications'>
+						<ListGroup variant='flush'>{getLimitedArray(futureNotifications)}</ListGroup>
 					</Tab>
-					<Tab eventKey="timeline" title="Timeline">
-						<ListGroup variant="flush">
-							<UpcomingDateListItem title="Date 1" date="10.06." time="14:00"/>
-							<UpcomingDateListItem title="Date 2" date="10.06." time="14:00"/>
-							<UpcomingDateListItem title="Date 3" date="10.06." time="14:00"/>
-							<UpcomingDateListItem title="Date 4" date="10.06." time="14:00"/>
-							<UpcomingDateListItem title="Date 5" date="10.06." time="14:00"/>
-						</ListGroup>
+					<Tab eventKey='timeline' title='Timeline'>
+						<ListGroup variant='flush'>{getLimitedArray(appointments)}</ListGroup>
 					</Tab>
 				</Tabs>
-			</Card>			
+			</Card>
 		</div>
 	);
 };

@@ -6,12 +6,8 @@ const UpcomingDateListItem = props => {
 		<>
 			<ListGroup.Item>
 				<Row>
-					<Col>
-					    {props.title}
-					</Col>
-					<Col>
-						{props.date} - {props.time} Uhr
-					</Col>
+					<Col>{props.title}</Col>
+					<Col>{props.timestamp}</Col>
 				</Row>
 			</ListGroup.Item>
 		</>
