@@ -2,16 +2,16 @@ import React from 'react';
 import SiteTitle from '../components/SiteTitle';
 import Documents from '../components/tables/Documents';
 import { Container } from 'react-bootstrap';
-import Alerts from '../components/Alerts.js';
+/*import Alerts from '../components/Alerts.js';*/
 import DocumentUpload from '../components/forms/DocumentUpload';
 
 const Dokumente = () => {
 	return (
 		<div>
 			<SiteTitle
-				title='Dokumente'
-				subtitle='Unterüberschrift zu Dokumenten'
-				text='Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.'
+				title='Dokumentenverwaltung'
+				subtitle='Hochladen, Bearbeiten und Löschen von Dokumenten'
+				text='Hier können Sie Dokumente hochladen, bearbeiten und löschen. Zusätzlich können Sie sich in der Dokumentenliste einen Überblick über alle Dokumente verschaffen.'
 			/>
 			<Container>
 				{/* <Alerts variant='success' text='Erfolgsnachricht' />

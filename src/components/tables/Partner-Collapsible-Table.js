@@ -36,11 +36,10 @@ const CollapsibleTable = () => {
 					</Row>
 				</Card.Header>
 				<Card.Body>
-					<Card.Title>Überschrift</Card.Title>
-					<Card.Subtitle className='mb-2 text-muted'>Subheader</Card.Subtitle>
+					<Card.Title>Partnerfirmenliste</Card.Title>
+					<Card.Subtitle className='mb-2 text-muted'>Filtern, Bearbeiten und Löschen von Partnerunternehmen</Card.Subtitle>
 					<Card.Text>
-						Some quick example text to build on the card title and make up the bulk of the
-						card's content.
+						In der Partnerfirmenliste können Sie Partnerfirmen bearbeiten und löschen. Wenn Sie eine bestimme Firma finden möchten, können Sie die Liste alphabetisch, nach dem Partner, der Ansprechperson, der E-Mail oder der Telefonnummer umsortieren.
 					</Card.Text>
 					<Table hover responsive>
 						<thead>

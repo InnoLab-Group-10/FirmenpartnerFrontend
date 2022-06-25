@@ -37,11 +37,10 @@ const CollapsibleTable = () => {
 					</Row>
 				</Card.Header>
 				<Card.Body>
-					<Card.Title>Überschrift</Card.Title>
-					<Card.Subtitle className='mb-2 text-muted'>Subheader</Card.Subtitle>
+					<Card.Title>Benutzerübersicht</Card.Title>
+					<Card.Subtitle className='mb-2 text-muted'>Filtern, Bearbeiten und Löschen von Benutzern</Card.Subtitle>
 					<Card.Text>
-						Some quick example text to build on the card title and make up the bulk of the
-						card's content.
+					In der Benutzerliste können Sie Benutzer bearbeiten und löschen. Wenn Sie einen bestimmen Benutzer finden möchten, können Sie die Liste alphabetisch, nach dem Namen, der Rolle oder der E-Mail umsortieren.
 					</Card.Text>
 					<Table hover responsive>
 						<thead>

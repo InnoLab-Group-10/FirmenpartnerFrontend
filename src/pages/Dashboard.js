@@ -34,8 +34,8 @@ const Dashboard = () => {
 		<>
 			<SiteTitle
 				title='Dashboard'
-				subtitle='Unterüberschrift zum Dashboard'
-				text='Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.'
+				subtitle='Quick-Facts, Benachrichtigungen und Kalender'
+				text='Facts, Nachrichten und Kalender.'
 			/>
 			<DashboardCards />
 			<Container>

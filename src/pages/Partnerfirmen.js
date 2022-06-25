@@ -2,16 +2,16 @@ import React from 'react';
 import SiteTitle from '../components/SiteTitle';
 import CollapsibleTable from '../components/tables/Partner-Collapsible-Table';
 import { Container } from 'react-bootstrap';
-import Alerts from '../components/Alerts';
+/*import Alerts from '../components/Alerts';*/
 import CreatePartnerForm from '../components/forms/CreaterPartnerForm';
 
 const Partnerfirmen = () => {
 	return (
 		<div>
 			<SiteTitle
-				title='Partnerfirmen'
-				subtitle='Unterüberschrift zu Partnerfirmen'
-				text='Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.'
+				title='Partnerfirmenverwaltung'
+				subtitle='Anlegen, Bearbeiten und Löschen von Partnerunternehmen'
+				text='Hier finden Sie alle notwendigen Funktionen, um Partnerfirmen anzulegen, zu bearbeiten und zu löschen. Zusätzlich können Sie sich in der Partnerfirmenliste einen Überblick über alle Partnerfirmen verschaffen.'
 			/>
 			<Container>
 				{/* <Alerts variant='success' text='Erfolgsnachricht' />

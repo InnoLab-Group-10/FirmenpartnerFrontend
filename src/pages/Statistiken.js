@@ -6,8 +6,8 @@ const Statistiken = () => {
 		<div>
 			<SiteTitle
 				title='Statistiken'
-				subtitle='Unterüberschrift zu Statistiken'
-				text='Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.'
+				subtitle='Übersicht historischer Daten'
+				text=': In den Statistiken können Sie sich einen Überblick über diverse Firmendaten, welche über die letzten Jahre oder auch aktuell aufgezeichnet wurden, verschaffen.'
 			/>
 		</div>
 	);

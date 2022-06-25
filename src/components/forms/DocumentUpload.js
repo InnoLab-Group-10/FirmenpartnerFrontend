@@ -40,7 +40,7 @@ const DocumentUpload = () => {
 							<Col lg>
 								<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
 									<Form.Label>
-										Hier stehen Informationen über die hochladbaren Dateien.
+										Um ein Dokument hochzuladen, drücken Sie auf das „Choose Files“-Feld und wählen Sie die passende Datei aus dem Ordner.
 									</Form.Label>
 									<Form.Control
 										type='file'
