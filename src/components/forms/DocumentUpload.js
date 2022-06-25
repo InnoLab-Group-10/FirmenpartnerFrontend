@@ -14,7 +14,7 @@ const DocumentUpload = () => {
 		register,
 		handleSubmit,
 		reset,
-		formState: { isSubmitSuccessful },
+		formState: { isSubmitSuccessful, errors },
 	} = useForm();
 
 	useEffect(() => {
@@ -42,7 +42,13 @@ const DocumentUpload = () => {
 									<Form.Label>
 										Hier stehen Informationen über die hochladbaren Dateien.
 									</Form.Label>
-									<Form.Control type='file' size='lg' {...register('file')} multiple />
+									<Form.Control
+										type='file'
+										size='lg'
+										{...register('file', { required: true })}
+										multiple
+										isInvalid={errors.file}
+									/>
 								</Form.Group>
 								<Form.Group controlId='formFileMultiple' className='mb-3 small-upload'>
 									<Form.Label>

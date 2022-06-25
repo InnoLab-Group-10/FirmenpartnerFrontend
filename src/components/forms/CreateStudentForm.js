@@ -23,7 +23,7 @@ const CreateStudentForm = () => {
 		register,
 		handleSubmit,
 		reset,
-		formState: { isSubmitSuccessful },
+		formState: { isSubmitSuccessful, errors },
 	} = useForm();
 
 	useEffect(() => {
@@ -37,7 +37,7 @@ const CreateStudentForm = () => {
 		register: registerImport,
 		handleSubmit: handleSubmitImport,
 		reset: resetImport,
-		formState: { isSubmitSuccessful: isSubmitSuccessfulImport },
+		formState: { isSubmitSuccessful: isSubmitSuccessfulImport, errors: errorsImport },
 	} = useForm();
 
 	useEffect(() => {
@@ -67,8 +67,8 @@ const CreateStudentForm = () => {
 										<FloatingLabel label='Studenten-ID' className='mb-3'>
 											<Form.Control
 												type='text'
-												placeholder='iXXbXXX'
-												{...register('studentId')}
+												{...register('studentId', { required: true, pattern: /^\S+$/ })}
+												isInvalid={errors.studentId}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -77,7 +77,8 @@ const CreateStudentForm = () => {
 											<Form.Control
 												type='text'
 												placeholder='Vorname'
-												{...register('firstName')}
+												{...register('firstName', { required: true })}
+												isInvalid={errors.firstName}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -86,7 +87,8 @@ const CreateStudentForm = () => {
 											<Form.Control
 												type='text'
 												placeholder='Nachname'
-												{...register('lastName')}
+												{...register('lastName', { required: true })}
+												isInvalid={errors.lastName}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -94,9 +96,9 @@ const CreateStudentForm = () => {
 										<FloatingLabel controlId='floatingSelect' label='Studiengang'>
 											<Form.Select
 												aria-label='Floating label select example'
-												{...register('programId')}
+												{...register('programId', { required: true })}
+												isInvalid={errors.programId}
 											>
-												<option>Wählen</option>
 												{/* TODO fetch from API */}
 												<option value='5018209c-0398-4cac-bbbc-95941a41911b'>BIF</option>
 											</Form.Select>
@@ -106,9 +108,9 @@ const CreateStudentForm = () => {
 										<FloatingLabel controlId='floatingSelect' label='Semester'>
 											<Form.Select
 												aria-label='Floating label select example'
-												{...register('semester')}
+												{...register('semester', { required: true })}
+												isInvalid={errors.semester}
 											>
-												<option>Wählen</option>
 												<option value='1'>1</option>
 												<option value='2'>2</option>
 												<option value='3'>3</option>
@@ -121,9 +123,13 @@ const CreateStudentForm = () => {
 									<Col lg>
 										<FloatingLabel label='E-Mail-Adresse' className='mb-3'>
 											<Form.Control
-												type='email'
+												type='text'
 												placeholder='name@example.com'
-												{...register('email')}
+												{...register('email', {
+													required: true,
+													pattern: /^(([a-z]|[0-9]|-|_)+\.?)+@(([a-z]|[0-9]|-|_)+\.?)+$/i,
+												})}
+												isInvalid={errors.email}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -135,7 +141,8 @@ const CreateStudentForm = () => {
 												as='textarea'
 												placeholder='Notizen anlegen'
 												style={{ height: '100px' }}
-												{...register('notes')}
+												{...register('notes', { required: true })}
+												isInvalid={errors.notes}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -176,7 +183,12 @@ const CreateStudentForm = () => {
 											<Form.Label>
 												Hier stehen Informationen über die hochladbaren Dateien.
 											</Form.Label>
-											<Form.Control type='file' size='lg' {...registerImport('file')} />
+											<Form.Control
+												type='file'
+												size='lg'
+												{...registerImport('file', { required: true })}
+												isInvalid={errorsImport.file}
+											/>
 										</Form.Group>
 									</Col>
 								</Row>

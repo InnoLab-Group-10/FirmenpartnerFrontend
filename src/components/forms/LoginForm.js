@@ -12,7 +12,7 @@ const LoginForm = () => {
 		register,
 		handleSubmit,
 		reset,
-		formState: { isSubmitSuccessful },
+		formState: { isSubmitSuccessful, errors },
 	} = useForm();
 
 	useEffect(() => {
@@ -27,13 +27,21 @@ const LoginForm = () => {
 				<Col>
 					<Form onSubmit={handleSubmit(data => dispatch(sessionLogin(data)))}>
 						<FloatingLabel label='Email' className='mb-3'>
-							<Form.Control type='text' placeholder='Email' {...register('email')} />
+							<Form.Control
+								type='text'
+								placeholder='Email'
+								{...register('email', {
+									required: true,
+								})}
+								isInvalid={errors.email}
+							/>
 						</FloatingLabel>
 						<FloatingLabel controlId='floatingPassword' label='Passwort'>
 							<Form.Control
 								type='password'
 								placeholder='Passwort'
-								{...register('password')}
+								{...register('password', { required: true })}
+								isInvalid={errors.password}
 							/>
 						</FloatingLabel>
 						<br />

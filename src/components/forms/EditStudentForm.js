@@ -14,7 +14,7 @@ const EditStudentForm = props => {
 		register,
 		handleSubmit,
 		reset,
-		formState: { isSubmitSuccessful },
+		formState: { isSubmitSuccessful, errors },
 	} = useForm();
 
 	useEffect(() => {
@@ -37,7 +37,8 @@ const EditStudentForm = props => {
 							type='text'
 							placeholder='iXXbXXX'
 							defaultValue={student.studentId}
-							{...register('studentId')}
+							{...register('studentId', { required: true, pattern: /^\S+$/ })}
+							isInvalid={errors.studentId}
 						/>
 					</FloatingLabel>
 				</Col>
@@ -47,7 +48,8 @@ const EditStudentForm = props => {
 							type='text'
 							placeholder='Vorname'
 							defaultValue={student.firstName}
-							{...register('firstName')}
+							{...register('firstName', { required: true })}
+							isInvalid={errors.firstName}
 						/>
 					</FloatingLabel>
 				</Col>
@@ -57,7 +59,8 @@ const EditStudentForm = props => {
 							type='text'
 							placeholder='Nachname'
 							defaultValue={student.lastName}
-							{...register('lastName')}
+							{...register('lastName', { required: true })}
+							isInvalid={errors.lastName}
 						/>
 					</FloatingLabel>
 				</Col>
@@ -66,7 +69,8 @@ const EditStudentForm = props => {
 						<Form.Select
 							aria-label='Floating label select example'
 							defaultValue={student.program.id}
-							{...register('programId')}
+							{...register('programId', { required: true })}
+							isInvalid={errors.programId}
 						>
 							<option>Wählen</option>
 							{/* TODO fetch from API */}
@@ -79,7 +83,8 @@ const EditStudentForm = props => {
 						<Form.Select
 							aria-label='Floating label select example'
 							defaultValue={student.semester}
-							{...register('semester')}
+							{...register('semester', { required: true })}
+							isInvalid={errors.semester}
 						>
 							<option>Wählen</option>
 							<option value='1'>1</option>
@@ -94,10 +99,14 @@ const EditStudentForm = props => {
 				<Col lg>
 					<FloatingLabel label='E-Mail-Adresse' className='mb-3'>
 						<Form.Control
-							type='email'
+							type='text'
 							placeholder='name@example.com'
 							defaultValue={student.email}
-							{...register('email')}
+							{...register('email', {
+								required: true,
+								pattern: /^(([a-z]|[0-9]|-|_)+\.?)+@(([a-z]|[0-9]|-|_)+\.?)+$/i,
+							})}
+							isInvalid={errors.email}
 						/>
 					</FloatingLabel>
 				</Col>
@@ -110,7 +119,8 @@ const EditStudentForm = props => {
 							placeholder='Notizen anlegen'
 							style={{ height: '100px' }}
 							defaultValue={student.notes}
-							{...register('notes')}
+							{...register('notes', { required: true })}
+							isInvalid={errors.notes}
 						/>
 					</FloatingLabel>
 				</Col>

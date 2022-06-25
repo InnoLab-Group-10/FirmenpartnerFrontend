@@ -23,7 +23,7 @@ const CreatePartnerForm = () => {
 		register,
 		handleSubmit,
 		reset,
-		formState: { isSubmitSuccessful },
+		formState: { isSubmitSuccessful, errors },
 	} = useForm();
 
 	useEffect(() => {
@@ -37,7 +37,7 @@ const CreatePartnerForm = () => {
 		register: registerImport,
 		handleSubmit: handleSubmitImport,
 		reset: resetImport,
-		formState: { isSubmitSuccessful: isSubmitSuccessfulImport },
+		formState: { isSubmitSuccessful: isSubmitSuccessfulImport, errors: errorsImport },
 	} = useForm();
 
 	useEffect(() => {
@@ -68,7 +68,8 @@ const CreatePartnerForm = () => {
 											<Form.Control
 												type='text'
 												placeholder='Firmenname'
-												{...register('name')}
+												{...register('name', { required: true })}
+												isInvalid={errors.name}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -77,7 +78,8 @@ const CreatePartnerForm = () => {
 											<Form.Control
 												type='text'
 												placeholder='Vorname'
-												{...register('firstName')}
+												{...register('firstName', { required: true })}
+												isInvalid={errors.firstName}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -86,7 +88,8 @@ const CreatePartnerForm = () => {
 											<Form.Control
 												type='text'
 												placeholder='Nachname'
-												{...register('lastName')}
+												{...register('lastName', { required: true })}
+												isInvalid={errors.lastName}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -95,18 +98,22 @@ const CreatePartnerForm = () => {
 									<Col lg>
 										<FloatingLabel label='E-Mail-Adresse' className='mb-3'>
 											<Form.Control
-												type='email'
+												type='text'
 												placeholder='name@example.com'
-												{...register('email')}
+												{...register('email', {
+													required: true,
+													pattern: /^(([a-z]|[0-9]|-|_)+\.?)+@(([a-z]|[0-9]|-|_)+\.?)+$/i,
+												})}
+												isInvalid={errors.email}
 											/>
 										</FloatingLabel>
 									</Col>
 									<Col lg>
 										<FloatingLabel label='Telefonnummer' className='mb-3'>
 											<Form.Control
-												type='tel'
-												placeholder='+43 (0) 000 000 00 00'
-												{...register('phone')}
+												type='text'
+												{...register('phone', { required: true, pattern: /^\+?[0-9]+$/ })}
+												isInvalid={errors.phone}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -114,22 +121,41 @@ const CreatePartnerForm = () => {
 								<Row>
 									<Col lg>
 										<FloatingLabel label='Adresse' className='mb-3'>
-											<Form.Control type='text' {...register('address')} />
+											<Form.Control
+												type='text'
+												{...register('address', { required: true })}
+												isInvalid={errors.address}
+											/>
 										</FloatingLabel>
 									</Col>
 									<Col lg>
 										<FloatingLabel label='Postleitzahl' className='mb-3'>
-											<Form.Control type='text' {...register('zipcode')} />
+											<Form.Control
+												type='text'
+												{...register('zipcode', { required: true, pattern: /^[0-9]+$/ })}
+												isInvalid={errors.zipcode}
+											/>
 										</FloatingLabel>
 									</Col>
 									<Col lg>
 										<FloatingLabel label='Ort' className='mb-3'>
-											<Form.Control type='text' {...register('city')} />
+											<Form.Control
+												type='text'
+												{...register('city', { required: true })}
+												isInvalid={errors.city}
+											/>
 										</FloatingLabel>
 									</Col>
 									<Col lg>
 										<FloatingLabel label='Studenten pro Jahr' className='mb-3'>
-											<Form.Control type='number' {...register('maxStudents')} />
+											<Form.Control
+												type='text'
+												{...register('maxStudents', {
+													required: true,
+													pattern: /^[1-9][0-9]*$/,
+												})}
+												isInvalid={errors.maxStudents}
+											/>
 										</FloatingLabel>
 									</Col>
 								</Row>
@@ -140,7 +166,8 @@ const CreatePartnerForm = () => {
 												as='textarea'
 												placeholder='Notizen anlegen'
 												style={{ height: '100px' }}
-												{...register('notes')}
+												{...register('notes', { required: true })}
+												isInvalid={errors.notes}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -181,7 +208,12 @@ const CreatePartnerForm = () => {
 											<Form.Label>
 												Hier stehen Informationen über die hochladbaren Dateien.
 											</Form.Label>
-											<Form.Control type='file' size='lg' {...registerImport('file')} />
+											<Form.Control
+												type='file'
+												size='lg'
+												{...registerImport('file', { required: true })}
+												isInvalid={errorsImport.file}
+											/>
 										</Form.Group>
 									</Col>
 								</Row>

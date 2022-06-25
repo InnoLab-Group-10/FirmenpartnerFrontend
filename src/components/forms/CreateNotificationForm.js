@@ -10,7 +10,7 @@ const CreateNotificationForm = props => {
 		register,
 		handleSubmit,
 		reset,
-		formState: { isSubmitSuccessful },
+		formState: { isSubmitSuccessful, errors },
 	} = useForm();
 	const dispatch = useDispatch();
 	const { id } = useSelector(state => state.user);
@@ -38,13 +38,21 @@ const CreateNotificationForm = props => {
 				<Col>
 					<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
 						<Form.Label>Datum</Form.Label>
-						<Form.Control type='date' {...register('date')} />
+						<Form.Control
+							type='date'
+							{...register('date', { required: true })}
+							isInvalid={errors.date}
+						/>
 					</Form.Group>
 				</Col>
 				<Col>
 					<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
 						<Form.Label>Uhrzeit</Form.Label>
-						<Form.Control type='time' {...register('time')} />
+						<Form.Control
+							type='time'
+							{...register('time', { required: true })}
+							isInvalid={errors.time}
+						/>
 					</Form.Group>
 				</Col>
 			</Row>
@@ -55,7 +63,8 @@ const CreateNotificationForm = props => {
 						as='textarea'
 						placeholder='Woran möchten Sie erinnert werden?'
 						style={{ height: '100px' }}
-						{...register('message')}
+						{...register('message', { required: true })}
+						isInvalid={errors.message}
 					/>
 				</Form.Group>
 			</Row>

@@ -12,7 +12,7 @@ const CreateAppointmentForm = props => {
 		register,
 		handleSubmit,
 		reset,
-		formState: { isSubmitSuccessful },
+		formState: { isSubmitSuccessful, errors },
 	} = useForm();
 
 	const submitHandler = data => {
@@ -34,8 +34,9 @@ const CreateAppointmentForm = props => {
 				<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
 					<Form.Label>Eintrags-Typ wählen</Form.Label>
 					<Form.Select
-						{...register('type')}
+						{...register('type', { required: true })}
 						onChange={e => setSelectedType(e.target.value)}
+						isInvalid={errors.type}
 					>
 						<option value='0'>Nachricht</option>
 						<option value='1'>Link</option>
@@ -47,13 +48,21 @@ const CreateAppointmentForm = props => {
 				<Col>
 					<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
 						<Form.Label>Datum</Form.Label>
-						<Form.Control type='date' {...register('date')} />
+						<Form.Control
+							type='date'
+							{...register('date', { required: true })}
+							isInvalid={errors.date}
+						/>
 					</Form.Group>
 				</Col>
 				<Col>
 					<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
 						<Form.Label>Uhrzeit</Form.Label>
-						<Form.Control type='time' {...register('time')} />
+						<Form.Control
+							type='time'
+							{...register('time', { required: true })}
+							isInvalid={errors.time}
+						/>
 					</Form.Group>
 				</Col>
 			</Row>
@@ -64,7 +73,8 @@ const CreateAppointmentForm = props => {
 						as='textarea'
 						placeholder='Ihre Nachricht'
 						style={{ height: '100px' }}
-						{...register('message')}
+						{...register('message', { required: true })}
+						isInvalid={errors.message}
 					/>
 				</Form.Group>
 			</Row>
@@ -75,7 +85,8 @@ const CreateAppointmentForm = props => {
 							<Form.Label>Link</Form.Label>
 							<Form.Control
 								type='text'
-								{...register('link')}
+								{...register('link', { required: true, pattern: /^https?:\/{2}.+$/ })}
+								isInvalid={errors.link}
 								placeholder='https://www.orf.at'
 							/>
 						</Form.Group>
@@ -83,7 +94,12 @@ const CreateAppointmentForm = props => {
 					<Row>
 						<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
 							<Form.Label>Linktext</Form.Label>
-							<Form.Control type='text' {...register('linkText')} placeholder='orf.at' />
+							<Form.Control
+								type='text'
+								{...register('linkText', { required: true })}
+								placeholder='orf.at'
+								isInvalid={errors.linkText}
+							/>
 						</Form.Group>
 					</Row>
 				</>

@@ -13,7 +13,7 @@ const CreateUserForm = () => {
 		register,
 		handleSubmit,
 		reset,
-		formState: { isSubmitSuccessful },
+		formState: { isSubmitSuccessful, errors },
 	} = useForm();
 
 	useEffect(() => {
@@ -27,15 +27,24 @@ const CreateUserForm = () => {
 			<Row>
 				<Col lg>
 					<FloatingLabel label='Name' className='mb-3'>
-						<Form.Control type='text' placeholder='Name' {...register('username')} />
+						<Form.Control
+							type='text'
+							placeholder='Name'
+							{...register('username', { required: true, pattern: /^\S+$/ })}
+							isInvalid={errors.username}
+						/>
 					</FloatingLabel>
 				</Col>
 				<Col lg>
 					<FloatingLabel label='E-Mail-Adresse' className='mb-3'>
 						<Form.Control
-							type='email'
+							type='text'
 							placeholder='name@example.com'
-							{...register('email')}
+							{...register('email', {
+								required: true,
+								pattern: /^(([a-z]|[0-9]|-|_)+\.?)+@(([a-z]|[0-9]|-|_)+\.?)+$/i,
+							})}
+							isInvalid={errors.email}
 						/>
 					</FloatingLabel>
 				</Col>
@@ -46,13 +55,18 @@ const CreateUserForm = () => {
 						<Form.Control
 							type='password'
 							placeholder='Password'
-							{...register('password')}
+							{...register('password', { required: true, minLength: 8 })}
+							isInvalid={errors.password}
 						/>
 					</FloatingLabel>
 				</Col>
 				<Col lg>
 					<FloatingLabel controlId='floatingSelect' label='Rolle'>
-						<Form.Select aria-label='Floating label select example' {...register('role')}>
+						<Form.Select
+							aria-label='Floating label select example'
+							{...register('role', { required: true })}
+							isInvalid={errors.role}
+						>
 							<option value='User'>User</option>
 							<option value='Administrator'>Administrator</option>
 						</Form.Select>

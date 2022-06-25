@@ -14,7 +14,7 @@ const EditUserForm = props => {
 		register,
 		handleSubmit,
 		reset,
-		formState: { isSubmitSuccessful },
+		formState: { isSubmitSuccessful, errors },
 	} = useForm();
 
 	useEffect(() => {
@@ -41,17 +41,22 @@ const EditUserForm = props => {
 							type='text'
 							placeholder='Name'
 							defaultValue={user.username}
-							{...register('username')}
+							{...register('username', { required: true, pattern: /^\S+$/ })}
+							isInvalid={errors.username}
 						/>
 					</FloatingLabel>
 				</Col>
 				<Col lg>
 					<FloatingLabel label='E-Mail-Adresse' className='mb-3'>
 						<Form.Control
-							type='email'
+							type='text'
 							placeholder='name@example.com'
 							defaultValue={user.email}
-							{...register('email')}
+							{...register('email', {
+								required: true,
+								pattern: /^(([a-z]|[0-9]|-|_)+\.?)+@(([a-z]|[0-9]|-|_)+\.?)+$/i,
+							})}
+							isInvalid={errors.email}
 						/>
 					</FloatingLabel>
 				</Col>
@@ -62,7 +67,8 @@ const EditUserForm = props => {
 						<Form.Select
 							aria-label='Floating label select example'
 							defaultValue={user.roles[user.roles.length - 1]}
-							{...register('role')}
+							{...register('role', { required: true })}
+							isInvalid={errors.role}
 						>
 							<option value='User'>User</option>
 							<option value='Administrator'>Administrator</option>

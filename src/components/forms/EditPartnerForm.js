@@ -15,7 +15,7 @@ const EditPartnerForm = props => {
 		register,
 		handleSubmit,
 		reset,
-		formState: { isSubmitSuccessful },
+		formState: { isSubmitSuccessful, errors },
 	} = useForm();
 
 	useEffect(() => {
@@ -46,7 +46,8 @@ const EditPartnerForm = props => {
 							type='text'
 							placeholder='Firmenname'
 							defaultValue={entry.company.name}
-							{...register('name')}
+							{...register('name', { required: true })}
+							isInvalid={errors.name}
 						/>
 					</FloatingLabel>
 				</Col>
@@ -56,7 +57,8 @@ const EditPartnerForm = props => {
 							type='text'
 							placeholder='Vorname'
 							defaultValue={entry.contacts[0].firstName}
-							{...register('firstName')}
+							{...register('firstName', { required: true })}
+							isInvalid={errors.firstName}
 						/>
 					</FloatingLabel>
 				</Col>
@@ -66,7 +68,8 @@ const EditPartnerForm = props => {
 							type='text'
 							placeholder='Nachname'
 							defaultValue={entry.contacts[0].lastName}
-							{...register('lastName')}
+							{...register('lastName', { required: true })}
+							isInvalid={errors.lastName}
 						/>
 					</FloatingLabel>
 				</Col>
@@ -78,7 +81,11 @@ const EditPartnerForm = props => {
 							type='email'
 							placeholder='name@example.com'
 							defaultValue={entry.contacts[0].email}
-							{...register('email')}
+							{...register('email', {
+								required: true,
+								pattern: /^(([a-z]|[0-9]|-|_)+\.?)+@(([a-z]|[0-9]|-|_)+\.?)+$/i,
+							})}
+							isInvalid={errors.email}
 						/>
 					</FloatingLabel>
 				</Col>
@@ -88,7 +95,8 @@ const EditPartnerForm = props => {
 							type='tel'
 							placeholder='+43 (0) 000 000 00 00'
 							defaultValue={entry.contacts[0].phone}
-							{...register('phone')}
+							{...register('phone', { required: true, pattern: /^\+?[0-9]+$/ })}
+							isInvalid={errors.phone}
 						/>
 					</FloatingLabel>
 				</Col>
@@ -99,7 +107,8 @@ const EditPartnerForm = props => {
 						<Form.Control
 							type='text'
 							defaultValue={entry.locations[0].address}
-							{...register('address')}
+							{...register('address', { required: true })}
+							isInvalid={errors.address}
 						/>
 					</FloatingLabel>
 				</Col>
@@ -108,7 +117,8 @@ const EditPartnerForm = props => {
 						<Form.Control
 							type='text'
 							defaultValue={entry.locations[0].zipcode}
-							{...register('zipcode')}
+							{...register('zipcode', { required: true, pattern: /^[0-9]+$/ })}
+							isInvalid={errors.zipcode}
 						/>
 					</FloatingLabel>
 				</Col>
@@ -117,7 +127,8 @@ const EditPartnerForm = props => {
 						<Form.Control
 							type='text'
 							defaultValue={entry.locations[0].city}
-							{...register('city')}
+							{...register('city', { required: true })}
+							isInvalid={errors.city}
 						/>
 					</FloatingLabel>
 				</Col>
@@ -126,7 +137,11 @@ const EditPartnerForm = props => {
 						<Form.Control
 							type='number'
 							defaultValue={entry.company.maxStudents}
-							{...register('maxStudents')}
+							{...register('maxStudents', {
+								required: true,
+								pattern: /^[1-9][0-9]*$/,
+							})}
+							isInvalid={errors.maxStudents}
 						/>
 					</FloatingLabel>
 				</Col>
@@ -139,7 +154,8 @@ const EditPartnerForm = props => {
 							placeholder='Notizen anlegen'
 							style={{ height: '100px' }}
 							defaultValue={entry.company.notes}
-							{...register('notes')}
+							{...register('notes', { required: true })}
+							isInvalid={errors.notes}
 						/>
 					</FloatingLabel>
 				</Col>
