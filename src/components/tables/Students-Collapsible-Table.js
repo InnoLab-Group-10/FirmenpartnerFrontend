@@ -5,18 +5,25 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import 'bootstrap/js/src/collapse.js';
 import StudentRow from './StudentRow';
-
 import { studentGetAll } from '../../store/student-thunks';
+import useSort, { SORT_OPTIONS } from '../../hooks/useSort';
 
 const CollapsibleTable = () => {
 	const dispatch = useDispatch();
 	const { students, shouldReload } = useSelector(state => state.student);
+	const {
+		sortedArray: sortedStudents,
+		setSortedArray: setSortedStudents,
+		sortHandler,
+		customSortHandler,
+	} = useSort();
 
 	useEffect(() => {
 		if (shouldReload) {
 			dispatch(studentGetAll());
+			setSortedStudents(null);
 		}
-	}, [dispatch, shouldReload]);
+	}, [dispatch, shouldReload, setSortedStudents]);
 
 	return (
 		<Container>
@@ -40,28 +47,56 @@ const CollapsibleTable = () => {
 						<thead>
 							<tr>
 								<th>
-									<Button variant='light'>
+									<Button
+										variant='light'
+										onClick={() =>
+											sortHandler([...students], 'studentId', SORT_OPTIONS.ALPHABET)
+										}
+									>
 										Studenten-ID.
 										<BiSortAZ className='sort-icon' />
 										<BiSortZA className='sort-icon' hidden />
 									</Button>
 								</th>
 								<th>
-									<Button variant='light'>
+									<Button
+										variant='light'
+										onClick={() =>
+											customSortHandler([...students], (a, b) =>
+												`${a.firstName} ${a.lastName}`.localeCompare(
+													`${b.firstName} ${b.lastName}`
+												)
+											)
+										}
+									>
 										Name
 										<BiSortAZ className='sort-icon' />
 										<BiSortZA className='sort-icon' hidden />
 									</Button>
 								</th>
 								<th>
-									<Button variant='light'>
+									<Button
+										variant='light'
+										onClick={() =>
+											customSortHandler([...students], (a, b) =>
+												`${a.program.name} ${a.semester}`.localeCompare(
+													`${b.program.name} ${b.semester}`
+												)
+											)
+										}
+									>
 										Studiengang
 										<BiSortAZ className='sort-icon' />
 										<BiSortZA className='sort-icon' hidden />
 									</Button>
 								</th>
 								<th>
-									<Button variant='light'>
+									<Button
+										variant='light'
+										onClick={() =>
+											sortHandler([...students], 'email', SORT_OPTIONS.ALPHABET)
+										}
+									>
 										E-Mail
 										<BiSortAZ className='sort-icon' />
 										<BiSortZA className='sort-icon' hidden />
@@ -70,9 +105,9 @@ const CollapsibleTable = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{students.map(entry => (
-								<StudentRow key={entry.id} entry={entry} />
-							))}
+							{sortedStudents
+								? sortedStudents.map(entry => <StudentRow key={entry.id} entry={entry} />)
+								: students.map(entry => <StudentRow key={entry.id} entry={entry} />)}
 						</tbody>
 					</Table>
 				</Card.Body>

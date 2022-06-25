@@ -5,17 +5,24 @@ import PartnerRow from './PartnerRow';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { companyGetAll } from '../../store/company-thunks';
+import useSort from '../../hooks/useSort';
 import 'bootstrap/js/src/collapse.js';
 
 const CollapsibleTable = () => {
 	const dispatch = useDispatch();
 	const { companies, shouldReload } = useSelector(state => state.company);
+	const {
+		sortedArray: sortedCompanies,
+		setSortedArray: setSortedCompanies,
+		customSortHandler,
+	} = useSort();
 
 	useEffect(() => {
 		if (shouldReload) {
 			dispatch(companyGetAll());
+			setSortedCompanies(null);
 		}
-	}, [dispatch, shouldReload]);
+	}, [dispatch, shouldReload, setSortedCompanies]);
 
 	return (
 		<Container>
@@ -39,28 +46,58 @@ const CollapsibleTable = () => {
 						<thead>
 							<tr>
 								<th>
-									<Button variant='light'>
+									<Button
+										variant='light'
+										onClick={() =>
+											customSortHandler([...companies], (a, b) =>
+												a.company.name.localeCompare(b.company.name)
+											)
+										}
+									>
 										Partner
 										<BiSortAZ className='sort-icon' />
 										<BiSortZA className='sort-icon' hidden />
 									</Button>
 								</th>
 								<th>
-									<Button variant='light'>
+									<Button
+										variant='light'
+										onClick={() =>
+											customSortHandler([...companies], (a, b) =>
+												`${a.contacts[0].name} ${a.contacts[0].name}`.localeCompare(
+													`${b.contacts[0].name} ${b.contacts[0].name}`
+												)
+											)
+										}
+									>
 										Ansprechperson
 										<BiSortAZ className='sort-icon' />
 										<BiSortZA className='sort-icon' hidden />
 									</Button>
 								</th>
 								<th>
-									<Button variant='light'>
+									<Button
+										variant='light'
+										onClick={() =>
+											customSortHandler([...companies], (a, b) =>
+												a.contacts[0].email.localeCompare(b.contacts[0].email)
+											)
+										}
+									>
 										E-Mail
 										<BiSortAZ className='sort-icon' />
 										<BiSortZA className='sort-icon' hidden />
 									</Button>
 								</th>
 								<th>
-									<Button variant='light'>
+									<Button
+										variant='light'
+										onClick={() =>
+											customSortHandler([...companies], (a, b) =>
+												a.contacts[0].phone.localeCompare(b.contacts[0].phone)
+											)
+										}
+									>
 										Telefon
 										<BiSortDown className='sort-icon' />
 										<BiSortUp hidden />
@@ -69,9 +106,13 @@ const CollapsibleTable = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{companies.map(entry => (
-								<PartnerRow key={entry.company.id} activity='1' entry={entry} />
-							))}
+							{sortedCompanies == null
+								? companies.map(entry => (
+										<PartnerRow key={entry.company.id} activity='1' entry={entry} />
+								  ))
+								: sortedCompanies.map(entry => (
+										<PartnerRow key={entry.company.id} activity='1' entry={entry} />
+								  ))}
 						</tbody>
 					</Table>
 				</Card.Body>

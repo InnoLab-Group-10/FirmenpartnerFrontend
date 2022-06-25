@@ -6,16 +6,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userGetAll } from '../../store/user-thunks';
 import 'bootstrap/js/src/collapse.js';
 import UserRow from './UserRow';
+import useSort, { SORT_OPTIONS } from '../../hooks/useSort';
 
 const CollapsibleTable = () => {
 	const dispatch = useDispatch();
 	const { users, shouldReload } = useSelector(state => state.user);
+	const {
+		sortedArray: sortedUsers,
+		setSortedArray: setSortedUsers,
+		sortHandler,
+		customSortHandler,
+	} = useSort();
 
 	useEffect(() => {
 		if (shouldReload) {
 			dispatch(userGetAll());
+			setSortedUsers(null);
 		}
-	}, [dispatch, shouldReload]);
+	}, [dispatch, shouldReload, setSortedUsers]);
 
 	return (
 		<Container>
@@ -39,21 +47,40 @@ const CollapsibleTable = () => {
 						<thead>
 							<tr>
 								<th>
-									<Button variant='light'>
+									<Button
+										variant='light'
+										onClick={() =>
+											sortHandler([...users], 'username', SORT_OPTIONS.ALPHABET)
+										}
+									>
 										Benutzer
 										<BiSortAZ className='sort-icon' />
 										<BiSortZA className='sort-icon' hidden />
 									</Button>
 								</th>
 								<th>
-									<Button variant='light'>
+									<Button
+										variant='light'
+										onClick={() =>
+											customSortHandler([...users], (a, b) =>
+												a.roles[a.roles.length - 1].localeCompare(
+													b.roles[b.roles.length - 1]
+												)
+											)
+										}
+									>
 										Rolle
 										<BiSortDown className='sort-icon' />
 										<BiSortUp hidden />
 									</Button>
 								</th>
 								<th>
-									<Button variant='light'>
+									<Button
+										variant='light'
+										onClick={() =>
+											sortHandler([...users], 'email', SORT_OPTIONS.ALPHABET)
+										}
+									>
 										E-Mail
 										<BiSortAZ className='sort-icon' />
 										<BiSortZA className='sort-icon' hidden />
@@ -62,9 +89,9 @@ const CollapsibleTable = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{users.map(entry => (
-								<UserRow key={entry.id} entry={entry} />
-							))}
+							{sortedUsers == null
+								? users.map(entry => <UserRow key={entry.id} entry={entry} />)
+								: sortedUsers.map(entry => <UserRow key={entry.id} entry={entry} />)}
 						</tbody>
 					</Table>
 				</Card.Body>
