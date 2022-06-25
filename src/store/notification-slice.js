@@ -36,6 +36,7 @@ const notificationSlice = createSlice({
 				state.futureNotifications = state.notifications.slice(index);
 			} else {
 				state.pastNotifications = state.notifications;
+				state.futureNotifications = [];
 			}
 
 			state.shouldReload = false;

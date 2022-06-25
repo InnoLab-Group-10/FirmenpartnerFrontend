@@ -16,13 +16,13 @@ const CreateNotificationForm = props => {
 	const { id } = useSelector(state => state.user);
 
 	const submitHandler = data => {
-		// combine date and time, add recipientId
-		const notificationData = {
-			message: data.message,
-			recipientId: id,
-			timestamp: `${data.date}T${data.time}:00`,
-		};
-		dispatch(notificationNew(notificationData));
+		dispatch(
+			notificationNew({
+				...data,
+				recipientId: id,
+				timestamp: `${data.date}T${data.time}:00`,
+			})
+		);
 		props.toggleHandler();
 	};
 

@@ -16,15 +16,7 @@ const CreateAppointmentForm = props => {
 	} = useForm();
 
 	const submitHandler = data => {
-		// combine date and time, add recipientId
-		const appointmentData = {
-			message: data.message,
-			link: data.link,
-			linkText: data.linkText,
-			type: data.type,
-			timestamp: `${data.date}T${data.time}:00`,
-		};
-		dispatch(timelineNew(appointmentData));
+		dispatch(timelineNew({ ...data, timestamp: `${data.date}T${data.time}:00` }));
 		props.toggleHandler();
 	};
 
