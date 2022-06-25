@@ -14,9 +14,9 @@ const Studierende = () => {
 				text='Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.'
 			/>
 			<Container>
-				<Alerts variant='success' text='Erfolgsnachricht' />
+				{/* <Alerts variant='success' text='Erfolgsnachricht' />
 				<Alerts variant='warning' text='Warnung' />
-				<Alerts variant='danger' text='Fehlschlag' />
+				<Alerts variant='danger' text='Fehlschlag' /> */}
 			</Container>
 			<CreateStudentForm />
 			<CollapsibleTable />
