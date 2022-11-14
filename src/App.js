@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { userGetCurrent } from './store/user-thunks';
 import Dashboard from './pages/Dashboard';
+import Mailings from './pages/Mailings';
 import Benutzer from './pages/Benutzer';
 import Partnerfirmen from './pages/Partnerfirmen';
 import Studierende from './pages/Studierende';
@@ -42,6 +43,7 @@ const App = () => {
 									<Route path='partnerfirmen' element={<Partnerfirmen />} />
 									<Route path='studierende' element={<Studierende />} />
 									<Route path='dokumente' element={<Dokumente />} />
+									<Route path='mailings' element={<Mailings />} />
 									<Route path='statistiken' element={<Statistiken />} />
 								</Routes>
 							</div>

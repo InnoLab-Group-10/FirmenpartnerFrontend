@@ -520,3 +520,17 @@ td {
 .notification-container{
 	height: 50%;
 }
+
+/* === MAILINGS === */
+.mailing-row p{
+	margin-bottom: .3rem;	
+}
+
+.mailing-row-icon{
+	height: 24px;
+	width: 24px;
+}
+
+.mailing-row-icon svg{
+	margin-bottom: 0.3rem;
+}

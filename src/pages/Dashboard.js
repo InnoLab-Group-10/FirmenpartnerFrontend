@@ -35,7 +35,7 @@ const Dashboard = () => {
 			<SiteTitle
 				title='Dashboard'
 				subtitle='Quick-Facts, Benachrichtigungen und Kalender'
-				text='Facts, Nachrichten und Kalender.'
+				text=''
 			/>
 			<DashboardCards />
 			<Container>

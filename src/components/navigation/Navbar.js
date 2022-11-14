@@ -9,6 +9,7 @@ import {
 	BiFolder,
 	BiBarChartAlt2,
 	BiLogOut,
+	BiMailSend
 } from 'react-icons/bi';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -59,6 +60,12 @@ const Navbar = () => {
 							<Nav.Link className='nav_link'>
 								<BiFolder className='nav_icon' />
 								<span className='nav_name'>Dokumente</span>
+							</Nav.Link>
+						</LinkContainer>
+						<LinkContainer to='/mailings' activeClassName='active'>
+							<Nav.Link className='nav_link'>
+								<BiMailSend className='nav_icon' />
+								<span className='nav_name'>Mailings</span>
 							</Nav.Link>
 						</LinkContainer>
 						<LinkContainer to='/statistiken' activeClassName='active'>
