@@ -3,7 +3,7 @@ import { Collapse, Button, Modal, Table } from 'react-bootstrap';
 import { BiTrash, BiPlus, BiMinus } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { companyDelete } from '../../store/company-thunks.js';
-import EditPartnerForm from '../forms/EditPartnerForm.js';
+import AddListRecipientForm from '../forms/AddListRecipientForm.js';
 
 const MailinglistRow = props => {
 	const entry = props.entry;
@@ -118,7 +118,7 @@ const MailinglistRow = props => {
 					<Modal.Title>Empfänger hinzufügen</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					
+					<AddListRecipientForm/>
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant='secondary' onClick={toggleEditShow}>
