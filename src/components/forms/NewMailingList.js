@@ -51,7 +51,7 @@ const NewMailingList = () => {
 			<Card>
 				<Card.Header>
 					<Row>
-						<Col>Partnerunternehmen anlegen</Col>
+						<Col>Mailingliste anlegen</Col>
 						<Col>
 							<BiInfoCircle className='info-button' />
 						</Col>

@@ -3,8 +3,6 @@ import { Form, Row, Col, FloatingLabel, Button } from 'react-bootstrap';
 
 // TODO support update of companies without assignments
 const AddListRecipientForm = props => {
-	
-
 	return (
 		<Form>
 			<Row>

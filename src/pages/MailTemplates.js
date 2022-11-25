@@ -1,27 +1,25 @@
 import React from 'react';
 import SiteTitle from '../components/SiteTitle';
 import { Container } from 'react-bootstrap';
-import Mailinglist from '../components/tables/Mailinglist';
-import NewMailingList from '../components/forms/NewMailingList';
+import MailTemplateDesignForm from '../components/forms/MailTemplateDesignForm';
 /*import Alerts from '../components/Alerts.js';*/
 
-const Mailings = () => {
+const MailTemplates = () => {
 	return (
 		<div>
 			<SiteTitle
-				title='Mailings'
-				subtitle='Mailinglisten Verwaltung'
-				text='Hier können Sie Mailinglisten erstellen, bearbeiten und löschen.'
+				title='Mail-Vorlagen'
+				subtitle='E-Mail-Vorlagen Verwaltung'
+				text='Hier können Sie Mailingvorlagen erstellen, bearbeiten und löschen.'
             />
 			<Container>
 				{/* <Alerts variant='success' text='Erfolgsnachricht' />
 				<Alerts variant='warning' text='Warnung' />
 				<Alerts variant='danger' text='Fehlschlag' /> */}
 			</Container>
-			<NewMailingList/>
-            <Mailinglist/>
+            <MailTemplateDesignForm/>
 		</div>
 	);
 };
 
-export default Mailings;
+export default MailTemplates;

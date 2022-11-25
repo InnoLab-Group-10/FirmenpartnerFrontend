@@ -10,10 +10,10 @@ import Benutzer from './pages/Benutzer';
 import Partnerfirmen from './pages/Partnerfirmen';
 import Studierende from './pages/Studierende';
 import Dokumente from './pages/Dokumente';
-import Statistiken from './pages/Statistiken';
 import Header from './components/header/Header';
 import Navbar from './components/navigation/Navbar';
 import Login from './pages/Login';
+import MailTemplates from './pages/MailTemplates';
 
 const App = () => {
 	const { isLoggedIn } = useSelector(state => state.session);
@@ -44,7 +44,7 @@ const App = () => {
 									<Route path='studierende' element={<Studierende />} />
 									<Route path='dokumente' element={<Dokumente />} />
 									<Route path='mailings' element={<Mailings />} />
-									<Route path='statistiken' element={<Statistiken />} />
+									<Route path='mailtemplates' element={<MailTemplates />} />
 								</Routes>
 							</div>
 						</div>

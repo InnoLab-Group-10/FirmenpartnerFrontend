@@ -7,7 +7,7 @@ import {
 	BiMessageSquareDetail,
 	BiBookmark,
 	BiFolder,
-	BiBarChartAlt2,
+	BiReceipt,
 	BiLogOut,
 	BiMailSend
 } from 'react-icons/bi';
@@ -56,22 +56,22 @@ const Navbar = () => {
 								<span className='nav_name'>Studierende</span>
 							</Nav.Link>
 						</LinkContainer>
-						<LinkContainer to='/dokumente' activeClassName='active'>
-							<Nav.Link className='nav_link'>
-								<BiFolder className='nav_icon' />
-								<span className='nav_name'>Dokumente</span>
-							</Nav.Link>
-						</LinkContainer>
 						<LinkContainer to='/mailings' activeClassName='active'>
 							<Nav.Link className='nav_link'>
 								<BiMailSend className='nav_icon' />
 								<span className='nav_name'>Mailings</span>
 							</Nav.Link>
 						</LinkContainer>
-						<LinkContainer to='/statistiken' activeClassName='active'>
+						<LinkContainer to='/mailtemplates' activeClassName='active'>
 							<Nav.Link className='nav_link'>
-								<BiBarChartAlt2 className='nav_icon' />
-								<span className='nav_name'>Statistiken</span>
+								<BiReceipt className='nav_icon' />
+								<span className='nav_name'>Mail-Vorlagen</span>
+							</Nav.Link>
+						</LinkContainer>
+						<LinkContainer to='/dokumente' activeClassName='active'>
+							<Nav.Link className='nav_link'>
+								<BiFolder className='nav_icon' />
+								<span className='nav_name'>Dokumente</span>
 							</Nav.Link>
 						</LinkContainer>
 					</div>
