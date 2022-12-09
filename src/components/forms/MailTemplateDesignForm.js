@@ -63,8 +63,23 @@ const MailTemplateDesignForm = () => {
 						<Accordion.Body>
 							<Form onSubmit={handleSubmit(data => dispatch(companyNew(data)))}>
 								<Row>
-									<Col>
-										Background colorpicker, Logo-Upload, Header-Image-Upload
+									<Col lg={2}>
+										<Form.Group className="mb-3" controlId="formHeaderBackgroundColor">
+											<Form.Label>Hintergrundfarbe</Form.Label>
+											<Form.Control size="lg" type="color" value="#ffffff"/>
+										</Form.Group>
+									</Col>
+									<Col lg>
+										<Form.Group controlId="formFileLogo" className="mb-3">
+											<Form.Label>Logo hochladen</Form.Label>
+											<Form.Control type="file" size="lg" />
+										</Form.Group>		
+									</Col>
+									<Col lg>
+										<Form.Group controlId="formFileHeader" className="mb-3">
+											<Form.Label>Hintergrundbild hochladen (optional)</Form.Label>
+											<Form.Control type="file" size="lg" />
+										</Form.Group>
 									</Col>
 								</Row>
 								<br/>
@@ -84,8 +99,17 @@ const MailTemplateDesignForm = () => {
 						<Accordion.Header>Body</Accordion.Header>
 						<Accordion.Body>
 							<Row>
-								<Col>
-									Background colorpicker, Font-Color, Image-Upload
+								<Col lg={2} sm>
+									<Form.Group className="mb-3" controlId="formBodyBackgroundColor">
+										<Form.Label>Hintergrundfarbe</Form.Label>
+										<Form.Control size="lg" type="color" value="#ffffff"/>
+									</Form.Group>
+								</Col>
+								<Col lg={2} sm>
+									<Form.Group className="mb-3" controlId="formBodyFontColor">
+										<Form.Label>Schriftfarbe</Form.Label>
+										<Form.Control size="lg" type="color" value="#e5e5e5"/>
+									</Form.Group>
 								</Col>
 							</Row>
                             <br/>
@@ -104,8 +128,23 @@ const MailTemplateDesignForm = () => {
 						<Accordion.Body>
 							<Form onSubmit={handleSubmitImport(data => dispatch(companyImport(data)))}>
 								<Row>
-									<Col>
-										Background colorpicker, Footer-Information-Text
+									<Col lg={2} sm>
+										<Form.Group className="mb-3" controlId="formFooterBackgroundColor">
+											<Form.Label>Hintergrundfarbe</Form.Label>
+											<Form.Control size="lg" type="color" value="#5c636a"/>
+										</Form.Group>
+									</Col>
+									<Col lg={2} sm>
+										<Form.Group className="mb-3" controlId="formFooterFontColor">
+											<Form.Label>Schirftfarbe</Form.Label>
+											<Form.Control size="lg" type="color" value="#ffffff"/>
+										</Form.Group>
+									</Col>
+									<Col lg>
+										<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+											<Form.Label>Footertext (HTML möglich)</Form.Label>
+											<Form.Control as="textarea" rows={3} />
+										</Form.Group>
 									</Col>
 								</Row>
 								<br/>
@@ -125,8 +164,11 @@ const MailTemplateDesignForm = () => {
 						<Accordion.Header>Hintergrund</Accordion.Header>
 						<Accordion.Body>
                             <Form>
-                                Background Colorpicker
-                            </Form>
+								<Form.Group className="mb-3" controlId="formBodyBackgroundColor">
+									<Form.Label>Hintergrundfarbe</Form.Label>
+									<Form.Control size="lg" type="color" value="#e5e5e5"/>
+								</Form.Group>
+							</Form>
                             <br/>
 							<div className='d-grid gap-2'>
 								<Button

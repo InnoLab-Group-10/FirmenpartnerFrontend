@@ -184,6 +184,10 @@ a {
 	margin-left: 0;
 }
 
+input[type=color]{
+	width: 100%;
+}
+
 /* === MENU TOGGLE === */
 
 .header-close-show {
@@ -402,6 +406,10 @@ td {
 	margin-left: .5rem;
 	display: inline !important;
 	float: right;
+}
+
+.table-icons path{
+	stroke: white;
 }
 
 .table-icon-column-two-icons{
