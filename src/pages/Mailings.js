@@ -2,7 +2,7 @@ import React from 'react';
 import SiteTitle from '../components/SiteTitle';
 import { Container } from 'react-bootstrap';
 import Mailinglist from '../components/tables/Mailinglist';
-import NewMailingList from '../components/forms/NewMailingList';
+import CreatNewMailingListForm from '../components/forms/CreatNewMailingListForm';
 /*import Alerts from '../components/Alerts.js';*/
 
 const Mailings = () => {
@@ -18,7 +18,7 @@ const Mailings = () => {
 				<Alerts variant='warning' text='Warnung' />
 				<Alerts variant='danger' text='Fehlschlag' /> */}
 			</Container>
-			<NewMailingList/>
+			<CreatNewMailingListForm/>
             <Mailinglist/>
 		</div>
 	);

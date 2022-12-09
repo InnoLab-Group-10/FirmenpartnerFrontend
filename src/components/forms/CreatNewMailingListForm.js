@@ -15,7 +15,7 @@ import { useForm } from 'react-hook-form';
 
 import { companyNew, companyImport, companyExport } from '../../store/company-thunks';
 
-const NewMailingList = () => {
+const CreatNewMailingListForm = () => {
 	const dispatch = useDispatch();
 
 	// new company
@@ -162,4 +162,4 @@ const NewMailingList = () => {
 	);
 };
 
-export default NewMailingList;
+export default CreatNewMailingListForm;

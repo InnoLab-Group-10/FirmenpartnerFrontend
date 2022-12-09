@@ -3,6 +3,7 @@ import SiteTitle from '../components/SiteTitle';
 import { Container } from 'react-bootstrap';
 import MailTemplateDesignForm from '../components/forms/MailTemplateDesignForm';
 import MailTemplateTable from '../components/tables/MailTemplate-Table';
+import NewMailingTemplate from '../components/forms/NewMailingTemplate';
 /*import Alerts from '../components/Alerts.js';*/
 
 const MailTemplates = () => {
@@ -19,6 +20,7 @@ const MailTemplates = () => {
 				<Alerts variant='danger' text='Fehlschlag' /> */}
 			</Container>
             <MailTemplateDesignForm/>
+			<NewMailingTemplate/>
             <MailTemplateTable/>
 		</div>
 	);

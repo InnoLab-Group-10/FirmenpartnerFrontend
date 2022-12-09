@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Form, Modal, Col } from 'react-bootstrap';
 import { BiTrash, BiPencil } from 'react-icons/bi';
 import { GrView } from 'react-icons/gr';
 import { useDispatch } from 'react-redux';
@@ -46,7 +46,7 @@ const MailTemplateRow = props => {
 					<Modal.Title>Löschen bestätigen</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					Sind Sie sicher dass Sie "" entfernen möchten?
+					Sind Sie sicher dass Sie "Template Name" entfernen möchten?
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant='secondary' onClick={toggleDeleteShow}>
@@ -63,11 +63,27 @@ const MailTemplateRow = props => {
 					<Modal.Title>Template bearbeiten</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					
+					<Form>
+						<Col lg>
+							<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+								<Form.Label>Template Name</Form.Label>
+								<Form.Control type="text"/>
+							</Form.Group>
+						</Col>
+						<Col lg>
+							<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+								<Form.Label>Body Text (HTML möglich)</Form.Label>
+								<Form.Control as="textarea" rows={10} />
+							</Form.Group>
+						</Col>
+					</Form>
 				</Modal.Body>
-				<Modal.Footer>
+				<Modal.Footer>	
 					<Button variant='secondary' onClick={toggleEditShow}>
 						Abbrechen
+					</Button>
+					<Button variant='primary' onClick={toggleEditShow}>
+						Speichern
 					</Button>
 				</Modal.Footer>
 			</Modal>
