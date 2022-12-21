@@ -235,6 +235,7 @@ input[type=color]{
 	float: right;
 	width: 24px;
 	height: 24px;
+	cursor: help;
 }
 
 /* === HEADER USER-BADGE === */

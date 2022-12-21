@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import CollapsibleTable from '../components/tables/User-Collapsible-Table.js';
 import SiteTitle from '../components/SiteTitle.js';
 /*import Alerts from '../components/Alerts.js';*/

@@ -66,7 +66,7 @@ const MailTemplateDesignForm = () => {
 									<Col lg={2}>
 										<Form.Group className="mb-3" controlId="formHeaderBackgroundColor">
 											<Form.Label>Hintergrundfarbe</Form.Label>
-											<Form.Control size="lg" type="color" value="#ffffff"/>
+											<Form.Control size="lg" type="color" value="#e5e5e5"/>
 										</Form.Group>
 									</Col>
 									<Col lg>
@@ -108,7 +108,7 @@ const MailTemplateDesignForm = () => {
 								<Col lg={2} sm>
 									<Form.Group className="mb-3" controlId="formBodyFontColor">
 										<Form.Label>Schriftfarbe</Form.Label>
-										<Form.Control size="lg" type="color" value="#e5e5e5"/>
+										<Form.Control size="lg" type="color" value="#343a40"/>
 									</Form.Group>
 								</Col>
 							</Row>
