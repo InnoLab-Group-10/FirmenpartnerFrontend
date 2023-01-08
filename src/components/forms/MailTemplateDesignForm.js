@@ -1,50 +1,73 @@
 import React, { useEffect } from 'react';
-import {
-	Form,
-	Container,
-	Card,
-	Row,
-	Col,
-	FloatingLabel,
-	Button,
-	Accordion,
-} from 'react-bootstrap';
-import { BiInfoCircle } from 'react-icons/bi';
-import { useDispatch } from 'react-redux';
+import { Form, Container, Card, Row, Col, Button, Accordion } from 'react-bootstrap';
+import { BiInfoCircle, BiArrowToBottom } from 'react-icons/bi';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
-import { companyNew, companyImport, companyExport } from '../../store/company-thunks';
+import { mailtemplateGetAll } from '../../store/mailtemplate-thunks';
+import {
+	mailsettingsGetAll,
+	mailsettingsUpdateHeader,
+} from '../../store/mailsettings-thunks';
+import { fileDownload, fileGetAll } from '../../store/file-thunks';
 
 const MailTemplateDesignForm = () => {
 	const dispatch = useDispatch();
+	const { mailtemplates, shouldReload } = useSelector(state => state.mailtemplate);
+	const { settings, shouldReload: shouldReloadSettings } = useSelector(
+		state => state.mailsettings
+	);
+	const { files } = useSelector(state => state.file);
 
-	// new company
+	// set header form
 	const {
-		register,
-		handleSubmit,
-		reset,
-		formState: { isSubmitSuccessful, errors },
+		register: registerHeader,
+		handleSubmit: handleSubmitHeader,
+		setValue: setValueHeader,
+		formState: { isSubmitSuccessful: isSubmitSuccessfulHeader },
 	} = useForm();
 
+	// reset header form on setting change for color and on successful submit for images, atleast for the form
 	useEffect(() => {
-		if (isSubmitSuccessful) {
-			reset();
+		setValueHeader('header_bg_color', settings.header_bg_color);
+		if (isSubmitSuccessfulHeader) {
+			setValueHeader('header_logo', null);
+			setValueHeader('header_bg_image', null);
 		}
-	}, [isSubmitSuccessful, reset]);
-
-	// import
-	const {
-		register: registerImport,
-		handleSubmit: handleSubmitImport,
-		reset: resetImport,
-		formState: { isSubmitSuccessful: isSubmitSuccessfulImport, errors: errorsImport },
-	} = useForm();
+	}, [isSubmitSuccessfulHeader, settings, setValueHeader]);
 
 	useEffect(() => {
-		if (isSubmitSuccessfulImport) {
-			resetImport();
+		if (shouldReload) {
+			dispatch(mailtemplateGetAll());
 		}
-	}, [isSubmitSuccessfulImport, resetImport]);
+	}, [dispatch, shouldReload]);
+
+	useEffect(() => {
+		if (shouldReloadSettings) {
+			dispatch(mailsettingsGetAll());
+			dispatch(fileGetAll());
+		}
+	}, [dispatch, shouldReloadSettings]);
+
+	const handleDownload = id => {
+		const file = files.find(entry => entry.id === id);
+		if (file) {
+			dispatch(fileDownload({ id, name: file.name }));
+		}
+	};
+
+	const getFileName = id => {
+		const file = files.find(entry => entry.id === id);
+		if (file) {
+			return (
+				<>
+					Derzeit ausgewählt: {file.name}
+					<BiArrowToBottom />
+				</>
+			);
+		}
+		return 'Noch nichts ausgewählt';
+	};
 
 	return (
 		<Container>
@@ -61,28 +84,58 @@ const MailTemplateDesignForm = () => {
 					<Accordion.Item eventKey='0'>
 						<Accordion.Header>Header</Accordion.Header>
 						<Accordion.Body>
-							<Form onSubmit={handleSubmit(data => dispatch(companyNew(data)))}>
+							<Form
+								onSubmit={handleSubmitHeader(data =>
+									dispatch(mailsettingsUpdateHeader(data))
+								)}
+							>
 								<Row>
 									<Col lg={2}>
-										<Form.Group className="mb-3" controlId="formHeaderBackgroundColor">
+										<Form.Group className='mb-3' controlId='formHeaderBackgroundColor'>
 											<Form.Label>Hintergrundfarbe</Form.Label>
-											<Form.Control size="lg" type="color" value="#e5e5e5"/>
+											<Form.Control
+												size='lg'
+												type='color'
+												{...registerHeader('header_bg_color')}
+											/>
 										</Form.Group>
 									</Col>
 									<Col lg>
-										<Form.Group controlId="formFileLogo" className="mb-3">
+										<Form.Group controlId='formFileLogo' className='mb-3'>
 											<Form.Label>Logo hochladen</Form.Label>
-											<Form.Control type="file" size="lg" />
-										</Form.Group>		
+											<Form.Control
+												type='file'
+												size='lg'
+												{...registerHeader('header_logo')}
+											/>
+											<Button
+												variant='light'
+												className='mailtemplate-download-button'
+												onClick={() => handleDownload(settings.header_logo)}
+											>
+												{getFileName(settings.header_logo)}
+											</Button>
+										</Form.Group>
 									</Col>
 									<Col lg>
-										<Form.Group controlId="formFileHeader" className="mb-3">
-											<Form.Label>Hintergrundbild hochladen (optional)</Form.Label>
-											<Form.Control type="file" size="lg" />
+										<Form.Group controlId='formFileHeader' className='mb-3'>
+											<Form.Label>Hintergrundbild hochladen</Form.Label>
+											<Form.Control
+												type='file'
+												size='lg'
+												{...registerHeader('header_bg_image')}
+											/>
+											<Button
+												variant='light'
+												className='mailtemplate-download-button'
+												onClick={() => handleDownload(settings.header_bg_image)}
+											>
+												{getFileName(settings.header_bg_image)}
+											</Button>
 										</Form.Group>
 									</Col>
 								</Row>
-								<br/>
+								<br />
 								<Row>
 									<Col lg>
 										<div className='d-grid'>
@@ -100,24 +153,21 @@ const MailTemplateDesignForm = () => {
 						<Accordion.Body>
 							<Row>
 								<Col lg={2} sm>
-									<Form.Group className="mb-3" controlId="formBodyBackgroundColor">
+									<Form.Group className='mb-3' controlId='formBodyBackgroundColor'>
 										<Form.Label>Hintergrundfarbe</Form.Label>
-										<Form.Control size="lg" type="color" value="#ffffff"/>
+										<Form.Control size='lg' type='color' />
 									</Form.Group>
 								</Col>
 								<Col lg={2} sm>
-									<Form.Group className="mb-3" controlId="formBodyFontColor">
+									<Form.Group className='mb-3' controlId='formBodyFontColor'>
 										<Form.Label>Schriftfarbe</Form.Label>
-										<Form.Control size="lg" type="color" value="#343a40"/>
+										<Form.Control size='lg' type='color' />
 									</Form.Group>
 								</Col>
 							</Row>
-                            <br/>
+							<br />
 							<div className='d-grid gap-2'>
-								<Button
-									variant='primary'
-									size='lg'
-								>
+								<Button variant='primary' size='lg'>
 									Speichern
 								</Button>
 							</div>
@@ -126,28 +176,28 @@ const MailTemplateDesignForm = () => {
 					<Accordion.Item eventKey='2'>
 						<Accordion.Header>Footer</Accordion.Header>
 						<Accordion.Body>
-							<Form onSubmit={handleSubmitImport(data => dispatch(companyImport(data)))}>
+							<Form>
 								<Row>
 									<Col lg={2} sm>
-										<Form.Group className="mb-3" controlId="formFooterBackgroundColor">
+										<Form.Group className='mb-3' controlId='formFooterBackgroundColor'>
 											<Form.Label>Hintergrundfarbe</Form.Label>
-											<Form.Control size="lg" type="color" value="#5c636a"/>
+											<Form.Control size='lg' type='color' />
 										</Form.Group>
 									</Col>
 									<Col lg={2} sm>
-										<Form.Group className="mb-3" controlId="formFooterFontColor">
+										<Form.Group className='mb-3' controlId='formFooterFontColor'>
 											<Form.Label>Schirftfarbe</Form.Label>
-											<Form.Control size="lg" type="color" value="#ffffff"/>
+											<Form.Control size='lg' type='color' />
 										</Form.Group>
 									</Col>
 									<Col lg>
-										<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+										<Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
 											<Form.Label>Footertext (HTML möglich)</Form.Label>
-											<Form.Control as="textarea" rows={3} />
+											<Form.Control as='textarea' rows={3} />
 										</Form.Group>
 									</Col>
 								</Row>
-								<br/>
+								<br />
 								<Row>
 									<Col lg>
 										<div className='d-grid'>
@@ -163,18 +213,15 @@ const MailTemplateDesignForm = () => {
 					<Accordion.Item eventKey='3'>
 						<Accordion.Header>Hintergrund</Accordion.Header>
 						<Accordion.Body>
-                            <Form>
-								<Form.Group className="mb-3" controlId="formBodyBackgroundColor">
+							<Form>
+								<Form.Group className='mb-3' controlId='formBodyBackgroundColor'>
 									<Form.Label>Hintergrundfarbe</Form.Label>
-									<Form.Control size="lg" type="color" value="#e5e5e5"/>
+									<Form.Control size='lg' type='color' />
 								</Form.Group>
 							</Form>
-                            <br/>
+							<br />
 							<div className='d-grid gap-2'>
-								<Button
-									variant='primary'
-									size='lg'
-								>
+								<Button variant='primary' size='lg'>
 									Speichern
 								</Button>
 							</div>

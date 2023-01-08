@@ -543,3 +543,17 @@ td {
 .mailing-row-icon svg{
 	margin-bottom: 0.3rem;
 }
+
+/* === MAIL TEMPLATES === */
+#bootstrap-override .mailtemplate-download-button {
+	width: 100%;
+	text-align: left;
+	padding: 0;
+	color: #6c757d;
+	background-color: rgba(0, 0, 0, 0);
+	border-color: rgba(0, 0, 0, 0);
+}
+
+.mailtemplate-download-button svg {
+	float: right;
+}
