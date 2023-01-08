@@ -10,15 +10,20 @@ import {
 	Accordion,
 } from 'react-bootstrap';
 import { BiInfoCircle } from 'react-icons/bi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
-import { companyNew, companyImport, companyExport } from '../../store/company-thunks';
+import {
+	mailinglistExportById,
+	mailinglistImportById,
+	mailinglistNew,
+} from '../../store/mailinglist-thunks';
 
 const CreatNewMailingListForm = () => {
 	const dispatch = useDispatch();
+	const { mailinglists } = useSelector(state => state.mailinglist);
 
-	// new company
+	// new mailinglist
 	const {
 		register,
 		handleSubmit,
@@ -46,6 +51,20 @@ const CreatNewMailingListForm = () => {
 		}
 	}, [isSubmitSuccessfulImport, resetImport]);
 
+	// export
+	const {
+		register: registerExport,
+		handleSubmit: handleSubmitExport,
+		reset: resetExport,
+		formState: { isSubmitSuccessful: isSubmitSuccessfulExport, errors: errorsExport },
+	} = useForm();
+
+	useEffect(() => {
+		if (isSubmitSuccessfulExport) {
+			resetExport();
+		}
+	}, [isSubmitSuccessfulExport, resetExport]);
+
 	return (
 		<Container>
 			<Card>
@@ -61,15 +80,15 @@ const CreatNewMailingListForm = () => {
 					<Accordion.Item eventKey='0'>
 						<Accordion.Header>Anlegen</Accordion.Header>
 						<Accordion.Body>
-							<Form onSubmit={handleSubmit(data => dispatch(companyNew(data)))}>
+							<Form onSubmit={handleSubmit(data => dispatch(mailinglistNew(data)))}>
 								<Row>
 									<Col lg>
 										<FloatingLabel label='Name der Liste' className='mb-3'>
 											<Form.Control
 												type='text'
 												placeholder='Name der Liste'
-												/*{...register('name', { required: true })}
-												isInvalid={errors.name}*/
+												{...register('name', { required: true })}
+												isInvalid={errors.name}
 											/>
 										</FloatingLabel>
 									</Col>
@@ -89,33 +108,48 @@ const CreatNewMailingListForm = () => {
 					<Accordion.Item eventKey='1'>
 						<Accordion.Header>Exportieren</Accordion.Header>
 						<Accordion.Body>
-                            <Form>
-                                <Col lg>
-                                    <Form.Select aria-label="Default select example" size="lg">
-                                        <option>Mailing Liste wählen</option>
-                                        <option value="1">Alle Unternehmen</option>
-                                        <option value="2">Aktive Unternehmen</option>
-                                        <option value="3">Inaktive Unternehmen</option>
-                                        <option value="3">Wiener Unternehmen</option>
-                                    </Form.Select>
-                                </Col>
-                            </Form>
-                            <br/>
-							<div className='d-grid gap-2'>
-								<Button
-									variant='primary'
-									size='lg'
-									onClick={() => dispatch(companyExport())}
-								>
-									Als CSV exportieren
-								</Button>
-							</div>
+							<Form
+								onSubmit={handleSubmitExport(data =>
+									dispatch(mailinglistExportById(data))
+								)}
+							>
+								<Row>
+									<Col lg>
+										<Form.Select
+											aria-label='Default select example'
+											size='lg'
+											{...registerExport('id', { required: true })}
+											isInvalid={errorsExport.id}
+										>
+											{mailinglists.map(entry => (
+												<option key={entry.id} value={entry.id}>
+													{entry.name}
+												</option>
+											))}
+										</Form.Select>
+									</Col>
+								</Row>
+								<br />
+								<Row>
+									<Col lg>
+										<div className='d-grid'>
+											<Button variant='primary' type='submit' size='lg'>
+												Als CSV exportieren
+											</Button>
+										</div>
+									</Col>
+								</Row>
+							</Form>
 						</Accordion.Body>
 					</Accordion.Item>
 					<Accordion.Item eventKey='2'>
 						<Accordion.Header>Importieren</Accordion.Header>
 						<Accordion.Body>
-							<Form onSubmit={handleSubmitImport(data => dispatch(companyImport(data)))}>
+							<Form
+								onSubmit={handleSubmitImport(data =>
+									dispatch(mailinglistImportById(data))
+								)}
+							>
 								<Row>
 									<Col lg>
 										<Form.Group className='mb-3 big-upload'>
@@ -130,20 +164,25 @@ const CreatNewMailingListForm = () => {
 											/>
 										</Form.Group>
 									</Col>
-                                    <Col lg>
-                                        <Form.Label>
+									<Col lg>
+										<Form.Label>
 											Wählen Sie hier die Liste in der die Datei eingefügt werden soll.
 										</Form.Label>
-                                        <Form.Select aria-label="Default select example" size="lg">
-                                            <option>Mailing Liste wählen</option>
-                                            <option value="1">Alle Unternehmen</option>
-                                            <option value="2">Aktive Unternehmen</option>
-                                            <option value="3">Inaktive Unternehmen</option>
-                                            <option value="3">Wiener Unternehmen</option>
-                                        </Form.Select>
-                                    </Col>
+										<Form.Select
+											aria-label='Default select example'
+											size='lg'
+											{...registerImport('id', { required: true })}
+											isInvalid={errorsImport.id}
+										>
+											{mailinglists.map(entry => (
+												<option key={entry.id} value={entry.id}>
+													{entry.name}
+												</option>
+											))}
+										</Form.Select>
+									</Col>
 								</Row>
-                                <br/>
+								<br />
 								<Row>
 									<Col lg>
 										<div className='d-grid'>

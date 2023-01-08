@@ -12,14 +12,14 @@ const Mailings = () => {
 				title='Mailings'
 				subtitle='Mailinglisten Verwaltung'
 				text='Hier können Sie Mailinglisten erstellen, bearbeiten und löschen.'
-            />
+			/>
 			<Container>
 				{/* <Alerts variant='success' text='Erfolgsnachricht' />
 				<Alerts variant='warning' text='Warnung' />
 				<Alerts variant='danger' text='Fehlschlag' /> */}
 			</Container>
-			<CreatNewMailingListForm/>
-            <Mailinglist/>
+			<CreatNewMailingListForm />
+			<Mailinglist />
 		</div>
 	);
 };

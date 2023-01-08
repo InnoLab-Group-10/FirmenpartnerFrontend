@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { Collapse, Button, Modal, Table } from 'react-bootstrap';
-import { BiTrash, BiPlus, BiMinus } from 'react-icons/bi';
+import { BiTrash, BiPlus } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
-import { companyDelete } from '../../store/company-thunks.js';
+import { mailinglistDelete } from '../../store/mailinglist-thunks';
 import AddListRecipientForm from '../forms/AddListRecipientForm.js';
+import MailinglistRowRecipient from './MailinglistRowRecipient';
 
 const MailinglistRow = props => {
-	const entry = props.entry;
 	const dispatch = useDispatch();
 
 	const [open, setOpen] = useState(false);
-	// const { company, contacts, locations } = props.entry;
 
 	const [showDelete, setDeleteShow] = useState(false);
 	const [showEdit, setEditShow] = useState(false);
@@ -19,7 +18,7 @@ const MailinglistRow = props => {
 	const toggleEditShow = () => setEditShow(prevState => !prevState);
 
 	const handleDelete = () => {
-		dispatch(companyDelete({ id: entry.company.id }));
+		dispatch(mailinglistDelete({ id: props.id }));
 		toggleDeleteShow();
 	};
 
@@ -47,9 +46,9 @@ const MailinglistRow = props => {
 				aria-controls='example-collapse-text'
 				aria-expanded={open}
 			>
-				        <td>{props.listName}</td>
-						<td>{props.listSize}</td>
-            			<td className='table-icon-column-two-icons'>
+				<td>{props.listName}</td>
+				<td>{props.entries.length}</td>
+				<td className='table-icon-column-two-icons'>
 					<Button
 						variant='danger'
 						className='table-icons table-delete-icon'
@@ -58,40 +57,38 @@ const MailinglistRow = props => {
 					>
 						<BiTrash />
 					</Button>
-					<Button variant='secondary' className='table-icons' onClick={toggleEditShow} hidden={props.notEditable}>
+					<Button
+						variant='secondary'
+						className='table-icons'
+						onClick={toggleEditShow}
+						hidden={props.notEditable}
+					>
 						<BiPlus />
 					</Button>
 				</td>
 			</tr>
 			<Collapse in={open}>
 				<tr id='example-collapse-text' className='detailed-row mailing-row'>
-                    <td colSpan="3">
-					<Table>
-                        <thead>
-                            <tr>
-                                <th>Firma</th>
-                                <th>Ansprechpartner</th>
-                                <th>E-Mail</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-<tr>
-    <td>Name</td>
-    <td>Vorname Nachname</td>
-    <td>test@test.com</td>
-    <td hidden={props.notEditable}>
-        <Button
-			variant='danger'
-			className='table-icons table-delete-icon mailing-row-icon'
-			onClick={toggleDeleteShow}
-		>
-			<BiMinus />
-		</Button>
-    </td>
-</tr>
-                        </tbody>
-                    </Table>
-                    </td>
+					<td colSpan='3'>
+						<Table>
+							<thead>
+								<tr>
+									<th>Firma</th>
+									<th>Ansprechpartner</th>
+									<th>E-Mail</th>
+								</tr>
+							</thead>
+							<tbody>
+								{props.entries.map(entry => (
+									<MailinglistRowRecipient
+										key={entry.id}
+										entry={entry}
+										mailinglistId={props.id}
+									/>
+								))}
+							</tbody>
+						</Table>
+					</td>
 				</tr>
 			</Collapse>
 
@@ -101,7 +98,7 @@ const MailinglistRow = props => {
 					<Modal.Title>Löschen bestätigen</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					Sind Sie sicher dass Sie "Test" entfernen möchten?
+					Sind Sie sicher dass Sie {props.listName} entfernen möchten?
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant='secondary' onClick={toggleDeleteShow}>
@@ -118,7 +115,7 @@ const MailinglistRow = props => {
 					<Modal.Title>Empfänger hinzufügen</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<AddListRecipientForm/>
+					<AddListRecipientForm id={props.id} />
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant='secondary' onClick={toggleEditShow}>
