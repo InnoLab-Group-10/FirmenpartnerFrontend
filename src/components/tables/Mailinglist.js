@@ -57,7 +57,7 @@ const Mailinglist = () => {
 									<Button
 										variant='light'
 										onClick={() =>
-											sortHandler([...mailinglists], 'name', SORT_OPTIONS.ALPHABET)
+											sortHandler([...mailinglists], 'entries', SORT_OPTIONS.LENGTH)
 										}
 									>
 										Einträge

@@ -19,7 +19,7 @@ import {
 	mailinglistNew,
 } from '../../store/mailinglist-thunks';
 
-const CreatNewMailingListForm = () => {
+const CreateNewMailingListForm = () => {
 	const dispatch = useDispatch();
 	const { mailinglists } = useSelector(state => state.mailinglist);
 
@@ -201,4 +201,4 @@ const CreatNewMailingListForm = () => {
 	);
 };
 
-export default CreatNewMailingListForm;
+export default CreateNewMailingListForm;

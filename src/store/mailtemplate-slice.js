@@ -3,6 +3,7 @@ import {
 	mailtemplateGetAll,
 	mailtemplateNew,
 	mailtemplateDelete,
+	mailtemplateUpdate,
 } from './mailtemplate-thunks';
 
 const mailtemplateSlice = createSlice({
@@ -25,6 +26,9 @@ const mailtemplateSlice = createSlice({
 			state.shouldReload = true;
 		},
 		[mailtemplateDelete.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		[mailtemplateUpdate.fulfilled]: state => {
 			state.shouldReload = true;
 		},
 	},

@@ -3,6 +3,7 @@ import { useState } from 'react';
 export const SORT_OPTIONS = {
 	ALPHABET: 1,
 	TIMESTAMP: 2,
+	LENGTH: 3,
 };
 
 const useSort = () => {
@@ -15,6 +16,9 @@ const useSort = () => {
 				break;
 			case 2:
 				setSortedArray(array.sort((a, b) => new Date(a[name]) - new Date(b[name])));
+				break;
+			case 3:
+				setSortedArray(array.sort((a, b) => a[name].length - b[name].length));
 				break;
 			default:
 				setSortedArray(null);

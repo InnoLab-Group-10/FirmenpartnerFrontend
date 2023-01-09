@@ -12,7 +12,7 @@ const mailinglistSlice = createSlice({
 	name: 'mailinglist',
 	initialState: {
 		shouldReload: true, // starts of with true for initial load of mailinglist table
-		mailinglists: [], // includes partnercompanies added to them
+		mailinglists: [],
 	},
 	reducers: {
 		setShouldReload: (state, action) => {

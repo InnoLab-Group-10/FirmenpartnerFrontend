@@ -4,25 +4,26 @@ import { BiInfoCircle, BiSortAZ, BiSortZA } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 
 import MailTemplateRow from './MailTemplateRow';
-import { fileGetAll } from '../../store/file-thunks';
 import useSort, { SORT_OPTIONS } from '../../hooks/useSort';
+import { mailtemplateGetAll } from '../../store/mailtemplate-thunks';
 
 const MailTemplateTable = () => {
 	const dispatch = useDispatch();
-	const { files, shouldReload } = useSelector(state => state.file);
+
+	const { mailtemplates, shouldReload } = useSelector(state => state.mailtemplate);
+
 	const {
-		sortedArray: sortedFiles,
-		setSortedArray: setSortedFiles,
+		sortedArray: sortedMailtemplates,
+		setSortedArray: setSortedMailtemplates,
 		sortHandler,
-		customSortHandler,
 	} = useSort();
 
 	useEffect(() => {
 		if (shouldReload) {
-			dispatch(fileGetAll());
-			setSortedFiles(null);
+			dispatch(mailtemplateGetAll());
+			setSortedMailtemplates(null);
 		}
-	}, [dispatch, shouldReload, setSortedFiles]);
+	}, [dispatch, shouldReload, setSortedMailtemplates]);
 
 	return (
 		<Container className='document-table'>
@@ -42,7 +43,9 @@ const MailTemplateTable = () => {
 								<th>
 									<Button
 										variant='light'
-										//onClick={() => sortHandler([...files], 'name', SORT_OPTIONS.ALPHABET)}
+										onClick={() =>
+											sortHandler([...mailtemplates], 'name', SORT_OPTIONS.ALPHABET)
+										}
 									>
 										Template Name
 										<BiSortAZ className='sort-icon' />
@@ -52,11 +55,13 @@ const MailTemplateTable = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{/*sortedFiles
-								? sortedFiles.map(entry => <MailTemplateRow key={entry.id} entry={entry} />)
-								: files.map(entry => <MailTemplateRow key={entry.id} entry={entry} />)*/}
-
-							<MailTemplateRow/>
+							{sortedMailtemplates
+								? sortedMailtemplates.map(entry => (
+										<MailTemplateRow key={entry.id} entry={entry} />
+								  ))
+								: mailtemplates.map(entry => (
+										<MailTemplateRow key={entry.id} entry={entry} />
+								  ))}
 						</tbody>
 					</Table>
 				</Card.Body>

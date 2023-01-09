@@ -4,7 +4,6 @@ import { BiInfoCircle, BiArrowToBottom } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
-import { mailtemplateGetAll } from '../../store/mailtemplate-thunks';
 import {
 	mailsettingsGetAll,
 	mailsettingsUpdateBackground,
@@ -16,7 +15,7 @@ import { fileDownload, fileGetAll } from '../../store/file-thunks';
 
 const MailTemplateDesignForm = () => {
 	const dispatch = useDispatch();
-	const { mailtemplates, shouldReload } = useSelector(state => state.mailtemplate);
+
 	const { settings, shouldReload: shouldReloadSettings } = useSelector(
 		state => state.mailsettings
 	);
@@ -74,12 +73,6 @@ const MailTemplateDesignForm = () => {
 	useEffect(() => {
 		setValueBackground('mail_bg_color', settings.mail_bg_color);
 	}, [settings, setValueBackground]);
-
-	useEffect(() => {
-		if (shouldReload) {
-			dispatch(mailtemplateGetAll());
-		}
-	}, [dispatch, shouldReload]);
 
 	useEffect(() => {
 		if (shouldReloadSettings) {
