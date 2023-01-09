@@ -19,7 +19,7 @@ export const mailsettingsGetAll = createAsyncThunk('mailsettings/getAll', async 
 export const mailsettingsUpdateHeader = createAsyncThunk(
 	'mailsettings/updateHeader',
 	async (arg, { getState }) => {
-		const { mailsettings } = getState();
+		const { mailsettings, file } = getState();
 		const requests = [];
 		if (arg.header_bg_color !== mailsettings.settings.header_bg_color) {
 			requests.push(
@@ -30,10 +30,15 @@ export const mailsettingsUpdateHeader = createAsyncThunk(
 			// upload new file, delete old file and wait for new id
 			const data = new FormData();
 			data.append('file', arg.header_logo[0]);
-			const response = await Promise.all([
-				axiosPrivate.post('/file', data),
-				axiosPrivate.delete(`/file/${mailsettings.settings.header_logo}`),
-			]);
+			const imageRequests = [];
+			imageRequests.push(axiosPrivate.post('/file', data));
+			// add delete if file exists
+			if (file.files.find(entry => entry.id === mailsettings.settings.header_logo)) {
+				imageRequests.push(
+					axiosPrivate.delete(`/file/${mailsettings.settings.header_logo}`)
+				);
+			}
+			const response = await Promise.all(imageRequests);
 			requests.push(
 				axiosPrivate.post(`/mailsettings/header_logo`, { value: response[0].data.id })
 			);
@@ -42,10 +47,15 @@ export const mailsettingsUpdateHeader = createAsyncThunk(
 			// upload new file, delete old file and wait for new id
 			const data = new FormData();
 			data.append('file', arg.header_bg_image[0]);
-			const response = await Promise.all([
-				axiosPrivate.post('/file', data),
-				axiosPrivate.delete(`/file/${mailsettings.settings.header_bg_image}`),
-			]);
+			const imageRequests = [];
+			imageRequests.push(axiosPrivate.post('/file', data));
+			// add delete if file exists
+			if (file.files.find(entry => entry.id === mailsettings.settings.header_bg_image)) {
+				imageRequests.push(
+					axiosPrivate.delete(`/file/${mailsettings.settings.header_bg_image}`)
+				);
+			}
+			const response = await Promise.all(imageRequests);
 			requests.push(
 				axiosPrivate.post(`/mailsettings/header_bg_image`, { value: response[0].data.id })
 			);

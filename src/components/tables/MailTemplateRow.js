@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Modal, Col } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { BiTrash, BiPencil } from 'react-icons/bi';
@@ -26,7 +26,6 @@ const MailTemplateRow = props => {
 	const {
 		register,
 		handleSubmit,
-		reset,
 		formState: { errors },
 	} = useForm({ defaultValues: { name: entry.name, content: entry.content } });
 
