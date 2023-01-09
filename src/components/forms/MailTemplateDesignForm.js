@@ -7,6 +7,9 @@ import { useForm } from 'react-hook-form';
 import { mailtemplateGetAll } from '../../store/mailtemplate-thunks';
 import {
 	mailsettingsGetAll,
+	mailsettingsUpdateBackground,
+	mailsettingsUpdateBody,
+	mailsettingsUpdateFooter,
 	mailsettingsUpdateHeader,
 } from '../../store/mailsettings-thunks';
 import { fileDownload, fileGetAll } from '../../store/file-thunks';
@@ -19,6 +22,7 @@ const MailTemplateDesignForm = () => {
 	);
 	const { files } = useSelector(state => state.file);
 
+	// FORMS
 	// set header form
 	const {
 		register: registerHeader,
@@ -26,7 +30,6 @@ const MailTemplateDesignForm = () => {
 		setValue: setValueHeader,
 		formState: { isSubmitSuccessful: isSubmitSuccessfulHeader },
 	} = useForm();
-
 	// reset header form on setting change for color and on successful submit for images, atleast for the form
 	useEffect(() => {
 		setValueHeader('header_bg_color', settings.header_bg_color);
@@ -35,6 +38,42 @@ const MailTemplateDesignForm = () => {
 			setValueHeader('header_bg_image', null);
 		}
 	}, [isSubmitSuccessfulHeader, settings, setValueHeader]);
+
+	// set body form
+	const {
+		register: registerBody,
+		handleSubmit: handleSubmitBody,
+		setValue: setValueBody,
+	} = useForm();
+	// reset body form on setting change
+	useEffect(() => {
+		setValueBody('body_bg_color', settings.body_bg_color);
+		setValueBody('body_color', settings.body_color);
+	}, [settings, setValueBody]);
+
+	// set footer form
+	const {
+		register: registerFooter,
+		handleSubmit: handleSubmitFooter,
+		setValue: setValueFooter,
+	} = useForm();
+	// reset footer form on setting change
+	useEffect(() => {
+		setValueFooter('footer_bg_color', settings.footer_bg_color);
+		setValueFooter('footer_color', settings.footer_color);
+		setValueFooter('footer_text', settings.footer_text);
+	}, [settings, setValueFooter]);
+
+	// set background form
+	const {
+		register: registerBackground,
+		handleSubmit: handleSubmitBackground,
+		setValue: setValueBackground,
+	} = useForm();
+	// reset background form on setting change
+	useEffect(() => {
+		setValueBackground('mail_bg_color', settings.mail_bg_color);
+	}, [settings, setValueBackground]);
 
 	useEffect(() => {
 		if (shouldReload) {
@@ -151,49 +190,79 @@ const MailTemplateDesignForm = () => {
 					<Accordion.Item eventKey='1'>
 						<Accordion.Header>Body</Accordion.Header>
 						<Accordion.Body>
-							<Row>
-								<Col lg={2} sm>
-									<Form.Group className='mb-3' controlId='formBodyBackgroundColor'>
-										<Form.Label>Hintergrundfarbe</Form.Label>
-										<Form.Control size='lg' type='color' />
-									</Form.Group>
-								</Col>
-								<Col lg={2} sm>
-									<Form.Group className='mb-3' controlId='formBodyFontColor'>
-										<Form.Label>Schriftfarbe</Form.Label>
-										<Form.Control size='lg' type='color' />
-									</Form.Group>
-								</Col>
-							</Row>
-							<br />
-							<div className='d-grid gap-2'>
-								<Button variant='primary' size='lg'>
-									Speichern
-								</Button>
-							</div>
+							<Form
+								onSubmit={handleSubmitBody(data =>
+									dispatch(mailsettingsUpdateBody(data))
+								)}
+							>
+								<Row>
+									<Col lg={2} sm>
+										<Form.Group className='mb-3' controlId='formBodyBackgroundColor'>
+											<Form.Label>Hintergrundfarbe</Form.Label>
+											<Form.Control
+												size='lg'
+												type='color'
+												{...registerBody('body_bg_color')}
+											/>
+										</Form.Group>
+									</Col>
+									<Col lg={2} sm>
+										<Form.Group className='mb-3' controlId='formBodyFontColor'>
+											<Form.Label>Schriftfarbe</Form.Label>
+											<Form.Control
+												size='lg'
+												type='color'
+												{...registerBody('body_color')}
+											/>
+										</Form.Group>
+									</Col>
+								</Row>
+								<br />
+								<div className='d-grid gap-2'>
+									<Button variant='primary' size='lg' type='submit'>
+										Speichern
+									</Button>
+								</div>
+							</Form>
 						</Accordion.Body>
 					</Accordion.Item>
 					<Accordion.Item eventKey='2'>
 						<Accordion.Header>Footer</Accordion.Header>
 						<Accordion.Body>
-							<Form>
+							<Form
+								onSubmit={handleSubmitFooter(data =>
+									dispatch(mailsettingsUpdateFooter(data))
+								)}
+							>
 								<Row>
 									<Col lg={2} sm>
 										<Form.Group className='mb-3' controlId='formFooterBackgroundColor'>
 											<Form.Label>Hintergrundfarbe</Form.Label>
-											<Form.Control size='lg' type='color' />
+											<Form.Control
+												size='lg'
+												type='color'
+												{...registerFooter('footer_bg_color')}
+											/>
 										</Form.Group>
 									</Col>
 									<Col lg={2} sm>
 										<Form.Group className='mb-3' controlId='formFooterFontColor'>
 											<Form.Label>Schirftfarbe</Form.Label>
-											<Form.Control size='lg' type='color' />
+											<Form.Control
+												size='lg'
+												type='color'
+												{...registerFooter('footer_color')}
+											/>
 										</Form.Group>
 									</Col>
 									<Col lg>
 										<Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
 											<Form.Label>Footertext (HTML möglich)</Form.Label>
-											<Form.Control as='textarea' rows={3} />
+											<Form.Control
+												as='textarea'
+												rows={3}
+												{...registerFooter('footer_text')}
+											/>
 										</Form.Group>
 									</Col>
 								</Row>
@@ -213,18 +282,26 @@ const MailTemplateDesignForm = () => {
 					<Accordion.Item eventKey='3'>
 						<Accordion.Header>Hintergrund</Accordion.Header>
 						<Accordion.Body>
-							<Form>
+							<Form
+								onSubmit={handleSubmitBackground(data =>
+									dispatch(mailsettingsUpdateBackground(data))
+								)}
+							>
 								<Form.Group className='mb-3' controlId='formBodyBackgroundColor'>
 									<Form.Label>Hintergrundfarbe</Form.Label>
-									<Form.Control size='lg' type='color' />
+									<Form.Control
+										size='lg'
+										type='color'
+										{...registerBackground('mail_bg_color')}
+									/>
 								</Form.Group>
+								<br />
+								<div className='d-grid gap-2'>
+									<Button variant='primary' size='lg' type='submit'>
+										Speichern
+									</Button>
+								</div>
 							</Form>
-							<br />
-							<div className='d-grid gap-2'>
-								<Button variant='primary' size='lg'>
-									Speichern
-								</Button>
-							</div>
 						</Accordion.Body>
 					</Accordion.Item>
 				</Accordion>

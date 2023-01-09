@@ -55,3 +55,68 @@ export const mailsettingsUpdateHeader = createAsyncThunk(
 		return response.data;
 	}
 );
+
+export const mailsettingsUpdateBody = createAsyncThunk(
+	'mailsettings/updateBody',
+	async (arg, { getState }) => {
+		console.log(arg);
+		const { mailsettings } = getState();
+		const requests = [];
+		if (arg.body_bg_color !== mailsettings.settings.body_bg_color) {
+			requests.push(
+				axiosPrivate.post(`/mailsettings/body_bg_color`, { value: arg.body_bg_color })
+			);
+		}
+		if (arg.body_color !== mailsettings.settings.body_color) {
+			requests.push(
+				axiosPrivate.post(`/mailsettings/body_color`, { value: arg.body_color })
+			);
+		}
+
+		const response = await Promise.all(requests);
+		return response.data;
+	}
+);
+
+export const mailsettingsUpdateFooter = createAsyncThunk(
+	'mailsettings/updateFooter',
+	async (arg, { getState }) => {
+		const { mailsettings } = getState();
+		const requests = [];
+		if (arg.footer_bg_color !== mailsettings.settings.footer_bg_color) {
+			requests.push(
+				axiosPrivate.post(`/mailsettings/footer_bg_color`, { value: arg.footer_bg_color })
+			);
+		}
+		if (arg.footer_color !== mailsettings.settings.footer_color) {
+			requests.push(
+				axiosPrivate.post(`/mailsettings/footer_color`, { value: arg.footer_color })
+			);
+		}
+		if (arg.footer_text !== mailsettings.settings.footer_text) {
+			requests.push(
+				axiosPrivate.post(`/mailsettings/footer_text`, { value: arg.footer_text })
+			);
+		}
+
+		const response = await Promise.all(requests);
+		return response.data;
+	}
+);
+
+export const mailsettingsUpdateBackground = createAsyncThunk(
+	'mailsettings/updateBackground',
+	async (arg, { getState }) => {
+		const { mailsettings } = getState();
+		// not necessary, but nice to have if it has to be extended
+		const requests = [];
+		if (arg.mail_bg_color !== mailsettings.settings.mail_bg_color) {
+			requests.push(
+				axiosPrivate.post(`/mailsettings/mail_bg_color`, { value: arg.mail_bg_color })
+			);
+		}
+
+		const response = await Promise.all(requests);
+		return response.data;
+	}
+);

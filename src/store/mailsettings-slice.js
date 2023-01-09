@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { mailsettingsGetAll, mailsettingsUpdateHeader } from './mailsettings-thunks';
+import {
+	mailsettingsGetAll,
+	mailsettingsUpdateBackground,
+	mailsettingsUpdateBody,
+	mailsettingsUpdateFooter,
+	mailsettingsUpdateHeader,
+} from './mailsettings-thunks';
 
 const mailsettingsSlice = createSlice({
 	name: 'mailsettings',
@@ -28,6 +34,15 @@ const mailsettingsSlice = createSlice({
 			state.shouldReload = false;
 		},
 		[mailsettingsUpdateHeader.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		[mailsettingsUpdateBody.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		[mailsettingsUpdateFooter.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		[mailsettingsUpdateBackground.fulfilled]: state => {
 			state.shouldReload = true;
 		},
 	},
