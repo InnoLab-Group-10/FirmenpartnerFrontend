@@ -1,22 +1,43 @@
-import React, { useState } from 'react';
-import Calendar from 'react-calendar';
+import React from 'react';
 
-import 'react-calendar/dist/Calendar.css';
+import {FullCalendar} from "/@fullcalendar/react";
+import dayGridPlugin from "/@fullcalendar/daygrid";
+//import timeGridPlugin from "@fullcalendar/timegrid";
+
+import "@fullcalendar/core/main.css";
+import "@fullcalendar/daygrid/main.css";
+import "@fullcalendar/timegrid/main.css";
+
+import events from "./Events";
 
 const CalendarComponent = () => {
-	const [values, setValues] = useState([new Date()]);
-	// const { notifications } = useSelector(state => state.notification);
-	// const { appointments } = useSelector(state => state.timeline);
-
-	// useEffect(() => {
-	// 	console.log(notifications.concat(appointments));
-	// 	console.log(
-	// 		notifications.concat(appointments).map(entry => new Date(entry.timestamp))
-	// 	);
-	// 	setValues(notifications.concat(appointments).map(entry => new Date(entry.timestamp)));
-	// }, [notifications, appointments]);
-
-	return <Calendar onChange={setValues} defaultValue={values} />;
+	return (
+	<>
+	<FullCalendar
+        defaultView="dayGridMonth"
+        header={{
+          left: "prev,next",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek,timeGridDay"
+        }}
+        themeSystem="Simplex"
+        plugins={[dayGridPlugin]}
+        events={events}
+      />
+      <FullCalendar
+        defaultView="dayGridMonth"
+        // themeSystem="Simplex"
+        // header={{
+        //   left: "prev,next",
+        //   center: "title",
+        //   right: "dayGridMonth,timeGridWeek,timeGridDay",
+        // }}
+        plugins={[dayGridPlugin]}
+        events={events}
+        displayEventEnd="true"
+        eventColor={"#" + Math.floor(Math.random() * 16777215).toString(16)}
+      />
+	</>)
 };
 
 export default CalendarComponent;
