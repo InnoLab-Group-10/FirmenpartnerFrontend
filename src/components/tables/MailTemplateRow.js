@@ -3,23 +3,33 @@ import { Button, Form, Modal, Col } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { BiTrash, BiPencil } from 'react-icons/bi';
 import { GrView } from 'react-icons/gr';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { mailtemplateDelete, mailtemplateUpdate } from '../../store/mailtemplate-thunks';
+import { sendmailGetPreviewByTemplateId } from '../../store/sendmail-thunks';
 
 const MailTemplateRow = props => {
 	const { entry } = props;
 	const dispatch = useDispatch();
 
+	const { currentPreview } = useSelector(state => state.sendmail);
+
 	const [showDelete, setDeleteShow] = useState(false);
 	const [showEdit, setEditShow] = useState(false);
+	const [showPreview, setPreviewShow] = useState(false);
 
 	const toggleDeleteShow = () => setDeleteShow(prevState => !prevState);
 	const toggleEditShow = () => setEditShow(prevState => !prevState);
+	const togglePreviewShow = () => setPreviewShow(prevState => !prevState);
 
 	const handleDelete = () => {
 		dispatch(mailtemplateDelete({ id: entry.id }));
 		toggleDeleteShow();
+	};
+
+	const handlePreview = () => {
+		dispatch(sendmailGetPreviewByTemplateId({ id: entry.id }));
+		togglePreviewShow();
 	};
 
 	// update template
@@ -41,7 +51,7 @@ const MailTemplateRow = props => {
 					>
 						<BiTrash />
 					</Button>
-					<Button variant='secondary' className='table-icons'>
+					<Button variant='secondary' className='table-icons' onClick={handlePreview}>
 						<GrView />
 					</Button>
 					<Button variant='secondary' className='table-icons' onClick={toggleEditShow}>
@@ -106,6 +116,13 @@ const MailTemplateRow = props => {
 						</Button>
 					</Modal.Footer>
 				</Form>
+			</Modal>
+			{/* Preview Modal */}
+			<Modal show={showPreview} onHide={togglePreviewShow} keyboard={false}>
+				<Modal.Header closeButton>
+					<Modal.Title>Preview</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>{currentPreview}</Modal.Body>
 			</Modal>
 		</>
 	);
