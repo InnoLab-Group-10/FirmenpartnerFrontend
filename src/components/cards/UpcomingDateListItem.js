@@ -7,7 +7,9 @@ const UpcomingDateListItem = props => {
 			<ListGroup.Item>
 				<Row>
 					<Col>{props.title}</Col>
-					<Col>{props.timestamp}</Col>
+					<Col>
+						{props.timestamp !== '-' ? new Date(props.timestamp).toLocaleString() : '-'}
+					</Col>
 				</Row>
 			</ListGroup.Item>
 		</>
