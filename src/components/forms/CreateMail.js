@@ -50,7 +50,7 @@ const CreateMail = props => {
 		dispatch(
 			sendmailSendByOption({
 				...data,
-				attachments: data.attachments.map(entry => entry.value),
+				attachments: data.attachments ? data.attachments.map(entry => entry.value) : [],
 			})
 		);
 		props.toggleHandler();
