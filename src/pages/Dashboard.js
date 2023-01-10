@@ -43,6 +43,8 @@ const Dashboard = () => {
 					<Col>
 						<UpcomingDateCard />
 					</Col>
+				</Row>
+				<Row>
 					<Col>
 						<CalendarComponent />
 					</Col>

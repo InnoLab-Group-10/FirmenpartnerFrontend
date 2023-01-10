@@ -116,6 +116,7 @@ const CreateAppointmentForm = props => {
 						>
 							Zurücksetzen
 						</Button>
+						<br></br>
 					</div>
 				</Col>
 				<Col lg>

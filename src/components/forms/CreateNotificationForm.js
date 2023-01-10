@@ -75,6 +75,7 @@ const CreateNotificationForm = props => {
 							Zurücksetzen
 						</Button>
 					</div>
+					<br></br>
 				</Col>
 				<Col lg>
 					<div className='d-grid'>

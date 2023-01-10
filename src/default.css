@@ -380,7 +380,7 @@ th .sort-icon {
 }
 
 td {
-	padding-left: 0.7rem !important;
+	padding-left: 0.7rem;
 }
 
 .detailed-row{
@@ -504,10 +504,15 @@ td {
 }
 
 /* === CALENDAR === */
-.react-calendar{
-	width: 100%;
-	border-radius: 3px;
-	border: 1px solid rgba(0,0,0,.1);
+#bootstrap-override .fc-button{
+	background-color: rgba(0, 0, 0, 0);
+	border-color: rgba(0, 0, 0, 0);
+	color:#6c757d;
+}
+
+.calendar-styling-override a{
+	text-decoration: none;
+	color:#6c757d;
 }
 
 /* === UPCOMING DATES === */

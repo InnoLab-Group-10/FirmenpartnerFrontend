@@ -5,8 +5,8 @@ import { Provider } from 'react-redux';
 
 import App from './App';
 import store from './store/index';
-import './default.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './default.css';
 
 // inject store for refresh token calls
 // fixes circular dependencies
