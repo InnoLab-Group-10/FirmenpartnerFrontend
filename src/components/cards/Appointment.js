@@ -75,12 +75,8 @@ const Appointment = props => {
 					<Modal.Title>Email versenden</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<CreateMail />
+					<CreateMail toggleHandler={() => setShow(prevState => !prevState)} />
 				</Modal.Body>
-				<Modal.Footer>
-					<Button variant='light'>Zurücksetzen</Button>
-					<Button variant='primary'>Absenden</Button>
-				</Modal.Footer>
 			</Modal>
 		</>
 	);

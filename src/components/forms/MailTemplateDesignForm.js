@@ -240,7 +240,7 @@ const MailTemplateDesignForm = () => {
 									</Col>
 									<Col lg={2} sm>
 										<Form.Group className='mb-3' controlId='formFooterFontColor'>
-											<Form.Label>Schirftfarbe</Form.Label>
+											<Form.Label>Schriftfarbe</Form.Label>
 											<Form.Control
 												size='lg'
 												type='color'

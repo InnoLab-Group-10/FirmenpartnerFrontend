@@ -11,13 +11,13 @@ const useSort = () => {
 
 	const sortHandler = (array, name, type) => {
 		switch (type) {
-			case 1:
+			case SORT_OPTIONS.ALPHABET:
 				setSortedArray(array.sort((a, b) => a[name].localeCompare(b[name])));
 				break;
-			case 2:
+			case SORT_OPTIONS.TIMESTAMP:
 				setSortedArray(array.sort((a, b) => new Date(a[name]) - new Date(b[name])));
 				break;
-			case 3:
+			case SORT_OPTIONS.LENGTH:
 				setSortedArray(array.sort((a, b) => a[name].length - b[name].length));
 				break;
 			default:

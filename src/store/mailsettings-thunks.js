@@ -69,7 +69,6 @@ export const mailsettingsUpdateHeader = createAsyncThunk(
 export const mailsettingsUpdateBody = createAsyncThunk(
 	'mailsettings/updateBody',
 	async (arg, { getState }) => {
-		console.log(arg);
 		const { mailsettings } = getState();
 		const requests = [];
 		if (arg.body_bg_color !== mailsettings.settings.body_bg_color) {
