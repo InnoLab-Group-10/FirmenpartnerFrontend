@@ -9,7 +9,7 @@ import {
 	Button,
 	Accordion,
 	Popover,
-	Overlay
+	Overlay,
 } from 'react-bootstrap';
 import { BiInfoCircle } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
@@ -23,7 +23,7 @@ const CreatePartnerForm = () => {
 	const [target, setTarget] = useState(null);
 	const ref = useRef(null);
 
-	const handleClick = (event) => {
+	const handleClick = event => {
 		setShow(!show);
 		setTarget(event.target);
 	};
@@ -63,28 +63,29 @@ const CreatePartnerForm = () => {
 					<Row>
 						<Col>Partnerunternehmen anlegen</Col>
 						<Col>
-								<div ref={ref}>
-									<div onClick={handleClick} >
-										<BiInfoCircle className='info-button'/>
-									</div>
-									<Overlay
-										show={show}
-										target={target}
-										placement="left"
-										container={ref}
-										containerPadding={20}
-									>
-										<Popover>
-											<Popover.Header as="h3">
-												Partnerunternehmen anlegen	
-											</Popover.Header>
-											<Popover.Body>
-												Fügen Sie Zusatzinformationen zum Unternehmen hinzu wenn es kein geeignetes Eingabefeld dafür gibt.
-												Import und Export arbeiten mit .csv-Dateien. Es empfiehlt sich vor dem Import einen Export zu machen um sicherzustellen dass die Spaltenbezeichnungen korrekt sind.
-											</Popover.Body>
-										</Popover>
-									</Overlay>
+							<div ref={ref}>
+								<div onClick={handleClick}>
+									<BiInfoCircle className='info-button' />
 								</div>
+								<Overlay
+									show={show}
+									target={target}
+									placement='left'
+									container={ref}
+									containerPadding={20}
+								>
+									<Popover>
+										<Popover.Header as='h3'>Partnerunternehmen anlegen</Popover.Header>
+										<Popover.Body>
+											Fügen Sie Zusatzinformationen zum Unternehmen hinzu wenn es kein
+											geeignetes Eingabefeld dafür gibt. Import und Export arbeiten mit
+											.csv-Dateien. Es empfiehlt sich vor dem Import einen Export zu
+											machen um sicherzustellen dass die Spaltenbezeichnungen korrekt
+											sind.
+										</Popover.Body>
+									</Popover>
+								</Overlay>
+							</div>
 						</Col>
 					</Row>
 				</Card.Header>
@@ -98,7 +99,6 @@ const CreatePartnerForm = () => {
 										<FloatingLabel label='Firmenname' className='mb-3'>
 											<Form.Control
 												type='text'
-												placeholder='Firmenname'
 												{...register('name', { required: true })}
 												isInvalid={errors.name}
 											/>
@@ -108,7 +108,6 @@ const CreatePartnerForm = () => {
 										<FloatingLabel label='Vorname' className='mb-3'>
 											<Form.Control
 												type='text'
-												placeholder='Vorname'
 												{...register('firstName', { required: true })}
 												isInvalid={errors.firstName}
 											/>
@@ -118,7 +117,6 @@ const CreatePartnerForm = () => {
 										<FloatingLabel label='Nachname' className='mb-3'>
 											<Form.Control
 												type='text'
-												placeholder='Nachname'
 												{...register('lastName', { required: true })}
 												isInvalid={errors.lastName}
 											/>
@@ -130,7 +128,6 @@ const CreatePartnerForm = () => {
 										<FloatingLabel label='E-Mail-Adresse' className='mb-3'>
 											<Form.Control
 												type='text'
-												placeholder='name@example.com'
 												{...register('email', {
 													required: true,
 													pattern: /^(([a-z]|[0-9]|-|_)+\.?)+@(([a-z]|[0-9]|-|_)+\.?)+$/i,
@@ -195,12 +192,21 @@ const CreatePartnerForm = () => {
 										<FloatingLabel controlId='floatingTextarea2' label='Notizen'>
 											<Form.Control
 												as='textarea'
-												placeholder='Notizen anlegen'
 												style={{ height: '100px' }}
 												{...register('notes', { required: true })}
 												isInvalid={errors.notes}
 											/>
 										</FloatingLabel>
+									</Col>
+								</Row>
+								<Row>
+									<Col lg>
+										<Form.Check
+											type='checkbox'
+											{...register('contractSigned')}
+											label='Nimmt das Unternehmen derzeit Studenten?'
+											className='mb-3'
+										/>
 									</Col>
 								</Row>
 								<Row>

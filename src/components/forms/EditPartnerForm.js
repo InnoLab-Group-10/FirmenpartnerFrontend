@@ -16,7 +16,7 @@ const EditPartnerForm = props => {
 		handleSubmit,
 		reset,
 		formState: { isSubmitSuccessful, errors },
-	} = useForm();
+	} = useForm({ defaultValues: { contractSigned: entry.company.contractSigned } });
 
 	useEffect(() => {
 		if (isSubmitSuccessful) {
@@ -29,9 +29,8 @@ const EditPartnerForm = props => {
 			companyUpdate({
 				...data,
 				companyId: entry.company.id,
-				contactId: entry.contacts[0].id,
-				locationId: entry.locations[0].id,
-				contractSigned: entry.company.contractSigned,
+				contactId: entry.contacts.length ? entry.contacts[0].id : '0',
+				locationId: entry.locations.length ? entry.locations[0].id : '0',
 			})
 		);
 		props.toggleHandler();
@@ -56,7 +55,7 @@ const EditPartnerForm = props => {
 						<Form.Control
 							type='text'
 							placeholder='Vorname'
-							defaultValue={entry.contacts[0].firstName}
+							defaultValue={entry.contacts.length ? entry.contacts[0].firstName : ''}
 							{...register('firstName', { required: true })}
 							isInvalid={errors.firstName}
 						/>
@@ -67,7 +66,7 @@ const EditPartnerForm = props => {
 						<Form.Control
 							type='text'
 							placeholder='Nachname'
-							defaultValue={entry.contacts[0].lastName}
+							defaultValue={entry.contacts.length ? entry.contacts[0].lastName : ''}
 							{...register('lastName', { required: true })}
 							isInvalid={errors.lastName}
 						/>
@@ -80,7 +79,7 @@ const EditPartnerForm = props => {
 						<Form.Control
 							type='email'
 							placeholder='name@example.com'
-							defaultValue={entry.contacts[0].email}
+							defaultValue={entry.contacts.length ? entry.contacts[0].email : ''}
 							{...register('email', {
 								required: true,
 								pattern: /^(([a-z]|[0-9]|-|_)+\.?)+@(([a-z]|[0-9]|-|_)+\.?)+$/i,
@@ -94,7 +93,7 @@ const EditPartnerForm = props => {
 						<Form.Control
 							type='tel'
 							placeholder='+43 (0) 000 000 00 00'
-							defaultValue={entry.contacts[0].phone}
+							defaultValue={entry.contacts.length ? entry.contacts[0].phone : ''}
 							{...register('phone', { required: true, pattern: /^\+?[0-9]+$/ })}
 							isInvalid={errors.phone}
 						/>
@@ -106,7 +105,7 @@ const EditPartnerForm = props => {
 					<FloatingLabel label='Addresse' className='mb-3'>
 						<Form.Control
 							type='text'
-							defaultValue={entry.locations[0].address}
+							defaultValue={entry.locations.length ? entry.locations[0].address : ''}
 							{...register('address', { required: true })}
 							isInvalid={errors.address}
 						/>
@@ -116,7 +115,7 @@ const EditPartnerForm = props => {
 					<FloatingLabel label='Postleitzahl' className='mb-3'>
 						<Form.Control
 							type='text'
-							defaultValue={entry.locations[0].zipcode}
+							defaultValue={entry.locations.length ? entry.locations[0].zipcode : ''}
 							{...register('zipcode', { required: true, pattern: /^[0-9]+$/ })}
 							isInvalid={errors.zipcode}
 						/>
@@ -126,7 +125,7 @@ const EditPartnerForm = props => {
 					<FloatingLabel label='Ort' className='mb-3'>
 						<Form.Control
 							type='text'
-							defaultValue={entry.locations[0].city}
+							defaultValue={entry.locations.length ? entry.locations[0].city : ''}
 							{...register('city', { required: true })}
 							isInvalid={errors.city}
 						/>
@@ -158,6 +157,16 @@ const EditPartnerForm = props => {
 							isInvalid={errors.notes}
 						/>
 					</FloatingLabel>
+				</Col>
+			</Row>
+			<Row>
+				<Col lg>
+					<Form.Check
+						type='checkbox'
+						{...register('contractSigned')}
+						label='Nimmt das Unternehmen derzeit Studenten?'
+						className='mb-3'
+					/>
 				</Col>
 			</Row>
 			<Row>

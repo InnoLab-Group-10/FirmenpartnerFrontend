@@ -24,19 +24,10 @@ const PartnerRow = props => {
 	};
 
 	let activity = '';
-	switch (props.activity) {
-		case '1':
-			activity = 'active-row';
-			break;
-		case '2':
-			activity = 'pending-row';
-			break;
-		case '0':
-			activity = 'deactivated-row';
-			break;
-		default:
-			activity = '';
-			break;
+	if (entry.company.contractSigned) {
+		activity = 'active-row';
+	} else {
+		activity = 'deactivated-row';
 	}
 
 	return (

@@ -6,7 +6,7 @@ export const companyNew = createAsyncThunk('company/new', async arg => {
 	// combine in order to call in parallel
 	const companyData = {
 		name: arg.name,
-		contractSigned: false,
+		contractSigned: arg.contractSigned,
 		maxStudents: arg.maxStudents,
 		notes: arg.notes,
 	};
@@ -73,11 +73,29 @@ export const companyUpdate = createAsyncThunk('company/update', async arg => {
 		zipcode: arg.zipcode,
 		companyId: arg.companyId,
 	};
-	const response = await Promise.all([
-		axiosPrivate.put(`/company/${arg.companyId}`, companyData),
-		axiosPrivate.put(`/contact/${arg.contactId}`, contactData),
-		axiosPrivate.put(`/companylocation/${arg.locationId}`, locationData),
-	]);
+	const requests = [axiosPrivate.put(`/company/${arg.companyId}`, companyData)];
+
+	if (arg.contactId === '0') {
+		// create contact
+		const responsePerson = await axiosPrivate.post('/contact', contactData);
+		const assignmentData = {
+			companyId: arg.companyId,
+			personId: responsePerson.data.id,
+			from: '2022-01-13',
+			to: '2022-01-13',
+		};
+		requests.push(axiosPrivate.post('/companyassignment', assignmentData));
+	} else {
+		requests.push(axiosPrivate.put(`/contact/${arg.contactId}`, contactData));
+	}
+	if (arg.locationId === '0') {
+		// create location
+		requests.push(axiosPrivate.post('/companylocation', locationData));
+	} else {
+		requests.push(axiosPrivate.put(`/companylocation/${arg.locationId}`, locationData));
+	}
+
+	const response = await Promise.all(requests);
 	return response.data;
 });
 
