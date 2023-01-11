@@ -152,8 +152,8 @@ const Header = () => {
 									</div>
 								</Dropdown.Toggle>
 								<Dropdown.Menu>
-									<Dropdown.Item href='#/action-1'>Link 1</Dropdown.Item>
-									<Dropdown.Item href='#/action-2'>Link 2</Dropdown.Item>
+									<Dropdown.Item href='/dashboard'>Dashboard</Dropdown.Item>
+									<Dropdown.Item href='#'>Infoseite</Dropdown.Item>
 									<Dropdown.Divider />
 									<Dropdown.Item
 										onClick={() => {
