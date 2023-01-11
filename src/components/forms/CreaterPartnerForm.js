@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
 	Form,
 	Container,
@@ -8,6 +8,8 @@ import {
 	FloatingLabel,
 	Button,
 	Accordion,
+	Popover,
+	Overlay
 } from 'react-bootstrap';
 import { BiInfoCircle } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
@@ -17,6 +19,14 @@ import { companyNew, companyImport, companyExport } from '../../store/company-th
 
 const CreatePartnerForm = () => {
 	const dispatch = useDispatch();
+	const [show, setShow] = useState(false);
+	const [target, setTarget] = useState(null);
+	const ref = useRef(null);
+
+	const handleClick = (event) => {
+		setShow(!show);
+		setTarget(event.target);
+	};
 
 	// new company
 	const {
@@ -53,7 +63,28 @@ const CreatePartnerForm = () => {
 					<Row>
 						<Col>Partnerunternehmen anlegen</Col>
 						<Col>
-							<BiInfoCircle className='info-button' />
+								<div ref={ref}>
+									<div onClick={handleClick} >
+										<BiInfoCircle className='info-button'/>
+									</div>
+									<Overlay
+										show={show}
+										target={target}
+										placement="left"
+										container={ref}
+										containerPadding={20}
+									>
+										<Popover>
+											<Popover.Header as="h3">
+												Partnerunternehmen anlegen	
+											</Popover.Header>
+											<Popover.Body>
+												Fügen Sie Zusatzinformationen zum Unternehmen hinzu wenn es kein geeignetes Eingabefeld dafür gibt.
+												Import und Export arbeiten mit .csv-Dateien. Es empfiehlt sich vor dem Import einen Export zu machen um sicherzustellen dass die Spaltenbezeichnungen korrekt sind.
+											</Popover.Body>
+										</Popover>
+									</Overlay>
+								</div>
 						</Col>
 					</Row>
 				</Card.Header>

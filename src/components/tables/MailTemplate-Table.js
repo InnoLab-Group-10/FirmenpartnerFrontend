@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Card, Container, Row, Col, Table, Button } from 'react-bootstrap';
+import React, { useEffect, useState, useRef } from 'react';
+import { Card, Container, Row, Col, Table, Button, Overlay, Popover } from 'react-bootstrap';
 import { BiInfoCircle, BiSortAZ, BiSortZA } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -25,6 +25,15 @@ const MailTemplateTable = () => {
 		}
 	}, [dispatch, shouldReload, setSortedMailtemplates]);
 
+	const [show, setShow] = useState(false);
+	const [target, setTarget] = useState(null);
+	const ref = useRef(null);
+
+	const handleClick = (event) => {
+		setShow(!show);
+		setTarget(event.target);
+	};
+
 	return (
 		<Container className='document-table'>
 			<Card>
@@ -32,8 +41,28 @@ const MailTemplateTable = () => {
 					<Row>
 						<Col>Vorlagen</Col>
 						<Col>
-							<BiInfoCircle className='info-button' />
-						</Col>
+						<div ref={ref}>
+									<div onClick={handleClick} >
+										<BiInfoCircle className='info-button'/>
+									</div>
+									<Overlay
+										show={show}
+										target={target}
+										placement="left"
+										container={ref}
+										containerPadding={20}
+									>
+										<Popover>
+											<Popover.Header as="h3">
+												Vorlagenübersicht											
+											</Popover.Header>
+											<Popover.Body>
+												Hier werden alle Vorlagen aufgelistet. Diese lassen sich bearbeiten, löschen und in einer Vorschau überprüfen.
+											</Popover.Body>
+										</Popover>
+									</Overlay>
+								</div>						
+							</Col>
 					</Row>
 				</Card.Header>
 				<Card.Body>

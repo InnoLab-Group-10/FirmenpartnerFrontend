@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Form, Container, Card, Row, Col, Button, Accordion } from 'react-bootstrap';
+import React, { useEffect, useState, useRef } from 'react';
+import { Form, Container, Card, Row, Col, Button, Accordion, Popover, Overlay } from 'react-bootstrap';
 import { BiInfoCircle } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -23,6 +23,15 @@ const NewMailingTemplate = () => {
 		}
 	}, [isSubmitSuccessful, reset]);
 
+	const [show, setShow] = useState(false);
+	const [target, setTarget] = useState(null);
+	const ref = useRef(null);
+
+	const handleClick = (event) => {
+		setShow(!show);
+		setTarget(event.target);
+	};
+
 	return (
 		<Container>
 			<Card>
@@ -30,7 +39,27 @@ const NewMailingTemplate = () => {
 					<Row>
 						<Col>Neues Template erstellen</Col>
 						<Col>
-							<BiInfoCircle className='info-button' />
+						<div ref={ref}>
+									<div onClick={handleClick} >
+										<BiInfoCircle className='info-button'/>
+									</div>
+									<Overlay
+										show={show}
+										target={target}
+										placement="left"
+										container={ref}
+										containerPadding={20}
+									>
+										<Popover>
+											<Popover.Header as="h3">
+												Template erstellen
+											</Popover.Header>
+											<Popover.Body>
+												Hier lassen sich Vorlagen für Betreff und Texte anlegen und speichern. Für eine eigene Formatierung des Inhalts ist auch HTML erlaubt.
+											</Popover.Body>
+										</Popover>
+									</Overlay>
+								</div>
 						</Col>
 					</Row>
 				</Card.Header>

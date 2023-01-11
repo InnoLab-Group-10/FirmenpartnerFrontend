@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Form, Container, Card, Row, Col, Button, Accordion } from 'react-bootstrap';
+import React, { useEffect, useState, useRef } from 'react';
+import { Form, Container, Card, Row, Col, Button, Accordion, Popover, Overlay } from 'react-bootstrap';
 import { BiInfoCircle, BiArrowToBottom } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -101,6 +101,15 @@ const MailTemplateDesignForm = () => {
 		return 'Noch nichts ausgewählt';
 	};
 
+	const [show, setShow] = useState(false);
+	const [target, setTarget] = useState(null);
+	const ref = useRef(null);
+
+	const handleClick = (event) => {
+		setShow(!show);
+		setTarget(event.target);
+	};
+
 	return (
 		<Container>
 			<Card>
@@ -108,8 +117,28 @@ const MailTemplateDesignForm = () => {
 					<Row>
 						<Col>Design bearbeiten</Col>
 						<Col>
-							<BiInfoCircle className='info-button' />
-						</Col>
+						<div ref={ref}>
+									<div onClick={handleClick} >
+										<BiInfoCircle className='info-button'/>
+									</div>
+									<Overlay
+										show={show}
+										target={target}
+										placement="left"
+										container={ref}
+										containerPadding={20}
+									>
+										<Popover>
+											<Popover.Header as="h3">
+												Design bearbeiten
+											</Popover.Header>
+											<Popover.Body>
+												Alle Mails werden in dem hier erstellten Design verschickt.
+											</Popover.Body>
+										</Popover>
+									</Overlay>
+								</div>						
+							</Col>
 					</Row>
 				</Card.Header>
 				<Accordion flush>

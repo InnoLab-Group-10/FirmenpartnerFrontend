@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { Form, Container, Card, Row, Col, Button } from 'react-bootstrap';
+import { Form, Container, Card, Row, Col, Button, Overlay, Popover } from 'react-bootstrap';
 import { BiInfoCircle } from 'react-icons/bi';
 
 import { fileNew } from '../../store/file-thunks';
@@ -23,6 +23,15 @@ const DocumentUpload = () => {
 		}
 	}, [isSubmitSuccessful, reset]);
 
+	const [show, setShow] = useState(false);
+	const [target, setTarget] = useState(null);
+	const ref = useRef(null);
+
+	const handleClick = (event) => {
+		setShow(!show);
+		setTarget(event.target);
+	};
+
 	return (
 		<Container>
 			<Card>
@@ -30,8 +39,28 @@ const DocumentUpload = () => {
 					<Row>
 						<Col>Datei hochladen</Col>
 						<Col>
-							<BiInfoCircle className='info-button' />
-						</Col>
+						<div ref={ref}>
+									<div onClick={handleClick} >
+										<BiInfoCircle className='info-button'/>
+									</div>
+									<Overlay
+										show={show}
+										target={target}
+										placement="left"
+										container={ref}
+										containerPadding={20}
+									>
+										<Popover>
+											<Popover.Header as="h3">
+												Datei hochladen											
+											</Popover.Header>
+											<Popover.Body>
+												Hier kann man beliebige Dateiformate hochladen.
+											</Popover.Body>
+										</Popover>
+									</Overlay>
+								</div>						
+							</Col>
 					</Row>
 				</Card.Header>
 				<Card.Body>

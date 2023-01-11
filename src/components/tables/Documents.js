@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Card, Container, Row, Col, Table, Button } from 'react-bootstrap';
+import React, { useEffect, useState, useRef } from 'react';
+import { Card, Container, Row, Col, Table, Button, Overlay, Popover } from 'react-bootstrap';
 import { BiInfoCircle, BiSortAZ, BiSortZA, BiSortDown, BiSortUp } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -24,6 +24,15 @@ const Documents = () => {
 		}
 	}, [dispatch, shouldReload, setSortedFiles]);
 
+	const [show, setShow] = useState(false);
+	const [target, setTarget] = useState(null);
+	const ref = useRef(null);
+
+	const handleClick = (event) => {
+		setShow(!show);
+		setTarget(event.target);
+	};
+
 	return (
 		<Container className='document-table'>
 			<Card>
@@ -31,8 +40,27 @@ const Documents = () => {
 					<Row>
 						<Col>Dokumente</Col>
 						<Col>
-							<BiInfoCircle className='info-button' />
-						</Col>
+						<div ref={ref}>
+									<div onClick={handleClick} >
+										<BiInfoCircle className='info-button'/>
+									</div>
+									<Overlay
+										show={show}
+										target={target}
+										placement="left"
+										container={ref}
+										containerPadding={20}
+									>
+										<Popover>
+											<Popover.Header as="h3">
+												Dokumente											
+											</Popover.Header>
+											<Popover.Body>
+												Hier werden alle hochgeladenen Dateien aufgelistet. Sie können gelöscht und heruntergeladen werden. Diese Dokumente können über das E-Mail-System zum Download weitergegeben werden.
+											</Popover.Body>
+										</Popover>
+									</Overlay>
+								</div>						</Col>
 					</Row>
 				</Card.Header>
 				<Card.Body>

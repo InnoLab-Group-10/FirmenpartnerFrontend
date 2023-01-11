@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Container, Table, Card, Col, Row, Button } from 'react-bootstrap';
+import React, { useEffect, useState, useRef } from 'react';
+import { Container, Table, Card, Col, Row, Button, Popover, Overlay } from 'react-bootstrap';
 import { BiInfoCircle, BiSortAZ, BiSortZA } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -25,6 +25,15 @@ const CollapsibleTable = () => {
 		}
 	}, [dispatch, shouldReload, setSortedStudents]);
 
+	const [show, setShow] = useState(false);
+	const [target, setTarget] = useState(null);
+	const ref = useRef(null);
+
+	const handleClick = (event) => {
+		setShow(!show);
+		setTarget(event.target);
+	};
+
 	return (
 		<Container>
 			<Card>
@@ -32,7 +41,27 @@ const CollapsibleTable = () => {
 					<Row>
 						<Col>Studierende</Col>
 						<Col>
-							<BiInfoCircle className='info-button' />
+								<div ref={ref}>
+									<div onClick={handleClick} >
+										<BiInfoCircle className='info-button'/>
+									</div>
+									<Overlay
+										show={show}
+										target={target}
+										placement="left"
+										container={ref}
+										containerPadding={20}
+									>
+										<Popover>
+											<Popover.Header as="h3">
+												Studierende anlegen
+											</Popover.Header>
+											<Popover.Body>
+												Die wichtigsten Informationen findet man auf dem ersten Blick. Für weitere Informationen lassen sich die Tabellenreihen ausklappen.
+											</Popover.Body>
+										</Popover>
+									</Overlay>
+								</div>
 						</Col>
 					</Row>
 				</Card.Header>
