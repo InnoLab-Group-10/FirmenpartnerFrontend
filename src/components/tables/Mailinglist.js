@@ -1,5 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Card, Container, Row, Col, Table, Button, Popover, Overlay } from 'react-bootstrap';
+import {
+	Card,
+	Container,
+	Row,
+	Col,
+	Table,
+	Button,
+	Popover,
+	Overlay,
+} from 'react-bootstrap';
 import { BiInfoCircle, BiSortAZ, BiSortZA, BiSortDown, BiSortUp } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,7 +20,9 @@ import useSort, { SORT_OPTIONS } from '../../hooks/useSort';
 const Mailinglist = () => {
 	const dispatch = useDispatch();
 	const { mailinglists, shouldReload } = useSelector(state => state.mailinglist);
-	const { companies } = useSelector(state => state.company);
+	const { companies, activeCompanies, inactiveCompanies } = useSelector(
+		state => state.company
+	);
 	const {
 		sortedArray: sortedMailingLists,
 		setSortedArray: setSortedMailingLists,
@@ -30,7 +41,7 @@ const Mailinglist = () => {
 	const [target, setTarget] = useState(null);
 	const ref = useRef(null);
 
-	const handleClick = (event) => {
+	const handleClick = event => {
 		setShow(!show);
 		setTarget(event.target);
 	};
@@ -42,28 +53,30 @@ const Mailinglist = () => {
 					<Row>
 						<Col>Mailinglisten</Col>
 						<Col>
-						<div ref={ref}>
-									<div onClick={handleClick} >
-										<BiInfoCircle className='info-button'/>
-									</div>
-									<Overlay
-										show={show}
-										target={target}
-										placement="left"
-										container={ref}
-										containerPadding={20}
-									>
-										<Popover>
-											<Popover.Header as="h3">
-												Mailinglisten
-											</Popover.Header>
-											<Popover.Body>
-												Die Listen "Alle Unternehmen", "Aktive Unternehmen" und "Inaktive Unternehmen" werden automatisch basierend auf den Einträgen in der Partnerliste zusammen gestellt und könne hier nicht gelöscht oder bearbeitet werden.
-												Die selbsterstellten Listen können ausgeklappt, bearbeitet und gelöscht werden. Einzelne Einträche lassen sich ebenfalls nachträglich bearbeiten und löschen.
-											</Popover.Body>
-										</Popover>
-									</Overlay>
+							<div ref={ref}>
+								<div onClick={handleClick}>
+									<BiInfoCircle className='info-button' />
 								</div>
+								<Overlay
+									show={show}
+									target={target}
+									placement='left'
+									container={ref}
+									containerPadding={20}
+								>
+									<Popover>
+										<Popover.Header as='h3'>Mailinglisten</Popover.Header>
+										<Popover.Body>
+											Die Listen "Alle Unternehmen", "Aktive Unternehmen" und "Inaktive
+											Unternehmen" werden automatisch basierend auf den Einträgen in der
+											Partnerliste zusammen gestellt und könne hier nicht gelöscht oder
+											bearbeitet werden. Die selbsterstellten Listen können ausgeklappt,
+											bearbeitet und gelöscht werden. Einzelne Einträche lassen sich
+											ebenfalls nachträglich bearbeiten und löschen.
+										</Popover.Body>
+									</Popover>
+								</Overlay>
+							</div>
 						</Col>
 					</Row>
 				</Card.Header>
@@ -111,7 +124,7 @@ const Mailinglist = () => {
 							/>
 							<MailinglistRow
 								listName='Aktive Unternehmen'
-								entries={companies
+								entries={activeCompanies
 									.map(entry =>
 										entry.contacts.length
 											? { ...entry.contacts[0], company: entry.company.name }
@@ -122,7 +135,13 @@ const Mailinglist = () => {
 							/>
 							<MailinglistRow
 								listName='Inaktive Unternehmen'
-								entries={[]}
+								entries={inactiveCompanies
+									.map(entry =>
+										entry.contacts.length
+											? { ...entry.contacts[0], company: entry.company.name }
+											: null
+									)
+									.filter(entry => entry != null)}
 								notEditable={true}
 							/>
 							{sortedMailingLists == null

@@ -51,17 +51,17 @@ const MailinglistRow = props => {
 				<td className='table-icon-column-two-icons'>
 					<Button
 						variant='danger'
-						className='table-icons table-delete-icon'
+						className={`table-icons table-delete-icon ${
+							props.notEditable ? 'invisible' : 'visible'
+						}`}
 						onClick={toggleDeleteShow}
-						hidden={props.notEditable}
 					>
 						<BiTrash />
 					</Button>
 					<Button
 						variant='secondary'
-						className='table-icons'
+						className={`table-icons ${props.notEditable ? 'invisible' : 'visible'}`}
 						onClick={toggleEditShow}
-						hidden={props.notEditable}
 					>
 						<BiPlus />
 					</Button>
@@ -84,6 +84,7 @@ const MailinglistRow = props => {
 										key={entry.id}
 										entry={entry}
 										mailinglistId={props.id}
+										notEditable={props.notEditable}
 									/>
 								))}
 							</tbody>
