@@ -26,12 +26,9 @@ import { fileDownload, fileDelete, fileGetAll } from '../../store/file-thunks';
 const MailTemplateDesignForm = () => {
 	const dispatch = useDispatch();
 
-	const {
-		settings,
-		shouldReload: shouldReloadSettings,
-		header_logoFile,
-		header_bg_imageFile,
-	} = useSelector(state => state.mailsettings);
+	const { settings, shouldReload: shouldReloadSettings } = useSelector(
+		state => state.mailsettings
+	);
 	const { files, shouldReload: shouldReloadFile } = useSelector(state => state.file);
 
 	// FORMS
@@ -90,8 +87,15 @@ const MailTemplateDesignForm = () => {
 	useEffect(() => {
 		if (shouldReloadSettings) {
 			dispatch(mailsettingsGetAll());
+			dispatch(fileGetAll());
 		}
 	}, [dispatch, shouldReloadSettings]);
+
+	useEffect(() => {
+		if (shouldReloadFile) {
+			dispatch(fileGetAll());
+		}
+	}, [dispatch, shouldReloadFile]);
 
 	const [show, setShow] = useState(false);
 	const [target, setTarget] = useState(null);
@@ -101,6 +105,14 @@ const MailTemplateDesignForm = () => {
 		setShow(!show);
 		setTarget(event.target);
 	};
+
+	const [header_logoFile, setHeader_bg_logoFile] = useState(null);
+	const [header_bg_imageFile, setHeader_bg_imageFile] = useState(null);
+
+	useEffect(() => {
+		setHeader_bg_logoFile(files.find(entry => entry.id === settings.header_logo));
+		setHeader_bg_imageFile(files.find(entry => entry.id === settings.header_bg_image));
+	}, [settings, files]);
 
 	return (
 		<Container>
@@ -164,7 +176,14 @@ const MailTemplateDesignForm = () => {
 													<Button
 														variant='light'
 														className='mailtemplate-download-button'
-														onClick={() => dispatch(fileDownload({ id: header_logoFile.id, name: file.name })}
+														onClick={() =>
+															dispatch(
+																fileDownload({
+																	id: header_logoFile.id,
+																	name: header_logoFile.name,
+																})
+															)
+														}
 													>
 														{header_logoFile
 															? `Derzeit ausgewählt: ${header_logoFile.name}`
@@ -200,7 +219,14 @@ const MailTemplateDesignForm = () => {
 													<Button
 														variant='light'
 														className='mailtemplate-download-button'
-														onClick={() => handleDownload(settings.header_bg_image)}
+														onClick={() =>
+															dispatch(
+																fileDownload({
+																	id: header_bg_imageFile.id,
+																	name: header_bg_imageFile.name,
+																})
+															)
+														}
 													>
 														{header_bg_imageFile
 															? `Derzeit ausgewählt: ${header_bg_imageFile.name}`

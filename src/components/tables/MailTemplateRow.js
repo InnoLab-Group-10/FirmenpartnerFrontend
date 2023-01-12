@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Modal, Col } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { BiTrash, BiPencil } from 'react-icons/bi';
@@ -7,13 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 
 import { mailtemplateDelete, mailtemplateUpdate } from '../../store/mailtemplate-thunks';
-import { mailsettingsGetAll } from '../../store/mailsettings-thunks';
 
 const MailTemplateRow = props => {
 	const { entry } = props;
 	const dispatch = useDispatch();
 
 	const { settings } = useSelector(state => state.mailsettings);
+	const { files } = useSelector(state => state.file);
 
 	const [showDelete, setDeleteShow] = useState(false);
 	const [showEdit, setEditShow] = useState(false);
@@ -132,16 +132,20 @@ const MailTemplateRow = props => {
 								className='mail-header'
 								style={{
 									backgroundColor: settings.header_bg_color,
-									backgroundImage: `url(
+									backgroundImage:
+										files.find(entry => entry.id === settings.header_bg_image) &&
+										`url(
 										http://toadsworth.ddns.net:5000/api/file/${settings.header_bg_image}
 									)`,
 								}}
 							>
 								<div className='mail-header-logo'>
-									<img
-										alt='logo'
-										src={`http://toadsworth.ddns.net:5000/api/file/${settings.header_logo}`}
-									/>
+									{files.find(entry => entry.id === settings.header_logo) && (
+										<img
+											alt='logo'
+											src={`http://toadsworth.ddns.net:5000/api/file/${settings.header_logo}`}
+										/>
+									)}
 								</div>
 							</div>
 							<div

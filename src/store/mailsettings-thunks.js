@@ -12,8 +12,6 @@ export const mailsettingsGetAll = createAsyncThunk('mailsettings/getAll', async 
 		axiosPrivate.get('/mailsettings/footer_color'),
 		axiosPrivate.get('/mailsettings/footer_text'),
 		axiosPrivate.get('/mailsettings/mail_bg_color'),
-		// get files for actual images
-		axiosPrivate.get('/file'),
 	]);
 	return response.map(entry => entry.data);
 });
