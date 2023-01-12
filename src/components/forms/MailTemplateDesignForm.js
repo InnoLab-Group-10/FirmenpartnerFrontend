@@ -1,6 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Form, Container, Card, Row, Col, Button, Accordion, Popover, Overlay } from 'react-bootstrap';
-import { BiInfoCircle, BiArrowToBottom } from 'react-icons/bi';
+import {
+	Form,
+	Container,
+	Card,
+	Row,
+	Col,
+	Button,
+	Accordion,
+	Popover,
+	Overlay,
+} from 'react-bootstrap';
+import { BiInfoCircle, BiTrash } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 
@@ -11,15 +21,18 @@ import {
 	mailsettingsUpdateFooter,
 	mailsettingsUpdateHeader,
 } from '../../store/mailsettings-thunks';
-import { fileDownload, fileGetAll } from '../../store/file-thunks';
+import { fileDownload, fileDelete, fileGetAll } from '../../store/file-thunks';
 
 const MailTemplateDesignForm = () => {
 	const dispatch = useDispatch();
 
-	const { settings, shouldReload: shouldReloadSettings } = useSelector(
-		state => state.mailsettings
-	);
-	const { files } = useSelector(state => state.file);
+	const {
+		settings,
+		shouldReload: shouldReloadSettings,
+		header_logoFile,
+		header_bg_imageFile,
+	} = useSelector(state => state.mailsettings);
+	const { files, shouldReload: shouldReloadFile } = useSelector(state => state.file);
 
 	// FORMS
 	// set header form
@@ -77,35 +90,14 @@ const MailTemplateDesignForm = () => {
 	useEffect(() => {
 		if (shouldReloadSettings) {
 			dispatch(mailsettingsGetAll());
-			dispatch(fileGetAll());
 		}
 	}, [dispatch, shouldReloadSettings]);
-
-	const handleDownload = id => {
-		const file = files.find(entry => entry.id === id);
-		if (file) {
-			dispatch(fileDownload({ id, name: file.name }));
-		}
-	};
-
-	const getFileName = id => {
-		const file = files.find(entry => entry.id === id);
-		if (file) {
-			return (
-				<>
-					Derzeit ausgewählt: {file.name}
-					<BiArrowToBottom />
-				</>
-			);
-		}
-		return 'Noch nichts ausgewählt';
-	};
 
 	const [show, setShow] = useState(false);
 	const [target, setTarget] = useState(null);
 	const ref = useRef(null);
 
-	const handleClick = (event) => {
+	const handleClick = event => {
 		setShow(!show);
 		setTarget(event.target);
 	};
@@ -117,28 +109,26 @@ const MailTemplateDesignForm = () => {
 					<Row>
 						<Col>Design bearbeiten</Col>
 						<Col>
-						<div ref={ref}>
-									<div onClick={handleClick} >
-										<BiInfoCircle className='info-button'/>
-									</div>
-									<Overlay
-										show={show}
-										target={target}
-										placement="left"
-										container={ref}
-										containerPadding={20}
-									>
-										<Popover>
-											<Popover.Header as="h3">
-												Design bearbeiten
-											</Popover.Header>
-											<Popover.Body>
-												Alle Mails werden in dem hier erstellten Design verschickt.
-											</Popover.Body>
-										</Popover>
-									</Overlay>
-								</div>						
-							</Col>
+							<div ref={ref}>
+								<div onClick={handleClick}>
+									<BiInfoCircle className='info-button' />
+								</div>
+								<Overlay
+									show={show}
+									target={target}
+									placement='left'
+									container={ref}
+									containerPadding={20}
+								>
+									<Popover>
+										<Popover.Header as='h3'>Design bearbeiten</Popover.Header>
+										<Popover.Body>
+											Alle Mails werden in dem hier erstellten Design verschickt.
+										</Popover.Body>
+									</Popover>
+								</Overlay>
+							</div>
+						</Col>
 					</Row>
 				</Card.Header>
 				<Accordion flush>
@@ -169,13 +159,32 @@ const MailTemplateDesignForm = () => {
 												size='lg'
 												{...registerHeader('header_logo')}
 											/>
-											<Button
-												variant='light'
-												className='mailtemplate-download-button'
-												onClick={() => handleDownload(settings.header_logo)}
-											>
-												{getFileName(settings.header_logo)}
-											</Button>
+											<Row>
+												<Col>
+													<Button
+														variant='light'
+														className='mailtemplate-download-button'
+														onClick={() => dispatch(fileDownload({ id: header_logoFile.id, name: file.name })}
+													>
+														{header_logoFile
+															? `Derzeit ausgewählt: ${header_logoFile.name}`
+															: 'Noch nichts ausgewählt'}
+													</Button>
+												</Col>
+												{header_logoFile && (
+													<Col xs='1'>
+														<Button
+															variant='light'
+															className='mailtemplate-download-button'
+															onClick={() =>
+																dispatch(fileDelete({ id: settings.header_logo }))
+															}
+														>
+															<BiTrash />
+														</Button>
+													</Col>
+												)}
+											</Row>
 										</Form.Group>
 									</Col>
 									<Col lg>
@@ -186,13 +195,32 @@ const MailTemplateDesignForm = () => {
 												size='lg'
 												{...registerHeader('header_bg_image')}
 											/>
-											<Button
-												variant='light'
-												className='mailtemplate-download-button'
-												onClick={() => handleDownload(settings.header_bg_image)}
-											>
-												{getFileName(settings.header_bg_image)}
-											</Button>
+											<Row>
+												<Col>
+													<Button
+														variant='light'
+														className='mailtemplate-download-button'
+														onClick={() => handleDownload(settings.header_bg_image)}
+													>
+														{header_bg_imageFile
+															? `Derzeit ausgewählt: ${header_bg_imageFile.name}`
+															: 'Noch nichts ausgewählt'}
+													</Button>
+												</Col>
+												{header_bg_imageFile && (
+													<Col xs='1'>
+														<Button
+															variant='light'
+															className='mailtemplate-download-button'
+															onClick={() =>
+																dispatch(fileDelete({ id: settings.header_bg_image }))
+															}
+														>
+															<BiTrash />
+														</Button>
+													</Col>
+												)}
+											</Row>
 										</Form.Group>
 									</Col>
 								</Row>

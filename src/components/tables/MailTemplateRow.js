@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form, Modal, Col } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { BiTrash, BiPencil } from 'react-icons/bi';
 import { GrView } from 'react-icons/gr';
 import { useDispatch, useSelector } from 'react-redux';
+import parse from 'html-react-parser';
 
 import { mailtemplateDelete, mailtemplateUpdate } from '../../store/mailtemplate-thunks';
-import { sendmailGetPreviewByTemplateId } from '../../store/sendmail-thunks';
+import { mailsettingsGetAll } from '../../store/mailsettings-thunks';
 
 const MailTemplateRow = props => {
 	const { entry } = props;
 	const dispatch = useDispatch();
 
-	const { currentPreview } = useSelector(state => state.sendmail);
+	const { settings } = useSelector(state => state.mailsettings);
 
 	const [showDelete, setDeleteShow] = useState(false);
 	const [showEdit, setEditShow] = useState(false);
@@ -28,7 +29,6 @@ const MailTemplateRow = props => {
 	};
 
 	const handlePreview = () => {
-		dispatch(sendmailGetPreviewByTemplateId({ id: entry.id }));
 		togglePreviewShow();
 	};
 
@@ -118,11 +118,53 @@ const MailTemplateRow = props => {
 				</Form>
 			</Modal>
 			{/* Preview Modal */}
-			<Modal show={showPreview} onHide={togglePreviewShow} keyboard={false}>
+			<Modal show={showPreview} onHide={togglePreviewShow} keyboard={false} size='lg'>
 				<Modal.Header closeButton>
 					<Modal.Title>Preview</Modal.Title>
 				</Modal.Header>
-				<Modal.Body>{currentPreview}</Modal.Body>
+				<Modal.Body>
+					<div
+						className='mail-background'
+						style={{ backgroundColor: settings.mail_bg_color }}
+					>
+						<div className='mail-box'>
+							<div
+								className='mail-header'
+								style={{
+									backgroundColor: settings.header_bg_color,
+									backgroundImage: `url(
+										http://toadsworth.ddns.net:5000/api/file/${settings.header_bg_image}
+									)`,
+								}}
+							>
+								<div className='mail-header-logo'>
+									<img
+										alt='logo'
+										src={`http://toadsworth.ddns.net:5000/api/file/${settings.header_logo}`}
+									/>
+								</div>
+							</div>
+							<div
+								className='mail-body'
+								style={{
+									backgroundColor: settings.body_bg_color,
+									color: settings.body_color,
+								}}
+							>
+								{entry.content && parse(entry.content)}
+							</div>
+							<div
+								className='mail-footer'
+								style={{
+									backgroundColor: settings.footer_bg_color,
+									color: settings.footer_color,
+								}}
+							>
+								{settings.footer_text && parse(settings.footer_text)}
+							</div>
+						</div>
+					</div>
+				</Modal.Body>
 			</Modal>
 		</>
 	);
