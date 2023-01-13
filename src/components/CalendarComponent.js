@@ -57,11 +57,30 @@ const CalendarComponent = () => {
 							backgroundColor: 'red',
 						})),
 					]}
-					eventClick={handleClick}
+					eventMouseEnter={handleClick}
 				/>
 			</Card.Body>
 		</Card>
 	);
 };
+
+/*
+<Overlay
+	show={show}
+	target={target}
+	placement="left"
+	container={ref}
+	containerPadding={20}
+>
+	<Popover>
+		<Popover.Header as="h3">
+			Benutzerübersicht	
+		</Popover.Header>
+		<Popover.Body>
+			Klicken Sie auf die Spaltenüberschriften um die Tabelle zu sortieren.
+		</Popover.Body>
+	</Popover>
+</Overlay>
+*/
 
 export default CalendarComponent;
