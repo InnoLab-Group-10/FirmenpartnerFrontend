@@ -118,11 +118,11 @@ const MailTemplateRow = props => {
 				</Form>
 			</Modal>
 			{/* Preview Modal */}
-			<Modal show={showPreview} onHide={togglePreviewShow} keyboard={false} size='lg'>
+			<Modal show={showPreview} onHide={togglePreviewShow} keyboard={false} fullscreen={true}>
 				<Modal.Header closeButton>
 					<Modal.Title>Preview</Modal.Title>
 				</Modal.Header>
-				<Modal.Body>
+				<Modal.Body className="previewModal">
 					<div
 						className='mail-background'
 						style={{ backgroundColor: settings.mail_bg_color }}

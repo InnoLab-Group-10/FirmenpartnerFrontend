@@ -599,3 +599,7 @@ td {
 .mail-header-logo img {
 	max-height: 150px;
 }
+
+.previewModal{
+	padding: 0;
+}
