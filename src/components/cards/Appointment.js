@@ -61,7 +61,7 @@ const Appointment = props => {
 			>
 				<Toast.Header>
 					<strong className='me-auto'>dummy</strong>
-					<small>{new Date(entry.timestamp).toLocaleString()}</small>
+					<small>{new Date(entry.timestamp).toLocaleString().slice(0, -3)}</small>
 				</Toast.Header>
 				<Toast.Body>
 					<Container>

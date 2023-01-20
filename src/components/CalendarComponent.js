@@ -5,28 +5,14 @@ import { useSelector } from 'react-redux';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timegridPlugin from '@fullcalendar/timegrid';
+import CalendarEvent from './CalendarEvent';
 
 const CalendarComponent = () => {
 	const { appointments } = useSelector(state => state.timeline);
 	const { notifications } = useSelector(state => state.notification);
 
-	const handleClick = e => {
-		const event = e.event;
-		if (event.url) {
-			alert(
-				event.title +
-					'\n' +
-					'Öffnet den Link: ' +
-					event.url +
-					' in einem neuen Browsertab.'
-			);
-
-			window.open(event.url);
-
-			e.jsEvent.preventDefault(); // prevents browser from following link in current tab.
-		} else {
-			alert(event.title);
-		}
+	const renderEvent = e => {
+		return <CalendarEvent event={e.event.extendedProps} />;
 	};
 
 	return (
@@ -45,42 +31,22 @@ const CalendarComponent = () => {
 					events={[
 						...appointments.map(entry => ({
 							id: entry.id,
-							title: entry.message,
 							start: entry.timestamp,
-							url: entry.link ? entry.link : '',
-							backgroundColor: 'blue',
+							type: 'appointment',
+							data: entry,
 						})),
 						...notifications.map(entry => ({
 							id: entry.id,
-							title: entry.message,
 							start: entry.timestamp,
-							backgroundColor: 'red',
+							type: 'notification',
+							data: entry,
 						})),
 					]}
-					eventMouseEnter={handleClick}
+					eventContent={renderEvent}
 				/>
 			</Card.Body>
 		</Card>
 	);
 };
-
-/*
-<Overlay
-	show={show}
-	target={target}
-	placement="left"
-	container={ref}
-	containerPadding={20}
->
-	<Popover>
-		<Popover.Header as="h3">
-			Benutzerübersicht	
-		</Popover.Header>
-		<Popover.Body>
-			Klicken Sie auf die Spaltenüberschriften um die Tabelle zu sortieren.
-		</Popover.Body>
-	</Popover>
-</Overlay>
-*/
 
 export default CalendarComponent;

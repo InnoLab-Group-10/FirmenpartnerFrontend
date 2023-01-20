@@ -15,7 +15,7 @@ const Note = props => {
 		>
 			<Toast.Header>
 				<strong className='me-auto'>{props.title}</strong>
-				<small>{new Date(props.timestamp).toLocaleString()}</small>
+				<small>{new Date(props.timestamp).toLocaleString().slice(0, -3)}</small>
 			</Toast.Header>
 			<Toast.Body>
 				<Container>

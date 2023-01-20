@@ -64,7 +64,7 @@ const DocumentRow = props => {
 						<BiArrowToBottom />
 					</Button>
 				</td>
-				<td>{new Date(entry.timestamp).toLocaleString()}</td>
+				<td>{new Date(entry.timestamp).toLocaleString().slice(0, -3)}</td>
 				<td>
 					<Button
 						variant='danger'
