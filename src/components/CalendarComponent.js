@@ -5,15 +5,10 @@ import { useSelector } from 'react-redux';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timegridPlugin from '@fullcalendar/timegrid';
-import CalendarEvent from './CalendarEvent';
 
 const CalendarComponent = () => {
 	const { appointments } = useSelector(state => state.timeline);
 	const { notifications } = useSelector(state => state.notification);
-
-	const renderEvent = e => {
-		return <CalendarEvent event={e.event.extendedProps} />;
-	};
 
 	return (
 		<Card>
@@ -31,18 +26,18 @@ const CalendarComponent = () => {
 					events={[
 						...appointments.map(entry => ({
 							id: entry.id,
+							title: entry.message,
 							start: entry.timestamp,
-							type: 'appointment',
-							data: entry,
+							url: entry.link ? entry.link : '',
+							backgroundColor: 'blue',
 						})),
 						...notifications.map(entry => ({
 							id: entry.id,
+							title: entry.message,
 							start: entry.timestamp,
-							type: 'notification',
-							data: entry,
+							backgroundColor: 'red',
 						})),
 					]}
-					eventContent={renderEvent}
 				/>
 			</Card.Body>
 		</Card>
