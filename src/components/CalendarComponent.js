@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
-import { Card, Modal } from 'react-bootstrap';
+import { Button, Card, Modal, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timegridPlugin from '@fullcalendar/timegrid';
+
 import CreateMail from './forms/CreateMail';
 
 const CalendarComponent = () => {
 	const { appointments } = useSelector(state => state.timeline);
 	const { notifications } = useSelector(state => state.notification);
 
+	const [currentEvent, setCurrentEvent] = useState({});
+
+	// for main modal
 	const [fullscreen, setFullscreen] = useState(true);
 	const [show, setShow] = useState(false);
 
@@ -19,16 +23,18 @@ const CalendarComponent = () => {
 		setShow(true);
 	};
 
-	const handleClick = e => {
-		const event = e.event.extendedProps.data;
+	const [fullscreenEmail, setFullscreenEmail] = useState(true);
+	const [showEmail, setShowEmail] = useState(false);
 
-		if (event.link) {
-			window.open(event.link);
-			e.jsEvent.preventDefault(); // prevents browser from following link in current tab.
-		}
-		if (event.type === 2) {
-			handleShow();
-		}
+	// for email modal
+	const handleShowEmail = () => {
+		setFullscreenEmail('sm-down');
+		setShowEmail(true);
+	};
+
+	const handleClick = e => {
+		setCurrentEvent(e.event.extendedProps.data);
+		handleShow();
 	};
 
 	return (
@@ -71,10 +77,44 @@ const CalendarComponent = () => {
 			</Card>
 			<Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
 				<Modal.Header closeButton>
+					<Modal.Title>Details</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<Row>{currentEvent.message}</Row>
+					<Row>
+						{currentEvent.type === 1 && (
+							<Button
+								className='toast-button'
+								variant='primary'
+								size='sm'
+								onClick={() => (window.location = currentEvent.link)}
+							>
+								{currentEvent.linkText}
+							</Button>
+						)}
+						{currentEvent.type === 2 && (
+							<Button
+								className='toast-button'
+								variant='primary'
+								size='sm'
+								onClick={handleShowEmail}
+							>
+								Email versenden
+							</Button>
+						)}
+					</Row>
+				</Modal.Body>
+			</Modal>
+			<Modal
+				show={showEmail}
+				fullscreen={fullscreenEmail}
+				onHide={() => setShowEmail(false)}
+			>
+				<Modal.Header closeButton>
 					<Modal.Title>Email versenden</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<CreateMail toggleHandler={() => setShow(prevState => !prevState)} />
+					<CreateMail toggleHandler={() => setShowEmail(prevState => !prevState)} />
 				</Modal.Body>
 			</Modal>
 		</>
