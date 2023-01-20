@@ -60,7 +60,8 @@ const Appointment = props => {
 				onClose={() => dispatch(timelineDelete({ id: entry.id }))}
 			>
 				<Toast.Header>
-					<strong className='me-auto'>dummy</strong>
+					{/* Statt dem Wort Eintrag den Kartentyp als Wort statt als Zahl*/}
+					<strong className='me-auto'>Termin</strong>
 					<small>{new Date(entry.timestamp).toLocaleString().slice(0, -3)}</small>
 				</Toast.Header>
 				<Toast.Body>
