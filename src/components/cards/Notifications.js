@@ -32,7 +32,7 @@ const Notifications = () => {
 						id={entry.id}
 						timestamp={entry.timestamp}
 						message={entry.message}
-						title='dummy'
+						title='Notiz'
 						variant='light'
 					/>
 				))}
@@ -45,7 +45,7 @@ const Notifications = () => {
 						id={entry.id}
 						timestamp={entry.timestamp}
 						message={entry.message}
-						title='dummy'
+						title='Notiz'
 						variant='light'
 					/>
 				))}

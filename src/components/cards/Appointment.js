@@ -60,7 +60,9 @@ const Appointment = props => {
 				onClose={() => dispatch(timelineDelete({ id: entry.id }))}
 			>
 				<Toast.Header>
-					<strong className='me-auto'>dummy</strong>
+					<strong className='me-auto'>
+						{['Nachricht', 'Link', 'Email'][entry.type]}
+					</strong>
 					<small>{new Date(entry.timestamp).toLocaleString().slice(0, -3)}</small>
 				</Toast.Header>
 				<Toast.Body>
