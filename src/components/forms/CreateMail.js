@@ -169,7 +169,7 @@ const CreateMail = props => {
 				</Col>
 				<Col lg>
 					<div className='d-grid'>
-						<Button variant='primary' type='submit'>
+						<Button className="toast-button" variant='primary' type='submit'>
 							Speichern
 						</Button>
 					</div>

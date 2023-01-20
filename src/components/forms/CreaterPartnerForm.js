@@ -204,7 +204,7 @@ const CreatePartnerForm = () => {
 										<Form.Check
 											type='checkbox'
 											{...register('contractSigned')}
-											label='Nimmt das Unternehmen derzeit Studenten?'
+											label='Nimmt das Unternehmen derzeit Studenten auf?'
 											className='mb-3'
 										/>
 									</Col>

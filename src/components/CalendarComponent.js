@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, Modal, Row, Container, ModalFooter } from 'react-bootstrap';
+import { Button, Card, Modal, Row, Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import FullCalendar from '@fullcalendar/react';
@@ -43,11 +43,8 @@ const CalendarComponent = () => {
 				<Card.Body className='calendar-styling-override'>
 					<FullCalendar
 						initialView='dayGridMonth'
-						headerToolbar={{
-							left: 'prev,next',
-							center: 'title',
-							right: 'dayGridMonth, timeGridWeek, timeGridDay',
-						}}
+						locales='deLocale'
+						firstDay={1}
 						weekNumbers='true'
 						contentHeight={650}
 						plugins={[dayGridPlugin, timegridPlugin]}
