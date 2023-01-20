@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Card, Modal, Row } from 'react-bootstrap';
+import { Button, Card, Modal, Row, Container, ModalFooter } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import FullCalendar from '@fullcalendar/react';
@@ -57,6 +57,7 @@ const CalendarComponent = () => {
 								title: entry.message,
 								start: entry.timestamp,
 								backgroundColor: 'blue',
+								className: "calendar-event-button",
 								data: {
 									...entry,
 								},
@@ -66,6 +67,7 @@ const CalendarComponent = () => {
 								title: entry.message,
 								start: entry.timestamp,
 								backgroundColor: 'red',
+								className: "calendar-event-button",
 								data: {
 									...entry,
 								},
@@ -80,6 +82,7 @@ const CalendarComponent = () => {
 					<Modal.Title>Details</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
+					<Container>
 					<Row>{currentEvent.message}</Row>
 					<Row>
 						{currentEvent.type === 1 && (
@@ -103,6 +106,7 @@ const CalendarComponent = () => {
 							</Button>
 						)}
 					</Row>
+					</Container>
 				</Modal.Body>
 			</Modal>
 			<Modal

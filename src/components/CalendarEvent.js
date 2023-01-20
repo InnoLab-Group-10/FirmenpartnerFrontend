@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Button, Modal, Overlay, Popover, Row } from 'react-bootstrap';
+import { Button, Modal, Overlay, Popover, Row} from 'react-bootstrap';
 import { BsCircleFill } from 'react-icons/bs';
 
 import CreateMail from './forms/CreateMail';
@@ -58,7 +58,7 @@ const CalendarEvent = props => {
 				container={ref}
 				containerPadding={20}
 			>
-				<Popover>
+				<Popover className='calendar-popover'>
 					<Popover.Header as='h3'>{getTitle()}</Popover.Header>
 					<Popover.Body>
 						<Row>{event.data.message}</Row>

@@ -515,6 +515,14 @@ td {
 	color:#6c757d;
 }
 
+.calendar-event-button{
+	cursor:pointer;
+}
+
+.toast-button{
+	margin-top: 1rem;
+}
+
 /* === UPCOMING DATES === */
 .dashboard-tabs{
 	justify-content: left;
