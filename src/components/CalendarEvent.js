@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { Button, Modal, Overlay, Popover } from 'react-bootstrap';
+import { Button, Modal, Overlay, Popover, Row } from 'react-bootstrap';
+import { BsCircleFill } from 'react-icons/bs';
 
 import CreateMail from './forms/CreateMail';
 
@@ -42,6 +43,7 @@ const CalendarEvent = props => {
 	return (
 		<div ref={ref}>
 			<div onClick={handleClick}>
+				<BsCircleFill color={event.type === 'appointment' ? 'red' : 'blue'} />
 				{new Date(event.data.timestamp).toLocaleString([], {
 					hour: '2-digit',
 					minute: '2-digit',
@@ -59,14 +61,31 @@ const CalendarEvent = props => {
 				<Popover>
 					<Popover.Header as='h3'>{getTitle()}</Popover.Header>
 					<Popover.Body>
-						{event.data.message}
-						<br />
-						{event.data.type === 1 && <a href={event.data.link}>{event.data.linkText}</a>}
+						<Row>{event.data.message}</Row>
+						{event.data.type === 1 && (
+							<Row>
+								<Button
+									variant='primary'
+									className='toast-button'
+									size='sm'
+									onClick={() => (window.location = event.data.link)}
+								>
+									{event.data.linkText}
+								</Button>
+							</Row>
+						)}
 						{event.data.type === 2 && (
 							<>
-								<Button variant='primary' size='sm' onClick={() => handleShow()}>
-									Email versenden
-								</Button>
+								<Row>
+									<Button
+										variant='primary'
+										className='toast-button'
+										size='sm'
+										onClick={() => handleShow()}
+									>
+										Email versenden
+									</Button>
+								</Row>
 								<Modal
 									show={showModal}
 									fullscreen={fullscreen}
