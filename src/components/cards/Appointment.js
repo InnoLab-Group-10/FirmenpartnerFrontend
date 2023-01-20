@@ -61,7 +61,7 @@ const Appointment = props => {
 			>
 				<Toast.Header>
 					<strong className='me-auto'>
-						{['Nachricht', 'Link', 'Email'][entry.type]}
+						{['Erinnerung', 'Link', 'E-Mail'][entry.type]}
 					</strong>
 					<small>{new Date(entry.timestamp).toLocaleString().slice(0, -3)}</small>
 				</Toast.Header>
