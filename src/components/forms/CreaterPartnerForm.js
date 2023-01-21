@@ -95,6 +95,7 @@ const CreatePartnerForm = () => {
 						<Accordion.Body>
 							<Form onSubmit={handleSubmit(data => dispatch(companyNew(data)))}>
 								<Row>
+									{<h5>HauptansprechpartnerIn</h5>}
 									<Col lg>
 										<FloatingLabel label='Firmenname' className='mb-3'>
 											<Form.Control
@@ -147,6 +148,7 @@ const CreatePartnerForm = () => {
 									</Col>
 								</Row>
 								<Row>
+									{<h5>Firmeninformationen</h5>}
 									<Col lg>
 										<FloatingLabel label='Adresse' className='mb-3'>
 											<Form.Control
@@ -204,7 +206,7 @@ const CreatePartnerForm = () => {
 										<Form.Check
 											type='checkbox'
 											{...register('contractSigned')}
-											label='Nimmt das Unternehmen derzeit Studenten auf?'
+											label='Nimmt das Unternehmen derzeit Studierende auf?'
 											className='mb-3'
 										/>
 									</Col>

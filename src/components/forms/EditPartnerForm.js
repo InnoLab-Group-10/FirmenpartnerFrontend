@@ -39,6 +39,7 @@ const EditPartnerForm = props => {
 	return (
 		<Form onSubmit={handleSubmit(data => updateHandler(data))}>
 			<Row>
+				{<h5>HauptansprechpartnerIn</h5>}
 				<Col lg>
 					<FloatingLabel label='Firmenname' className='mb-3'>
 						<Form.Control
@@ -101,10 +102,12 @@ const EditPartnerForm = props => {
 				</Col>
 			</Row>
 			<Row>
+				{<h5>Firmeninformationen</h5>}
 				<Col lg>
 					<FloatingLabel label='Addresse' className='mb-3'>
 						<Form.Control
 							type='text'
+							placeholder='Adresse'
 							defaultValue={entry.locations.length ? entry.locations[0].address : ''}
 							{...register('address', { required: true })}
 							isInvalid={errors.address}
@@ -115,6 +118,7 @@ const EditPartnerForm = props => {
 					<FloatingLabel label='Postleitzahl' className='mb-3'>
 						<Form.Control
 							type='text'
+							placeholder='Postleitzahl'
 							defaultValue={entry.locations.length ? entry.locations[0].zipcode : ''}
 							{...register('zipcode', { required: true, pattern: /^[0-9]+$/ })}
 							isInvalid={errors.zipcode}
@@ -125,6 +129,7 @@ const EditPartnerForm = props => {
 					<FloatingLabel label='Ort' className='mb-3'>
 						<Form.Control
 							type='text'
+							placeholder='Ort'
 							defaultValue={entry.locations.length ? entry.locations[0].city : ''}
 							{...register('city', { required: true })}
 							isInvalid={errors.city}
@@ -132,9 +137,10 @@ const EditPartnerForm = props => {
 					</FloatingLabel>
 				</Col>
 				<Col lg>
-					<FloatingLabel label='Studenten pro Jahr' className='mb-3'>
+					<FloatingLabel label='Studierende pro Jahr' className='mb-3'>
 						<Form.Control
 							type='number'
+							placeholder='Studierende pro Jahr'
 							defaultValue={entry.company.maxStudents}
 							{...register('maxStudents', {
 								required: true,
@@ -164,7 +170,7 @@ const EditPartnerForm = props => {
 					<Form.Check
 						type='checkbox'
 						{...register('contractSigned')}
-						label='Nimmt das Unternehmen derzeit Studenten?'
+						label='Nimmt das Unternehmen derzeit Studierende auf?'
 						className='mb-3'
 					/>
 				</Col>

@@ -384,7 +384,8 @@ td {
 }
 
 .detailed-row{
-	background-color: #e9ecef;
+	background-color: #f9fafb;
+	border-left: solid 12px #f9fafb;
 }
 
 .active-row {
