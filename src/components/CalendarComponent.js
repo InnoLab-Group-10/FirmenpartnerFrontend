@@ -99,7 +99,7 @@ const CalendarComponent = () => {
 								size='sm'
 								onClick={handleShowEmail}
 							>
-								Email versenden
+								E-Mail versenden
 							</Button>
 						)}
 					</Row>
@@ -112,7 +112,7 @@ const CalendarComponent = () => {
 				onHide={() => setShowEmail(false)}
 			>
 				<Modal.Header closeButton>
-					<Modal.Title>Email versenden</Modal.Title>
+					<Modal.Title>E-Mail versenden</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<CreateMail toggleHandler={() => setShowEmail(prevState => !prevState)} />

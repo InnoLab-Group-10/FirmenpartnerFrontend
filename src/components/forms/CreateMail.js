@@ -73,6 +73,12 @@ const CreateMail = props => {
 			<Row>
 				<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
 					<Form.Label>Empfänger wählen</Form.Label>
+					<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+						<Form.Control type="email" placeholder="E-Mail-Adressen" />
+						<Form.Text muted>
+							Adressen durch "," getrent eingeben oder Mailinglisten verwenden.
+						</Form.Text>
+					</Form.Group>
 					<Form.Select
 						aria-label='Default select example'
 						defaultValue='1'
@@ -128,6 +134,12 @@ const CreateMail = props => {
 				</Form.Group>
 			</Row>
 			<Row>
+				<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+					<Form.Label>Nachricht</Form.Label>
+					<Form.Control as="textarea" rows={3} />
+				</Form.Group>
+			</Row>
+			<Row>
 				<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
 					<Form.Label>Datei anhängen</Form.Label>
 					<Controller
@@ -144,6 +156,9 @@ const CreateMail = props => {
 							/>
 						)}
 					/>
+					<Form.Text muted>
+						Das Limit für Anhänge liegt bei 20MB.
+					</Form.Text>
 				</Form.Group>
 			</Row>
 			{/* <Row>
@@ -162,15 +177,15 @@ const CreateMail = props => {
 			<Row>
 				<Col lg>
 					<div className='d-grid'>
-						<Button variant='light' onClick={resetForm}>
+						<Button className="toast-button-2" variant='light' onClick={resetForm}>
 							Zurücksetzen
 						</Button>
 					</div>
 				</Col>
 				<Col lg>
 					<div className='d-grid'>
-						<Button className="toast-button" variant='primary' type='submit'>
-							Speichern
+						<Button className="toast-button-2" variant='primary' type='submit'>
+							Absenden
 						</Button>
 					</div>
 				</Col>

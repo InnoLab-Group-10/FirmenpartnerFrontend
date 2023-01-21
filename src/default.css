@@ -523,6 +523,10 @@ td {
 	margin-top: 1rem;
 }
 
+.toast-button-2:first-of-type{
+	margin-bottom: 1rem;
+}
+
 /* === UPCOMING DATES === */
 .dashboard-tabs{
 	justify-content: left;

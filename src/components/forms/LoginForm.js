@@ -26,10 +26,10 @@ const LoginForm = () => {
 			<Row>
 				<Col>
 					<Form onSubmit={handleSubmit(data => dispatch(sessionLogin(data)))}>
-						<FloatingLabel label='Email' className='mb-3'>
+						<FloatingLabel label='Benutzername' className='mb-3'>
 							<Form.Control
 								type='text'
-								placeholder='Email'
+								placeholder='Benutzername'
 								{...register('email', {
 									required: true,
 								})}
