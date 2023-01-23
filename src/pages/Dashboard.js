@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import UpcomingDateCard from '../components/cards/UpcomingDateCard';
 import { timelineGetAll } from '../store/timeline-thunks';
 import { notificationGetUser } from '../store/notification-thunks';
+import Statistics from '../components/Statistics';
 
 const Dashboard = () => {
 	const dispatch = useDispatch();
@@ -40,8 +41,11 @@ const Dashboard = () => {
 			<DashboardCards />
 			<Container>
 				<Row>
-					<Col>
+					<Col lg>
 						<UpcomingDateCard />
+					</Col>
+					<Col lg>
+						<Statistics/>
 					</Col>
 				</Row>
 				<Row>
