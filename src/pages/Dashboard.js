@@ -41,16 +41,16 @@ const Dashboard = () => {
 			<DashboardCards />
 			<Container>
 				<Row>
+					<Col>
+						<CalendarComponent />
+					</Col>
+				</Row>
+				<Row>
 					<Col lg>
 						<UpcomingDateCard />
 					</Col>
 					<Col lg>
 						<Statistics/>
-					</Col>
-				</Row>
-				<Row>
-					<Col>
-						<CalendarComponent />
 					</Col>
 				</Row>
 			</Container>
