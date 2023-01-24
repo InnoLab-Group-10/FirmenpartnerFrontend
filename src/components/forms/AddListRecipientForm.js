@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import { Form, Row, Col, FloatingLabel, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { mailingListNewRecipient } from '../../store/mailinglist-thunks';
 
 // TODO support update of companies without assignments
 const AddListRecipientForm = props => {
-	const { companies } = useSelector(state => state.company);
 	const dispatch = useDispatch();
 
 	// new entry
@@ -15,7 +14,6 @@ const AddListRecipientForm = props => {
 		register,
 		handleSubmit,
 		reset,
-		setValue,
 		formState: { isSubmitSuccessful, errors },
 	} = useForm();
 
@@ -24,16 +22,6 @@ const AddListRecipientForm = props => {
 			reset();
 		}
 	}, [isSubmitSuccessful, reset]);
-
-	const handleChange = e => {
-		const entry = companies.find(entry => entry.company.id === e.target.value);
-		setValue('company', entry.company.name);
-		if (entry.contacts.length) {
-			setValue('firstName', entry.contacts[0].firstName);
-			setValue('lastName', entry.contacts[0].lastName);
-			setValue('email', entry.contacts[0].email);
-		}
-	};
 
 	return (
 		<Form
@@ -95,26 +83,6 @@ const AddListRecipientForm = props => {
 							Hinzufügen
 						</Button>
 					</div>
-				</Col>
-			</Row>
-			<Row>
-				<Col lg>
-					<Form.Select
-						className='mt-3'
-						aria-label='Default select example'
-						size='lg'
-						defaultValue='1'
-						onChange={handleChange}
-					>
-						<option value='1' disabled>
-							Daten aus der Firmenliste auswählen
-						</option>
-						{companies.map(entry => (
-							<option key={entry.company.id} value={entry.company.id}>
-								{entry.company.name}
-							</option>
-						))}
-					</Form.Select>
 				</Col>
 			</Row>
 		</Form>
