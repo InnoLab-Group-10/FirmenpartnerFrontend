@@ -8,7 +8,7 @@ const MailTemplates = () => {
 	return (
 		<div>
 			<SiteTitle
-				title='Mail-Vorlagen'
+				title='Mailing-Vorlagen'
 				subtitle='E-Mail-Vorlagen Verwaltung'
 				text='Hier können Sie Mailingvorlagen erstellen, bearbeiten und löschen.'
 			/>

@@ -28,7 +28,7 @@ const Navbar = () => {
 					<LinkContainer to='/'>
 						<Nav.Link className='nav_logo'>
 							<BiLayer className='nav_logo-icon' />
-							<span className='nav_logo-name'>Seitentitel</span>
+							<span className='nav_logo-name'>FirmenpartnerDB</span>
 						</Nav.Link>
 					</LinkContainer>
 					<div className='nav_list'>

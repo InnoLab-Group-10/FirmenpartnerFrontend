@@ -9,8 +9,8 @@ const Mailings = () => {
 	return (
 		<div>
 			<SiteTitle
-				title='Mailings'
-				subtitle='Mailinglisten Verwaltung'
+				title='Mailinglisten'
+				subtitle='Empfänger-Verwaltung'
 				text='Hier können Sie Mailinglisten erstellen, bearbeiten und löschen.'
 			/>
 			<Container>

@@ -28,7 +28,7 @@ const App = () => {
 
 	return (
 		<>
-			{isLoggedIn ? (
+			{isLoggedIn ? (<>
 				<div className='body'>
 					<div id='bootstrap-override'>
 						<div id='body-pd' className={`${showNavbar ? 'body-pd' : ''}`}>
@@ -50,13 +50,14 @@ const App = () => {
 						</div>
 					</div>
 				</div>
-			) : (
+			</>) : (
+			<>
 				<div id='bootstrap-override-login'>
 					<div className='login-background'>
 						<Login />
 					</div>
 				</div>
-			)}
+			</>)}
 		</>
 	);
 };

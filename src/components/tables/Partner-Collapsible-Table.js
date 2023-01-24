@@ -169,7 +169,6 @@ const CollapsibleTable = () => {
 						</tbody>
 					</Table>
 				</Card.Body>
-				<Card.Footer className='text-muted'>Status</Card.Footer>
 			</Card>
 		</Container>
 	);

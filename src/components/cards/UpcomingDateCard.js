@@ -34,10 +34,10 @@ const UpcomingDateCard = () => {
 					id='uncontrolled-tab-example'
 					className='dashboard-tabs'
 				>
-					<Tab eventKey='notifications' title='Notifications'>
+					<Tab eventKey='notifications' title='Benachrichtigungen'>
 						<ListGroup variant='flush'>{getLimitedArray(futureNotifications)}</ListGroup>
 					</Tab>
-					<Tab eventKey='timeline' title='Timeline'>
+					<Tab eventKey='timeline' title='Termine'>
 						<ListGroup variant='flush'>{getLimitedArray(appointments)}</ListGroup>
 					</Tab>
 				</Tabs>
