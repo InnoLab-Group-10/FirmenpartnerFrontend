@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 
-import { sendmailSendByOption } from '../../store/sendmail-thunks';
+import { sendmailSend } from '../../store/sendmail-thunks';
 import { mailinglistGetAll } from '../../store/mailinglist-thunks';
 import { mailtemplateGetAll } from '../../store/mailtemplate-thunks';
 import { fileGetAll } from '../../store/file-thunks';
@@ -39,17 +39,24 @@ const CreateMail = props => {
 	} = useForm();
 
 	const submitHandler = data => {
-		if (data.id === '1') {
-			setError('id');
+		// check if any recipient is set
+		if (data.additionalRecipients === '' && data.mailingList === '1') {
+			setError('additionalRecipients');
+			setError('mailingList');
 			return;
 		}
-		if (data.template === '1') {
+		// check if any text is set
+		if (data.additionalText === '' && data.template === '1') {
+			setError('additionalText');
 			setError('template');
 			return;
 		}
 		dispatch(
-			sendmailSendByOption({
+			sendmailSend({
 				...data,
+				additionalRecipients: data.additionalRecipients.length
+					? data.additionalRecipients.split(',')
+					: [],
 				attachments: data.attachments ? data.attachments.map(entry => entry.value) : [],
 			})
 		);
@@ -73,17 +80,21 @@ const CreateMail = props => {
 			<Row>
 				<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
 					<Form.Label>Empfänger wählen</Form.Label>
-					<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-						<Form.Control type="email" placeholder="E-Mail-Adressen" />
+					<Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
+						<Form.Control
+							placeholder='E-Mail-Adressen'
+							{...register('additionalRecipients')}
+							isInvalid={errors.additionalRecipients}
+						/>
 						<Form.Text muted>
-							Adressen durch "," getrent eingeben oder Mailinglisten verwenden.
+							Adressen durch "," getrennt eingeben und/oder Mailinglisten verwenden.
 						</Form.Text>
 					</Form.Group>
 					<Form.Select
 						aria-label='Default select example'
 						defaultValue='1'
-						{...register('id', { required: true })}
-						isInvalid={errors.id}
+						{...register('mailingList')}
+						isInvalid={errors.mailingList}
 					>
 						<option value='1' disabled>
 							Mailingliste wählen
@@ -92,29 +103,6 @@ const CreateMail = props => {
 						<option value='active'>Aktive Unternehmen</option>
 						<option value='inactive'>Inaktive Unternehmen</option>
 						{mailinglists.map(entry => (
-							<option key={entry.id} value={entry.id}>
-								{entry.name}
-							</option>
-						))}
-					</Form.Select>
-				</Form.Group>
-			</Row>
-			<Row>
-				<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
-					<Form.Label>E-Mail-Vorlage wählen</Form.Label>
-					<Form.Select
-						aria-label='Default select example'
-						defaultValue='1'
-						{...register('template', { required: true })}
-						isInvalid={errors.template}
-					>
-						<option value='1' disabled>
-							Vorlage wählen
-						</option>
-						<option value='all'>Alle Unternehmen</option>
-						<option value='active'>Aktive Unternehmen</option>
-						<option value='inactive'>Inaktive Unternehmen</option>
-						{mailtemplates.map(entry => (
 							<option key={entry.id} value={entry.id}>
 								{entry.name}
 							</option>
@@ -133,10 +121,40 @@ const CreateMail = props => {
 					/>
 				</Form.Group>
 			</Row>
+
 			<Row>
-				<Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+				<Form.Group className='mb-3' controlId='exampleForm.ControlTextarea1'>
 					<Form.Label>Nachricht</Form.Label>
-					<Form.Control as="textarea" rows={3} />
+					<Form.Control
+						as='textarea'
+						rows={3}
+						{...register('additionalText')}
+						isInvalid={errors.additionalText}
+					/>
+					<Form.Text muted>
+						Nachricht eingeben und/oder E-Mail-Vorlage verwenden.
+						<br />
+						Die Nachricht wird unter dem Text der E-Mail-Vorlage eingefügt.
+					</Form.Text>
+				</Form.Group>
+			</Row>
+			<Row>
+				<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
+					<Form.Select
+						aria-label='Default select example'
+						defaultValue='1'
+						{...register('template')}
+						isInvalid={errors.template}
+					>
+						<option value='1' disabled>
+							E-Mail-Vorlage wählen
+						</option>
+						{mailtemplates.map(entry => (
+							<option key={entry.id} value={entry.id}>
+								{entry.name}
+							</option>
+						))}
+					</Form.Select>
 				</Form.Group>
 			</Row>
 			<Row>
@@ -156,35 +174,21 @@ const CreateMail = props => {
 							/>
 						)}
 					/>
-					<Form.Text muted>
-						Das Limit für Anhänge liegt bei 20MB.
-					</Form.Text>
+					<Form.Text muted>Das Limit für Anhänge liegt bei 20MB.</Form.Text>
 				</Form.Group>
 			</Row>
-			{/* <Row>
-				<Form.Label>Datum</Form.Label>
-				<Col>
-					<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
-						<Form.Control type='date' />
-					</Form.Group>
-				</Col>
-				<Col>
-					<Form.Group controlId='formFileMultiple' className='mb-3 big-upload'>
-						<Form.Check type='checkbox' label='Automatisch senden' />
-					</Form.Group>
-				</Col>
-			</Row> */}
+
 			<Row>
 				<Col lg>
 					<div className='d-grid'>
-						<Button className="toast-button-2" variant='light' onClick={resetForm}>
+						<Button className='toast-button-2' variant='light' onClick={resetForm}>
 							Zurücksetzen
 						</Button>
 					</div>
 				</Col>
 				<Col lg>
 					<div className='d-grid'>
-						<Button className="toast-button-2" variant='primary' type='submit'>
+						<Button className='toast-button-2' variant='primary' type='submit'>
 							Absenden
 						</Button>
 					</div>
