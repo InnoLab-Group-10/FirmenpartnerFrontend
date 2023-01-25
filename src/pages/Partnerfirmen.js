@@ -1,6 +1,6 @@
 import React from 'react';
 import SiteTitle from '../components/SiteTitle';
-import CollapsibleTable from '../components/tables/Partner-Collapsible-Table';
+import PartnerTable from '../components/tables/PartnerTable';
 import { Container } from 'react-bootstrap';
 /*import Alerts from '../components/Alerts';*/
 import CreatePartnerForm from '../components/forms/CreaterPartnerForm';
@@ -19,7 +19,7 @@ const Partnerfirmen = () => {
 				<Alerts variant='danger' text='Fehlschlag' /> */}
 			</Container>
 			<CreatePartnerForm />
-			<CollapsibleTable />
+			<PartnerTable />
 		</div>
 	);
 };

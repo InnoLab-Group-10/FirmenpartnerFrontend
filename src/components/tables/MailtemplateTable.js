@@ -1,5 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Card, Container, Row, Col, Table, Button, Overlay, Popover } from 'react-bootstrap';
+import {
+	Card,
+	Container,
+	Row,
+	Col,
+	Table,
+	Button,
+	Overlay,
+	Popover,
+} from 'react-bootstrap';
 import { BiInfoCircle, BiSortAZ, BiSortZA } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -7,7 +16,7 @@ import MailTemplateRow from './MailTemplateRow';
 import useSort, { SORT_OPTIONS } from '../../hooks/useSort';
 import { mailtemplateGetAll } from '../../store/mailtemplate-thunks';
 
-const MailTemplateTable = () => {
+const MailtemplateTable = () => {
 	const dispatch = useDispatch();
 
 	const { mailtemplates, shouldReload } = useSelector(state => state.mailtemplate);
@@ -29,7 +38,7 @@ const MailTemplateTable = () => {
 	const [target, setTarget] = useState(null);
 	const ref = useRef(null);
 
-	const handleClick = (event) => {
+	const handleClick = event => {
 		setShow(!show);
 		setTarget(event.target);
 	};
@@ -41,28 +50,27 @@ const MailTemplateTable = () => {
 					<Row>
 						<Col>Vorlagen</Col>
 						<Col>
-						<div ref={ref}>
-									<div onClick={handleClick} >
-										<BiInfoCircle className='info-button'/>
-									</div>
-									<Overlay
-										show={show}
-										target={target}
-										placement="left"
-										container={ref}
-										containerPadding={20}
-									>
-										<Popover>
-											<Popover.Header as="h3">
-												Vorlagenübersicht											
-											</Popover.Header>
-											<Popover.Body>
-												Hier werden alle Vorlagen aufgelistet. Diese lassen sich bearbeiten, löschen und in einer Vorschau überprüfen.
-											</Popover.Body>
-										</Popover>
-									</Overlay>
-								</div>						
-							</Col>
+							<div ref={ref}>
+								<div onClick={handleClick}>
+									<BiInfoCircle className='info-button' />
+								</div>
+								<Overlay
+									show={show}
+									target={target}
+									placement='left'
+									container={ref}
+									containerPadding={20}
+								>
+									<Popover>
+										<Popover.Header as='h3'>Vorlagenübersicht</Popover.Header>
+										<Popover.Body>
+											Hier werden alle Vorlagen aufgelistet. Diese lassen sich bearbeiten,
+											löschen und in einer Vorschau überprüfen.
+										</Popover.Body>
+									</Popover>
+								</Overlay>
+							</div>
+						</Col>
 					</Row>
 				</Card.Header>
 				<Card.Body>
@@ -99,4 +107,4 @@ const MailTemplateTable = () => {
 	);
 };
 
-export default MailTemplateTable;
+export default MailtemplateTable;

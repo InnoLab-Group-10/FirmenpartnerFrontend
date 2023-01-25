@@ -17,7 +17,7 @@ import { companyGetAll } from '../../store/company-thunks';
 import MailinglistRow from './MailinglistRow';
 import useSort, { SORT_OPTIONS } from '../../hooks/useSort';
 
-const Mailinglist = () => {
+const MailinglistTable = () => {
 	const dispatch = useDispatch();
 	const { mailinglists, shouldReload } = useSelector(state => state.mailinglist);
 	const { companies, activeCompanies, inactiveCompanies } = useSelector(
@@ -171,4 +171,4 @@ const Mailinglist = () => {
 	);
 };
 
-export default Mailinglist;
+export default MailinglistTable;

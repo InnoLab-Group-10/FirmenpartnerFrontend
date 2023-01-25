@@ -1,6 +1,6 @@
 import React from 'react';
 import SiteTitle from '../components/SiteTitle';
-import Documents from '../components/tables/Documents';
+import DocumentTable from '../components/tables/DocumentTable';
 import { Container } from 'react-bootstrap';
 /*import Alerts from '../components/Alerts.js';*/
 import DocumentUpload from '../components/forms/DocumentUpload';
@@ -19,7 +19,7 @@ const Dokumente = () => {
 				<Alerts variant='danger' text='Fehlschlag' /> */}
 			</Container>
 			<DocumentUpload />
-			<Documents />
+			<DocumentTable />
 		</div>
 	);
 };

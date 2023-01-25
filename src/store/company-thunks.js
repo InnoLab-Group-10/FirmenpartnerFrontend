@@ -3,7 +3,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 const fileDownloader = require('js-file-download');
 
 export const companyNew = createAsyncThunk('company/new', async arg => {
-	// combine in order to call in parallel
 	const companyData = {
 		name: arg.name,
 		contractSigned: arg.contractSigned,
@@ -11,20 +10,6 @@ export const companyNew = createAsyncThunk('company/new', async arg => {
 		notes: arg.notes,
 	};
 	const responseCompany = await axiosPrivate.post('/company', companyData);
-	const contactData = {
-		firstName: arg.firstName,
-		lastName: arg.lastName,
-		email: arg.email,
-		phone: arg.phone,
-	};
-	const responsePerson = await axiosPrivate.post('/contact', contactData);
-	const assignmentData = {
-		companyId: responseCompany.data.id,
-		personId: responsePerson.data.id,
-		from: '2022-01-13',
-		to: '2022-01-13',
-	};
-	await axiosPrivate.post('/companyassignment', assignmentData);
 	const locationData = {
 		address: arg.address,
 		city: arg.city,
@@ -52,20 +37,12 @@ export const companyExport = createAsyncThunk('company/export', async () => {
 	fileDownloader(response.data, 'company-export.csv');
 });
 
-// TODO support for multiple contacts and locations
-// (e.g. show form twice if 2 contacts have to be modified)
 export const companyUpdate = createAsyncThunk('company/update', async arg => {
 	const companyData = {
 		name: arg.name,
 		contractSigned: arg.contractSigned,
 		maxStudents: arg.maxStudents,
 		notes: arg.notes,
-	};
-	const contactData = {
-		firstName: arg.firstName,
-		lastName: arg.lastName,
-		email: arg.email,
-		phone: arg.phone,
 	};
 	const locationData = {
 		address: arg.address,
@@ -75,19 +52,6 @@ export const companyUpdate = createAsyncThunk('company/update', async arg => {
 	};
 	const requests = [axiosPrivate.put(`/company/${arg.companyId}`, companyData)];
 
-	if (arg.contactId === '0') {
-		// create contact
-		const responsePerson = await axiosPrivate.post('/contact', contactData);
-		const assignmentData = {
-			companyId: arg.companyId,
-			personId: responsePerson.data.id,
-			from: '2022-01-13',
-			to: '2022-01-13',
-		};
-		requests.push(axiosPrivate.post('/companyassignment', assignmentData));
-	} else {
-		requests.push(axiosPrivate.put(`/contact/${arg.contactId}`, contactData));
-	}
 	if (arg.locationId === '0') {
 		// create location
 		requests.push(axiosPrivate.post('/companylocation', locationData));
@@ -101,6 +65,5 @@ export const companyUpdate = createAsyncThunk('company/update', async arg => {
 
 export const companyDelete = createAsyncThunk('company/delete', async arg => {
 	const response = await axiosPrivate.delete(`/company/${arg.id}`);
-	// TODO delete other data too?
 	return response.data;
 });

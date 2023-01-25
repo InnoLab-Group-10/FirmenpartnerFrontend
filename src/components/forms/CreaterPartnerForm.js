@@ -95,7 +95,6 @@ const CreatePartnerForm = () => {
 						<Accordion.Body>
 							<Form onSubmit={handleSubmit(data => dispatch(companyNew(data)))}>
 								<Row>
-									{<h5>HauptansprechpartnerIn</h5>}
 									<Col lg>
 										<FloatingLabel label='Firmenname' className='mb-3'>
 											<Form.Control
@@ -106,49 +105,19 @@ const CreatePartnerForm = () => {
 										</FloatingLabel>
 									</Col>
 									<Col lg>
-										<FloatingLabel label='Vorname' className='mb-3'>
+										<FloatingLabel label='Studenten pro Jahr' className='mb-3'>
 											<Form.Control
 												type='text'
-												{...register('firstName', { required: true })}
-												isInvalid={errors.firstName}
-											/>
-										</FloatingLabel>
-									</Col>
-									<Col lg>
-										<FloatingLabel label='Nachname' className='mb-3'>
-											<Form.Control
-												type='text'
-												{...register('lastName', { required: true })}
-												isInvalid={errors.lastName}
-											/>
-										</FloatingLabel>
-									</Col>
-								</Row>
-								<Row>
-									<Col lg>
-										<FloatingLabel label='E-Mail-Adresse' className='mb-3'>
-											<Form.Control
-												type='text'
-												{...register('email', {
+												{...register('maxStudents', {
 													required: true,
-													pattern: /^(([a-z]|[0-9]|-|_)+\.?)+@(([a-z]|[0-9]|-|_)+\.?)+$/i,
+													pattern: /^[1-9][0-9]*$/,
 												})}
-												isInvalid={errors.email}
-											/>
-										</FloatingLabel>
-									</Col>
-									<Col lg>
-										<FloatingLabel label='Telefonnummer' className='mb-3'>
-											<Form.Control
-												type='text'
-												{...register('phone', { required: true, pattern: /^\+?[0-9]+$/ })}
-												isInvalid={errors.phone}
+												isInvalid={errors.maxStudents}
 											/>
 										</FloatingLabel>
 									</Col>
 								</Row>
 								<Row>
-									{<h5>Firmeninformationen</h5>}
 									<Col lg>
 										<FloatingLabel label='Adresse' className='mb-3'>
 											<Form.Control
@@ -173,18 +142,6 @@ const CreatePartnerForm = () => {
 												type='text'
 												{...register('city', { required: true })}
 												isInvalid={errors.city}
-											/>
-										</FloatingLabel>
-									</Col>
-									<Col lg>
-										<FloatingLabel label='Studenten pro Jahr' className='mb-3'>
-											<Form.Control
-												type='text'
-												{...register('maxStudents', {
-													required: true,
-													pattern: /^[1-9][0-9]*$/,
-												})}
-												isInvalid={errors.maxStudents}
 											/>
 										</FloatingLabel>
 									</Col>

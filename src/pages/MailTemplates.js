@@ -1,10 +1,10 @@
 import React from 'react';
 import SiteTitle from '../components/SiteTitle';
 import MailTemplateDesignForm from '../components/forms/MailTemplateDesignForm';
-import MailTemplateTable from '../components/tables/MailTemplate-Table';
+import MailtemplateTable from '../components/tables/MailtemplateTable';
 import NewMailingTemplate from '../components/forms/NewMailingTemplate';
 
-const MailTemplates = () => {
+const Mailtemplates = () => {
 	return (
 		<div>
 			<SiteTitle
@@ -14,9 +14,9 @@ const MailTemplates = () => {
 			/>
 			<MailTemplateDesignForm />
 			<NewMailingTemplate />
-			<MailTemplateTable />
+			<MailtemplateTable />
 		</div>
 	);
 };
 
-export default MailTemplates;
+export default Mailtemplates;

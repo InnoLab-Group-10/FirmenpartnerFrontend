@@ -3,6 +3,8 @@ import { Collapse, Button, Modal, Table } from 'react-bootstrap';
 import { BiTrash, BiPencil, BiPlus } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { companyDelete } from '../../store/company-thunks.js';
+import AddContactForm from '../forms/AddContactForm.js';
+import AddHistoryForm from '../forms/AddHistoryForm.js';
 import EditPartnerForm from '../forms/EditPartnerForm.js';
 
 const PartnerRow = props => {
@@ -14,9 +16,13 @@ const PartnerRow = props => {
 
 	const [showDelete, setDeleteShow] = useState(false);
 	const [showEdit, setEditShow] = useState(false);
+	const [showAddContact, setAddContactShow] = useState(false);
+	const [showAddHistory, setAddHistoryShow] = useState(false);
 
 	const toggleDeleteShow = () => setDeleteShow(prevState => !prevState);
 	const toggleEditShow = () => setEditShow(prevState => !prevState);
+	const toggleAddContactShow = () => setAddContactShow(prevState => !prevState);
+	const toggleAddHistoryShow = () => setAddHistoryShow(prevState => !prevState);
 
 	const handleDelete = () => {
 		dispatch(companyDelete({ id: entry.company.id }));
@@ -39,19 +45,12 @@ const PartnerRow = props => {
 				aria-expanded={open}
 			>
 				<td>{company.name}</td>
-				{contacts.length !== 0 ? (
-					<>
-						<td>{`${contacts[0].firstName} ${contacts[0].lastName}`}</td>
-						<td>{contacts[0].email}</td>
-						<td>{contacts[0].phone}</td>
-					</>
-				) : (
-					<>
-						<td>N/A</td>
-						<td>N/A</td>
-						<td>N/A</td>
-					</>
-				)}
+				<td>
+					{locations.length !== 0
+						? `${locations[0].address}, ${locations[0].zipcode} ${locations[0].city}`
+						: 'N/A, N/A, N/A'}
+				</td>
+				<td>{company.maxStudents}</td>
 				<td className='table-icon-column-two-icons'>
 					<Button
 						variant='danger'
@@ -70,22 +69,6 @@ const PartnerRow = props => {
 					<td colSpan={5}>
 						<Table>
 							<tbody>
-								<tr>
-									<td>
-										<strong>Anschrift:</strong>
-									</td>
-									<td>
-										{locations.length !== 0
-											? `${locations[0].address}, ${locations[0].zipcode}, ${locations[0].city}`
-											: 'N/A, N/A, N/A'}
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<strong>Studierende:</strong>
-									</td>
-									<td>{company.maxStudents} pro Jahr</td>
-								</tr>
 								<tr>
 									<td>
 										<strong>Notiz:</strong>
@@ -110,7 +93,7 @@ const PartnerRow = props => {
 										<Button
 											variant='secondary'
 											className='table-icons'
-											onClick={toggleEditShow}
+											onClick={toggleAddContactShow}
 										>
 											<BiPlus />
 										</Button>
@@ -154,7 +137,7 @@ const PartnerRow = props => {
 										<Button
 											variant='secondary'
 											className='table-icons'
-											onClick={toggleEditShow}
+											onClick={toggleAddHistoryShow}
 										>
 											<BiPlus />
 										</Button>
@@ -188,7 +171,7 @@ const PartnerRow = props => {
 				</tr>
 			</Collapse>
 
-			{/* Delete Confirmation Modal */}
+			{/* Delete Partner Confirmation Modal */}
 			<Modal show={showDelete} onHide={toggleDeleteShow} keyboard={false}>
 				<Modal.Header closeButton>
 					<Modal.Title>Löschen bestätigen</Modal.Title>
@@ -205,7 +188,7 @@ const PartnerRow = props => {
 					</Button>
 				</Modal.Footer>
 			</Modal>
-			{/* Edit Form Modal */}
+			{/* Edit Partner Form Modal */}
 			<Modal size='xl' show={showEdit} onHide={toggleEditShow} keyboard={false}>
 				<Modal.Header closeButton>
 					<Modal.Title>Partnerfirma bearbeiten</Modal.Title>
@@ -215,18 +198,32 @@ const PartnerRow = props => {
 				</Modal.Body>
 			</Modal>
 			{/* Add Contactperson Modal */}
-			<Modal size='xl' show={showEdit} onHide={toggleEditShow} keyboard={false}>
+			<Modal
+				size='xl'
+				show={showAddContact}
+				onHide={toggleAddContactShow}
+				keyboard={false}
+			>
 				<Modal.Header closeButton>
-					<Modal.Title>Ansprechperson hinzufügen</Modal.Title>
+					<Modal.Title>AnsprechpartnerIn hinzufügen</Modal.Title>
 				</Modal.Header>
-				<Modal.Body>Formular Vorname, Nachname, Email, Nummer</Modal.Body>
+				<Modal.Body>
+					<AddContactForm id={company.id} />
+				</Modal.Body>
 			</Modal>
 			{/* Add Students Per Year Modal */}
-			<Modal size='xl' show={showEdit} onHide={toggleEditShow} keyboard={false}>
+			<Modal
+				size='xl'
+				show={showAddHistory}
+				onHide={toggleAddHistoryShow}
+				keyboard={false}
+			>
 				<Modal.Header closeButton>
-					<Modal.Title>Studierende pro Jahr</Modal.Title>
+					<Modal.Title>Studierende pro Jahr hinzufügen</Modal.Title>
 				</Modal.Header>
-				<Modal.Body>Jahr, Anzahl</Modal.Body>
+				<Modal.Body>
+					<AddHistoryForm id={company.id} />
+				</Modal.Body>
 			</Modal>
 		</>
 	);

@@ -1,6 +1,6 @@
 import React from 'react';
 import SiteTitle from '../components/SiteTitle';
-import CollapsibleTable from '../components/tables/Students-Collapsible-Table';
+import StudentTable from '../components/tables/StudentTable';
 import { Container } from 'react-bootstrap';
 /*import Alerts from '../components/Alerts';*/
 import CreateStudentForm from '../components/forms/CreateStudentForm';
@@ -19,7 +19,7 @@ const Studierende = () => {
 				<Alerts variant='danger' text='Fehlschlag' /> */}
 			</Container>
 			<CreateStudentForm />
-			<CollapsibleTable />
+			<StudentTable />
 		</div>
 	);
 };

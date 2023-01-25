@@ -1,5 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Container, Table, Card, Col, Row, Button, Overlay, Popover } from 'react-bootstrap';
+import {
+	Container,
+	Table,
+	Card,
+	Col,
+	Row,
+	Button,
+	Overlay,
+	Popover,
+} from 'react-bootstrap';
 import { BiInfoCircle, BiSortAZ, BiSortZA, BiSortDown, BiSortUp } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,7 +17,7 @@ import 'bootstrap/js/src/collapse.js';
 import UserRow from './UserRow';
 import useSort, { SORT_OPTIONS } from '../../hooks/useSort';
 
-const CollapsibleTable = () => {
+const UserTable = () => {
 	const dispatch = useDispatch();
 	const { users, shouldReload } = useSelector(state => state.user);
 	const {
@@ -29,7 +38,7 @@ const CollapsibleTable = () => {
 	const [target, setTarget] = useState(null);
 	const ref = useRef(null);
 
-	const handleClick = (event) => {
+	const handleClick = event => {
 		setShow(!show);
 		setTarget(event.target);
 	};
@@ -42,34 +51,37 @@ const CollapsibleTable = () => {
 						<Col>Benutzer</Col>
 						<Col>
 							<div ref={ref}>
-									<div onClick={handleClick} >
-										<BiInfoCircle className='info-button'/>
-									</div>
-									<Overlay
-										show={show}
-										target={target}
-										placement="left"
-										container={ref}
-										containerPadding={20}
-									>
-										<Popover>
-											<Popover.Header as="h3">
-												Benutzerübersicht	
-											</Popover.Header>
-											<Popover.Body>
-												Klicken Sie auf die Spaltenüberschriften um die Tabelle zu sortieren.
-											</Popover.Body>
-										</Popover>
-									</Overlay>
+								<div onClick={handleClick}>
+									<BiInfoCircle className='info-button' />
 								</div>
+								<Overlay
+									show={show}
+									target={target}
+									placement='left'
+									container={ref}
+									containerPadding={20}
+								>
+									<Popover>
+										<Popover.Header as='h3'>Benutzerübersicht</Popover.Header>
+										<Popover.Body>
+											Klicken Sie auf die Spaltenüberschriften um die Tabelle zu
+											sortieren.
+										</Popover.Body>
+									</Popover>
+								</Overlay>
+							</div>
 						</Col>
 					</Row>
 				</Card.Header>
 				<Card.Body>
 					<Card.Title>Benutzerübersicht</Card.Title>
-					<Card.Subtitle className='mb-2 text-muted'>Filtern, Bearbeiten und Löschen von Benutzern</Card.Subtitle>
+					<Card.Subtitle className='mb-2 text-muted'>
+						Filtern, Bearbeiten und Löschen von Benutzern
+					</Card.Subtitle>
 					<Card.Text>
-					In der Benutzerliste können Sie Benutzer bearbeiten und löschen. Wenn Sie einen bestimmen Benutzer finden möchten, können Sie die Liste alphabetisch, nach dem Namen, der Rolle oder der E-Mail umsortieren.
+						In der Benutzerliste können Sie Benutzer bearbeiten und löschen. Wenn Sie
+						einen bestimmen Benutzer finden möchten, können Sie die Liste alphabetisch,
+						nach dem Namen, der Rolle oder der E-Mail umsortieren.
 					</Card.Text>
 					<Table hover responsive>
 						<thead>
@@ -128,4 +140,4 @@ const CollapsibleTable = () => {
 	);
 };
 
-export default CollapsibleTable;
+export default UserTable;

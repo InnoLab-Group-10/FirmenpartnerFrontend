@@ -16,7 +16,17 @@ const EditPartnerForm = props => {
 		handleSubmit,
 		reset,
 		formState: { isSubmitSuccessful, errors },
-	} = useForm({ defaultValues: { contractSigned: entry.company.contractSigned } });
+	} = useForm({
+		defaultValues: {
+			name: entry.company.name,
+			maxStudents: entry.company.maxStudents,
+			address: entry.locations.length ? entry.locations[0].address : '',
+			zipcode: entry.locations.length ? entry.locations[0].zipcode : '',
+			city: entry.locations.length ? entry.locations[0].city : '',
+			notes: entry.company.notes,
+			contractSigned: entry.company.contractSigned,
+		},
+	});
 
 	useEffect(() => {
 		if (isSubmitSuccessful) {
@@ -39,109 +49,19 @@ const EditPartnerForm = props => {
 	return (
 		<Form onSubmit={handleSubmit(data => updateHandler(data))}>
 			<Row>
-				{<h5>HauptansprechpartnerIn</h5>}
 				<Col lg>
 					<FloatingLabel label='Firmenname' className='mb-3'>
 						<Form.Control
 							type='text'
-							placeholder='Firmenname'
-							defaultValue={entry.company.name}
 							{...register('name', { required: true })}
 							isInvalid={errors.name}
 						/>
 					</FloatingLabel>
 				</Col>
 				<Col lg>
-					<FloatingLabel label='Vorname' className='mb-3'>
+					<FloatingLabel label='Studenten pro Jahr' className='mb-3'>
 						<Form.Control
 							type='text'
-							placeholder='Vorname'
-							defaultValue={entry.contacts.length ? entry.contacts[0].firstName : ''}
-							{...register('firstName', { required: true })}
-							isInvalid={errors.firstName}
-						/>
-					</FloatingLabel>
-				</Col>
-				<Col lg>
-					<FloatingLabel label='Nachname' className='mb-3'>
-						<Form.Control
-							type='text'
-							placeholder='Nachname'
-							defaultValue={entry.contacts.length ? entry.contacts[0].lastName : ''}
-							{...register('lastName', { required: true })}
-							isInvalid={errors.lastName}
-						/>
-					</FloatingLabel>
-				</Col>
-			</Row>
-			<Row>
-				<Col lg>
-					<FloatingLabel label='E-Mail-Adresse' className='mb-3'>
-						<Form.Control
-							type='email'
-							placeholder='name@example.com'
-							defaultValue={entry.contacts.length ? entry.contacts[0].email : ''}
-							{...register('email', {
-								required: true,
-								pattern: /^(([a-z]|[0-9]|-|_)+\.?)+@(([a-z]|[0-9]|-|_)+\.?)+$/i,
-							})}
-							isInvalid={errors.email}
-						/>
-					</FloatingLabel>
-				</Col>
-				<Col lg>
-					<FloatingLabel label='Telefonnummer' className='mb-3'>
-						<Form.Control
-							type='tel'
-							placeholder='+43 (0) 000 000 00 00'
-							defaultValue={entry.contacts.length ? entry.contacts[0].phone : ''}
-							{...register('phone', { required: true, pattern: /^\+?[0-9]+$/ })}
-							isInvalid={errors.phone}
-						/>
-					</FloatingLabel>
-				</Col>
-			</Row>
-			<Row>
-				{<h5>Firmeninformationen</h5>}
-				<Col lg>
-					<FloatingLabel label='Addresse' className='mb-3'>
-						<Form.Control
-							type='text'
-							placeholder='Adresse'
-							defaultValue={entry.locations.length ? entry.locations[0].address : ''}
-							{...register('address', { required: true })}
-							isInvalid={errors.address}
-						/>
-					</FloatingLabel>
-				</Col>
-				<Col lg>
-					<FloatingLabel label='Postleitzahl' className='mb-3'>
-						<Form.Control
-							type='text'
-							placeholder='Postleitzahl'
-							defaultValue={entry.locations.length ? entry.locations[0].zipcode : ''}
-							{...register('zipcode', { required: true, pattern: /^[0-9]+$/ })}
-							isInvalid={errors.zipcode}
-						/>
-					</FloatingLabel>
-				</Col>
-				<Col lg>
-					<FloatingLabel label='Ort' className='mb-3'>
-						<Form.Control
-							type='text'
-							placeholder='Ort'
-							defaultValue={entry.locations.length ? entry.locations[0].city : ''}
-							{...register('city', { required: true })}
-							isInvalid={errors.city}
-						/>
-					</FloatingLabel>
-				</Col>
-				<Col lg>
-					<FloatingLabel label='Studierende pro Jahr' className='mb-3'>
-						<Form.Control
-							type='number'
-							placeholder='Studierende pro Jahr'
-							defaultValue={entry.company.maxStudents}
 							{...register('maxStudents', {
 								required: true,
 								pattern: /^[1-9][0-9]*$/,
@@ -151,14 +71,41 @@ const EditPartnerForm = props => {
 					</FloatingLabel>
 				</Col>
 			</Row>
+			<Row>
+				<Col lg>
+					<FloatingLabel label='Adresse' className='mb-3'>
+						<Form.Control
+							type='text'
+							{...register('address', { required: true })}
+							isInvalid={errors.address}
+						/>
+					</FloatingLabel>
+				</Col>
+				<Col lg>
+					<FloatingLabel label='Postleitzahl' className='mb-3'>
+						<Form.Control
+							type='text'
+							{...register('zipcode', { required: true, pattern: /^[0-9]+$/ })}
+							isInvalid={errors.zipcode}
+						/>
+					</FloatingLabel>
+				</Col>
+				<Col lg>
+					<FloatingLabel label='Ort' className='mb-3'>
+						<Form.Control
+							type='text'
+							{...register('city', { required: true })}
+							isInvalid={errors.city}
+						/>
+					</FloatingLabel>
+				</Col>
+			</Row>
 			<Row className='textarea'>
 				<Col lg>
 					<FloatingLabel controlId='floatingTextarea2' label='Notizen'>
 						<Form.Control
 							as='textarea'
-							placeholder='Notizen anlegen'
 							style={{ height: '100px' }}
-							defaultValue={entry.company.notes}
 							{...register('notes', { required: true })}
 							isInvalid={errors.notes}
 						/>

@@ -6,6 +6,7 @@ import {
 	companyDelete,
 	companyUpdate,
 } from './company-thunks';
+import { contactDelete, contactNewWithAssignment, contactUpdate } from './contact-thunks';
 
 const companySlice = createSlice({
 	name: 'company',
@@ -50,6 +51,16 @@ const companySlice = createSlice({
 			state.shouldReload = true;
 		},
 		[companyImport.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		// contact operations
+		[contactNewWithAssignment.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		[contactUpdate.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		[contactDelete.fulfilled]: state => {
 			state.shouldReload = true;
 		},
 	},

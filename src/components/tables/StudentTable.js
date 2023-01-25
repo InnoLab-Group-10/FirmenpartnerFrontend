@@ -9,29 +9,30 @@ import {
 	Popover,
 	Overlay,
 } from 'react-bootstrap';
-import { BiInfoCircle, BiSortAZ, BiSortZA, BiSortDown, BiSortUp } from 'react-icons/bi';
-import PartnerRow from './PartnerRow';
+import { BiInfoCircle, BiSortAZ, BiSortZA } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { companyGetAll } from '../../store/company-thunks';
-import useSort from '../../hooks/useSort';
 import 'bootstrap/js/src/collapse.js';
+import StudentRow from './StudentRow';
+import { studentGetAll } from '../../store/student-thunks';
+import useSort, { SORT_OPTIONS } from '../../hooks/useSort';
 
-const CollapsibleTable = () => {
+const StudentTable = () => {
 	const dispatch = useDispatch();
-	const { companies, shouldReload } = useSelector(state => state.company);
+	const { students, shouldReload } = useSelector(state => state.student);
 	const {
-		sortedArray: sortedCompanies,
-		setSortedArray: setSortedCompanies,
+		sortedArray: sortedStudents,
+		setSortedArray: setSortedStudents,
+		sortHandler,
 		customSortHandler,
 	} = useSort();
 
 	useEffect(() => {
 		if (shouldReload) {
-			dispatch(companyGetAll());
-			setSortedCompanies(null);
+			dispatch(studentGetAll());
+			setSortedStudents(null);
 		}
-	}, [dispatch, shouldReload, setSortedCompanies]);
+	}, [dispatch, shouldReload, setSortedStudents]);
 
 	const [show, setShow] = useState(false);
 	const [target, setTarget] = useState(null);
@@ -42,24 +43,12 @@ const CollapsibleTable = () => {
 		setTarget(event.target);
 	};
 
-	const handleNAforSort = arr => {
-		return arr.map(entry => ({
-			...entry,
-			locations: entry.locations.length
-				? entry.locations
-				: [{ address: 'N/A', city: 'N/A', zipcode: 'N/A' }],
-			contacts: entry.contacts.length
-				? entry.contacts
-				: [{ firstName: 'N/A', lastName: 'N/A', email: 'N/A', phone: 'N/A' }],
-		}));
-	};
-
 	return (
 		<Container>
 			<Card>
 				<Card.Header>
 					<Row>
-						<Col>Partnerunternehmen</Col>
+						<Col>Studierende</Col>
 						<Col>
 							<div ref={ref}>
 								<div onClick={handleClick}>
@@ -73,7 +62,7 @@ const CollapsibleTable = () => {
 									containerPadding={20}
 								>
 									<Popover>
-										<Popover.Header as='h3'>Partnerübersicht</Popover.Header>
+										<Popover.Header as='h3'>Studierende anlegen</Popover.Header>
 										<Popover.Body>
 											Die wichtigsten Informationen findet man auf dem ersten Blick. Für
 											weitere Informationen lassen sich die Tabellenreihen ausklappen.
@@ -85,15 +74,15 @@ const CollapsibleTable = () => {
 					</Row>
 				</Card.Header>
 				<Card.Body>
-					<Card.Title>Partnerfirmenliste</Card.Title>
+					<Card.Title>Studierendenübersicht</Card.Title>
 					<Card.Subtitle className='mb-2 text-muted'>
-						Filtern, Bearbeiten und Löschen von Partnerunternehmen
+						Filtern, Bearbeiten und Löschen von Studierenden
 					</Card.Subtitle>
 					<Card.Text>
-						In der Partnerfirmenliste können Sie Partnerfirmen bearbeiten und löschen.
-						Wenn Sie eine bestimme Firma finden möchten, können Sie die Liste
-						alphabetisch, nach dem Partner, der Ansprechperson, der E-Mail oder der
-						Telefonnummer umsortieren.
+						In der Studierendenliste können Sie Studierende bearbeiten und löschen. Wenn
+						Sie einen bestimmen Studierenden finden möchten, können Sie die Liste
+						alphabetisch, nach der Studenten-ID, dem Namen, dem Studiengang oder der
+						E-Mail umsortieren.
 					</Card.Text>
 					<Table hover responsive>
 						<thead>
@@ -102,12 +91,10 @@ const CollapsibleTable = () => {
 									<Button
 										variant='light'
 										onClick={() =>
-											customSortHandler([...companies], (a, b) =>
-												a.company.name.localeCompare(b.company.name)
-											)
+											sortHandler([...students], 'studentId', SORT_OPTIONS.ALPHABET)
 										}
 									>
-										Partner
+										Studenten-ID.
 										<BiSortAZ className='sort-icon' />
 										<BiSortZA className='sort-icon' hidden />
 									</Button>
@@ -116,14 +103,14 @@ const CollapsibleTable = () => {
 									<Button
 										variant='light'
 										onClick={() =>
-											customSortHandler(handleNAforSort(companies), (a, b) =>
-												`${a.contacts[0].firstName} ${a.contacts[0].lastName}`.localeCompare(
-													`${b.contacts[0].firstName} ${b.contacts[0].lastName}`
+											customSortHandler([...students], (a, b) =>
+												`${a.firstName} ${a.lastName}`.localeCompare(
+													`${b.firstName} ${b.lastName}`
 												)
 											)
 										}
 									>
-										Ansprechperson
+										Name
 										<BiSortAZ className='sort-icon' />
 										<BiSortZA className='sort-icon' hidden />
 									</Button>
@@ -132,9 +119,23 @@ const CollapsibleTable = () => {
 									<Button
 										variant='light'
 										onClick={() =>
-											customSortHandler(handleNAforSort(companies), (a, b) =>
-												a.contacts[0].email.localeCompare(b.contacts[0].email)
+											customSortHandler([...students], (a, b) =>
+												`${a.program.name} ${a.semester}`.localeCompare(
+													`${b.program.name} ${b.semester}`
+												)
 											)
+										}
+									>
+										Studiengang
+										<BiSortAZ className='sort-icon' />
+										<BiSortZA className='sort-icon' hidden />
+									</Button>
+								</th>
+								<th>
+									<Button
+										variant='light'
+										onClick={() =>
+											sortHandler([...students], 'email', SORT_OPTIONS.ALPHABET)
 										}
 									>
 										E-Mail
@@ -142,30 +143,12 @@ const CollapsibleTable = () => {
 										<BiSortZA className='sort-icon' hidden />
 									</Button>
 								</th>
-								<th>
-									<Button
-										variant='light'
-										onClick={() =>
-											customSortHandler(handleNAforSort(companies), (a, b) =>
-												a.contacts[0].phone.localeCompare(b.contacts[0].phone)
-											)
-										}
-									>
-										Telefon
-										<BiSortDown className='sort-icon' />
-										<BiSortUp hidden />
-									</Button>
-								</th>
 							</tr>
 						</thead>
 						<tbody>
-							{sortedCompanies == null
-								? companies.map(entry => (
-										<PartnerRow key={entry.company.id} activity='1' entry={entry} />
-								  ))
-								: sortedCompanies.map(entry => (
-										<PartnerRow key={entry.company.id} activity='1' entry={entry} />
-								  ))}
+							{sortedStudents
+								? sortedStudents.map(entry => <StudentRow key={entry.id} entry={entry} />)
+								: students.map(entry => <StudentRow key={entry.id} entry={entry} />)}
 						</tbody>
 					</Table>
 				</Card.Body>
@@ -174,4 +157,4 @@ const CollapsibleTable = () => {
 	);
 };
 
-export default CollapsibleTable;
+export default StudentTable;

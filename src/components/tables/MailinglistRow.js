@@ -12,10 +12,10 @@ const MailinglistRow = props => {
 	const [open, setOpen] = useState(false);
 
 	const [showDelete, setDeleteShow] = useState(false);
-	const [showEdit, setEditShow] = useState(false);
+	const [showAdd, setAddShow] = useState(false);
 
 	const toggleDeleteShow = () => setDeleteShow(prevState => !prevState);
-	const toggleEditShow = () => setEditShow(prevState => !prevState);
+	const toggleAddShow = () => setAddShow(prevState => !prevState);
 
 	const handleDelete = () => {
 		dispatch(mailinglistDelete({ id: props.id }));
@@ -61,7 +61,7 @@ const MailinglistRow = props => {
 					<Button
 						variant='secondary'
 						className={`table-icons ${props.notEditable ? 'invisible' : 'visible'}`}
-						onClick={toggleEditShow}
+						onClick={toggleAddShow}
 					>
 						<BiPlus />
 					</Button>
@@ -111,7 +111,7 @@ const MailinglistRow = props => {
 				</Modal.Footer>
 			</Modal>
 			{/* Edit Form Modal */}
-			<Modal size='xl' show={showEdit} onHide={toggleEditShow} keyboard={false}>
+			<Modal size='xl' show={showAdd} onHide={toggleAddShow} keyboard={false}>
 				<Modal.Header closeButton>
 					<Modal.Title>Empfänger hinzufügen</Modal.Title>
 				</Modal.Header>
@@ -119,7 +119,7 @@ const MailinglistRow = props => {
 					<AddListRecipientForm id={props.id} />
 				</Modal.Body>
 				<Modal.Footer>
-					<Button variant='secondary' onClick={toggleEditShow}>
+					<Button variant='secondary' onClick={toggleAddShow}>
 						Abbrechen
 					</Button>
 				</Modal.Footer>
