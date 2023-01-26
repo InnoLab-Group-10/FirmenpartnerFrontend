@@ -7,6 +7,7 @@ import {
 	companyUpdate,
 } from './company-thunks';
 import { contactDelete, contactNewWithAssignment, contactUpdate } from './contact-thunks';
+import { studentcountDelete, studentcountNew, studentcountUpdate } from './studentcount-thunks';
 
 const companySlice = createSlice({
 	name: 'company',
@@ -61,6 +62,16 @@ const companySlice = createSlice({
 			state.shouldReload = true;
 		},
 		[contactDelete.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		// studentcount operations
+		[studentcountNew.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		[studentcountUpdate.fulfilled]: state => {
+			state.shouldReload = true;
+		},
+		[studentcountDelete.fulfilled]: state => {
 			state.shouldReload = true;
 		},
 	},

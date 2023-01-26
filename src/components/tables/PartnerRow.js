@@ -4,26 +4,27 @@ import { BiTrash, BiPencil, BiPlus } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { companyDelete } from '../../store/company-thunks.js';
 import AddContactForm from '../forms/AddContactForm.js';
-import AddHistoryForm from '../forms/AddHistoryForm.js';
+import AddStudentcountForm from '../forms/AddStudentcountForm.js';
 import EditPartnerForm from '../forms/EditPartnerForm.js';
 import ContactRow from './ContactRow.js';
+import StudentcountRow from './StudentcountRow.js';
 
 const PartnerRow = props => {
 	const entry = props.entry;
 	const dispatch = useDispatch();
 
 	const [open, setOpen] = useState(false);
-	const { company, contacts, locations } = props.entry;
+	const { company, contacts, locations, studentCountHistory } = props.entry;
 
 	const [showDelete, setDeleteShow] = useState(false);
 	const [showEdit, setEditShow] = useState(false);
 	const [showAddContact, setAddContactShow] = useState(false);
-	const [showAddHistory, setAddHistoryShow] = useState(false);
+	const [showAddStudentcount, setAddStudentcountShow] = useState(false);
 
 	const toggleDeleteShow = () => setDeleteShow(prevState => !prevState);
 	const toggleEditShow = () => setEditShow(prevState => !prevState);
 	const toggleAddContactShow = () => setAddContactShow(prevState => !prevState);
-	const toggleAddHistoryShow = () => setAddHistoryShow(prevState => !prevState);
+	const toggleAddStudentcountShow = () => setAddStudentcountShow(prevState => !prevState);
 
 	const handleDelete = () => {
 		dispatch(companyDelete({ id: entry.company.id }));
@@ -103,10 +104,7 @@ const PartnerRow = props => {
 							</thead>
 							<tbody>
 								{contacts.map(entry => (
-									<ContactRow
-										key={entry.id}
-										entry={entry}
-									/>
+									<ContactRow key={entry.id} entry={entry} />
 								))}
 							</tbody>
 						</Table>
@@ -123,7 +121,7 @@ const PartnerRow = props => {
 										<Button
 											variant='secondary'
 											className='table-icons'
-											onClick={toggleAddHistoryShow}
+											onClick={toggleAddStudentcountShow}
 										>
 											<BiPlus />
 										</Button>
@@ -131,26 +129,9 @@ const PartnerRow = props => {
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>2018</td>
-									<td>99</td>
-									<td>
-										<Button
-											variant='danger'
-											className='table-icons table-delete-icon'
-											onClick={toggleDeleteShow}
-										>
-											<BiTrash />
-										</Button>
-										<Button
-											variant='secondary'
-											className='table-icons'
-											onClick={toggleEditShow}
-										>
-											<BiPencil />
-										</Button>
-									</td>
-								</tr>
+								{studentCountHistory.map((entry, index) => (
+									<StudentcountRow key={index} entry={entry} companyId={company.id} />
+								))}
 							</tbody>
 						</Table>
 					</td>
@@ -200,15 +181,15 @@ const PartnerRow = props => {
 			{/* Add Students Per Year Modal */}
 			<Modal
 				size='xl'
-				show={showAddHistory}
-				onHide={toggleAddHistoryShow}
+				show={showAddStudentcount}
+				onHide={toggleAddStudentcountShow}
 				keyboard={false}
 			>
 				<Modal.Header closeButton>
 					<Modal.Title>Studierende pro Jahr hinzufügen</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<AddHistoryForm id={company.id} />
+					<AddStudentcountForm id={company.id} />
 				</Modal.Body>
 			</Modal>
 		</>
