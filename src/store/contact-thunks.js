@@ -1,6 +1,11 @@
 import { axiosPrivate } from './axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+export const contactGetAll = createAsyncThunk('contact/getAll', async () => {
+	const response = await axiosPrivate.get('/contact');
+	return response.data;
+});
+
 export const contactNewWithAssignment = createAsyncThunk(
 	'contact/newWithAssignment',
 	async arg => {
