@@ -6,6 +6,7 @@ import { companyDelete } from '../../store/company-thunks.js';
 import AddContactForm from '../forms/AddContactForm.js';
 import AddHistoryForm from '../forms/AddHistoryForm.js';
 import EditPartnerForm from '../forms/EditPartnerForm.js';
+import ContactRow from './ContactRow.js';
 
 const PartnerRow = props => {
 	const entry = props.entry;
@@ -101,27 +102,12 @@ const PartnerRow = props => {
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>Vorname Nachname</td>
-									<td>text@test.test</td>
-									<td>+43 (0) 000 000 00 00</td>
-									<td>
-										<Button
-											variant='danger'
-											className='table-icons table-delete-icon'
-											onClick={toggleDeleteShow}
-										>
-											<BiTrash />
-										</Button>
-										<Button
-											variant='secondary'
-											className='table-icons'
-											onClick={toggleEditShow}
-										>
-											<BiPencil />
-										</Button>
-									</td>
-								</tr>
+								{contacts.map(entry => (
+									<ContactRow
+										key={entry.id}
+										entry={entry}
+									/>
+								))}
 							</tbody>
 						</Table>
 						<Table>
