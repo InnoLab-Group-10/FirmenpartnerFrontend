@@ -1,27 +1,18 @@
 import React, { useEffect } from 'react';
 import { Form, Row, Col, FloatingLabel, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { mailingListNewRecipient } from '../../store/mailinglist-thunks';
-import { contactGetAll } from '../../store/contact-thunks';
 
 const AddListRecipientForm = props => {
 	const dispatch = useDispatch();
-	const { contacts, shouldReload } = useSelector(state => state.contact);
-
-	useEffect(() => {
-		if (shouldReload) {
-			dispatch(contactGetAll());
-		}
-	});
 
 	// new entry
 	const {
 		register,
 		handleSubmit,
 		reset,
-		setValue,
 		formState: { isSubmitSuccessful, errors },
 	} = useForm();
 
@@ -30,13 +21,6 @@ const AddListRecipientForm = props => {
 			reset();
 		}
 	}, [isSubmitSuccessful, reset]);
-
-	const handleChange = e => {
-		const entry = contacts.find(entry => entry.id === e.target.value);
-		setValue('firstName', entry.firstName);
-		setValue('lastName', entry.lastName);
-		setValue('email', entry.email);
-	};
 
 	return (
 		<Form
@@ -98,26 +82,6 @@ const AddListRecipientForm = props => {
 							Hinzufügen
 						</Button>
 					</div>
-				</Col>
-			</Row>
-			<Row>
-				<Col lg>
-					<Form.Select
-						className='mt-3'
-						aria-label='Default select example'
-						size='lg'
-						defaultValue='1'
-						onChange={handleChange}
-					>
-						<option value='1' disabled>
-							Person aus der Liste auswählen
-						</option>
-						{contacts.map(entry => (
-							<option key={entry.id} value={entry.id}>
-								{entry.firstName} {entry.lastName}
-							</option>
-						))}
-					</Form.Select>
 				</Col>
 			</Row>
 		</Form>

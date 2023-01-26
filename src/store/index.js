@@ -11,7 +11,6 @@ import fileReducer from './file-slice';
 import mailinglistReducer from './mailinglist-slice';
 import mailtemplateReducer from './mailtemplate-slice';
 import mailsettingsReducer from './mailsettings-slice';
-import contactReducer from './contact-slice';
 
 // TODO table site (company, user, etc.) only get reloaded when client inserts new user
 // maybe periodically call api for new data, or make refresh button
@@ -28,7 +27,6 @@ const store = configureStore({
 		mailinglist: mailinglistReducer,
 		mailtemplate: mailtemplateReducer,
 		mailsettings: mailsettingsReducer,
-		contact: contactReducer,
 	},
 });
 
