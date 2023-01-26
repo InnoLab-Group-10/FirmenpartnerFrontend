@@ -422,6 +422,10 @@ td {
 	min-width: 140px;
 }
 
+.table-notes-column{
+	width: 100px;
+}
+
 /* === DOCUMENTS === */
 .pdf path {
 	stroke: #dc3545;

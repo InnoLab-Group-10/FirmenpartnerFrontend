@@ -13,7 +13,7 @@ import Dokumente from './pages/Dokumente';
 import Header from './components/header/Header';
 import Navbar from './components/navigation/Navbar';
 import Login from './pages/Login';
-import Mailtemplates from './pages/Mailtemplates';
+import Mailtemplates from './pages/MailTemplates';
 
 const App = () => {
 	const { isLoggedIn } = useSelector(state => state.session);
