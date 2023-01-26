@@ -129,8 +129,8 @@ const PartnerRow = props => {
 								</tr>
 							</thead>
 							<tbody>
-								{studentCountHistory.map((entry, index) => (
-									<StudentcountRow key={index} entry={entry} companyId={company.id} />
+								{studentCountHistory.map(entry => (
+									<StudentcountRow key={entry.id} entry={entry} companyId={company.id} />
 								))}
 							</tbody>
 						</Table>

@@ -4,7 +4,7 @@ import { BiTrash, BiPencil } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 
 import { studentcountDelete } from '../../store/studentcount-thunks';
-import EditContactForm from '../forms/EditContactForm';
+import EditStudentcountForm from '../forms/EditStudentcountForm';
 
 const StudentcountRow = props => {
 	const { entry, companyId } = props;
@@ -24,8 +24,8 @@ const StudentcountRow = props => {
 	return (
 		<>
 			<tr>
-				<td>2018</td>
-				<td>99</td>
+				<td>{entry.year}</td>
+				<td>{entry.count}</td>
 				<td>
 					<Button
 						variant='danger'
@@ -61,7 +61,7 @@ const StudentcountRow = props => {
 					<Modal.Title>Eintrag bearbeiten</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<EditContactForm
+					<EditStudentcountForm
 						entry={entry}
 						companyId={companyId}
 						toggleHandler={toggleEditShow}
