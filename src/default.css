@@ -312,6 +312,18 @@ input[type=color]{
 	}
 }
 
+.header-button-name{
+	display: inline;
+	margin-right: .6rem;
+	font-weight: 700;
+}
+
+@media(max-width: 576px){
+	.header-button-name{
+		display: none;
+	}
+}
+
 /* === SITE-TITLE === */
 .site-title {
 	margin-bottom: 2rem;
