@@ -63,7 +63,7 @@ const Statistics = () => {
 								}}
 							/>
 							<CartesianGrid stroke='#ccc' strokeDasharray='5 5' />
-							<Bar dataKey='count' name='Studierende' fill='#8884d8' barSize={30} />
+							<Bar dataKey='count' name='Studierende' fill='#0d6efd' barSize={30} />
 						</BarChart>
 					</Col>
 				</Row>

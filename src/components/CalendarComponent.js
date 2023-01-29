@@ -48,6 +48,7 @@ const CalendarComponent = () => {
 						weekNumbers='true'
 						contentHeight={650}
 						plugins={[dayGridPlugin, timegridPlugin]}
+						buttonText={{today: 'Heute'}}
 						events={[
 							...appointments.map(entry => ({
 								id: entry.id,
