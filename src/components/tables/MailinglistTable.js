@@ -113,35 +113,44 @@ const MailinglistTable = () => {
 						<tbody>
 							<MailinglistRow
 								listName='Alle Unternehmen'
-								entries={companies
-									.map(entry =>
-										entry.contacts.length
-											? { ...entry.contacts[0], company: entry.company.name }
-											: null
-									)
-									.filter(entry => entry != null)}
+								entries={companies.reduce(
+									(previous, current) =>
+										previous.concat(
+											current.contacts.map(entry => ({
+												...entry,
+												company: current.company.name,
+											}))
+										),
+									[]
+								)}
 								notEditable={true}
 							/>
 							<MailinglistRow
 								listName='Aktive Unternehmen'
-								entries={activeCompanies
-									.map(entry =>
-										entry.contacts.length
-											? { ...entry.contacts[0], company: entry.company.name }
-											: null
-									)
-									.filter(entry => entry != null)}
+								entries={activeCompanies.reduce(
+									(previous, current) =>
+										previous.concat(
+											current.contacts.map(entry => ({
+												...entry,
+												company: current.company.name,
+											}))
+										),
+									[]
+								)}
 								notEditable={true}
 							/>
 							<MailinglistRow
 								listName='Inaktive Unternehmen'
-								entries={inactiveCompanies
-									.map(entry =>
-										entry.contacts.length
-											? { ...entry.contacts[0], company: entry.company.name }
-											: null
-									)
-									.filter(entry => entry != null)}
+								entries={inactiveCompanies.reduce(
+									(previous, current) =>
+										previous.concat(
+											current.contacts.map(entry => ({
+												...entry,
+												company: current.company.name,
+											}))
+										),
+									[]
+								)}
 								notEditable={true}
 							/>
 							{sortedMailingLists == null

@@ -39,7 +39,6 @@ const EditPartnerForm = props => {
 			companyUpdate({
 				...data,
 				companyId: entry.company.id,
-				contactId: entry.contacts.length ? entry.contacts[0].id : '0',
 				locationId: entry.locations.length ? entry.locations[0].id : '0',
 			})
 		);
