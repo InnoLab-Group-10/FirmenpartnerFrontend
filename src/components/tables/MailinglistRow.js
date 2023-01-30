@@ -8,7 +8,6 @@ import MailinglistRowRecipient from './MailinglistRowRecipient';
 
 const MailinglistRow = props => {
 	const dispatch = useDispatch();
-
 	const [open, setOpen] = useState(false);
 
 	const [showDelete, setDeleteShow] = useState(false);
