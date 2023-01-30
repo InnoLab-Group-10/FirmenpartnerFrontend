@@ -4,12 +4,12 @@ import {
 	BiLayer,
 	BiGridAlt,
 	BiUser,
-	BiMessageSquareDetail,
-	BiBookmark,
+	BiFoodMenu,
 	BiFolder,
-	BiReceipt,
 	BiLogOut,
-	BiMailSend
+	BiMailSend,
+	BiBriefcase,
+	BiBrush
 } from 'react-icons/bi';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -46,25 +46,25 @@ const Navbar = () => {
 						</LinkContainer>
 						<LinkContainer to='/partnerfirmen' activeClassName='active'>
 							<Nav.Link className='nav_link'>
-								<BiMessageSquareDetail className='nav_icon' />
+								<BiBriefcase className='nav_icon' />
 								<span className='nav_name'>Partnerfirmen</span>
 							</Nav.Link>
 						</LinkContainer>
 						<LinkContainer to='/studierende' activeClassName='active'>
 							<Nav.Link className='nav_link'>
-								<BiBookmark className='nav_icon' />
+								<BiFoodMenu className='nav_icon' />
 								<span className='nav_name'>Studierende</span>
 							</Nav.Link>
 						</LinkContainer>
 						<LinkContainer to='/mailings' activeClassName='active'>
 							<Nav.Link className='nav_link'>
 								<BiMailSend className='nav_icon' />
-								<span className='nav_name'>Mailings</span>
+								<span className='nav_name'>Mailinglisten</span>
 							</Nav.Link>
 						</LinkContainer>
 						<LinkContainer to='/mailtemplates' activeClassName='active'>
 							<Nav.Link className='nav_link'>
-								<BiReceipt className='nav_icon' />
+								<BiBrush className='nav_icon' />
 								<span className='nav_name'>Mail-Vorlagen</span>
 							</Nav.Link>
 						</LinkContainer>

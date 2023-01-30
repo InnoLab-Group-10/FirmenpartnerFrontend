@@ -72,10 +72,12 @@ const PartnerRow = props => {
 						<Table>
 							<tbody>
 								<tr>
-									<td>
+									<td className="table-notes-column">
 										<strong>Notiz:</strong>
 									</td>
-									<td>{company.notes}</td>
+									<td>
+										{company.notes}
+									</td>
 								</tr>
 							</tbody>
 						</Table>

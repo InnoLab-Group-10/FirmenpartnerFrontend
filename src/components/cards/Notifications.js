@@ -24,7 +24,7 @@ const Notifications = () => {
 
 	return (
 		<>
-			<h4 className='timeline-year'>Zukünftige Benachrichtigungen</h4>
+			<h4 className='timeline-year'>Termine</h4>
 			<Container className='overflow-auto'>
 				{futureNotifications.map(entry => (
 					<Note
@@ -37,7 +37,7 @@ const Notifications = () => {
 					/>
 				))}
 			</Container>
-			<h4 className='timeline-year'>Benachrichtigungen</h4>
+			<h4 className='timeline-year'>Vergangene Termine</h4>
 			<Container className='notification-container overflow-auto'>
 				{pastNotifications.map(entry => (
 					<Note

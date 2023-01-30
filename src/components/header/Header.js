@@ -68,7 +68,7 @@ const Header = () => {
 				scroll='true'
 			>
 				<Offcanvas.Header closeButton>
-					<Offcanvas.Title>Timeline</Offcanvas.Title>
+					<Offcanvas.Title>Aufgaben</Offcanvas.Title>
 					<div className='timeline-edit-button'>
 						<Button
 							className='timeline-button'
@@ -94,7 +94,7 @@ const Header = () => {
 				scroll='false'
 			>
 				<Offcanvas.Header closeButton>
-					<Offcanvas.Title>Benachrichtigungen</Offcanvas.Title>
+					<Offcanvas.Title>Terminübersicht</Offcanvas.Title>
 					<div className='timeline-edit-button'>
 						<Button
 							className='timeline-button'
@@ -130,6 +130,7 @@ const Header = () => {
 									variant='light'
 									onClick={() => setShowNotes(true)}
 								>
+									<span className='header-button-name'>Termine</span>
 									<BiNotification />
 								</Button>
 							</div>
@@ -139,6 +140,7 @@ const Header = () => {
 									variant='light'
 									onClick={() => setShow(true)}
 								>
+									<span className='header-button-name'>Aufgaben</span>
 									<BiCalendarWeek />
 								</Button>
 							</div>
@@ -156,7 +158,6 @@ const Header = () => {
 									<LinkContainer to='/dashboard'>
 										<Dropdown.Item>Dashboard</Dropdown.Item>
 									</LinkContainer>
-									<Dropdown.Item href='#'>Infoseite</Dropdown.Item>
 									<Dropdown.Divider />
 									<Dropdown.Item
 										onClick={() => {
