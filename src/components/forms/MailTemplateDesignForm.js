@@ -145,7 +145,7 @@ const MailTemplateDesignForm = () => {
 				</Card.Header>
 				<Accordion flush>
 					<Accordion.Item eventKey='0'>
-						<Accordion.Header>Header</Accordion.Header>
+						<Accordion.Header>Kopfzeile</Accordion.Header>
 						<Accordion.Body>
 							<Form
 								onSubmit={handleSubmitHeader(data =>
@@ -264,7 +264,7 @@ const MailTemplateDesignForm = () => {
 						</Accordion.Body>
 					</Accordion.Item>
 					<Accordion.Item eventKey='1'>
-						<Accordion.Header>Body</Accordion.Header>
+						<Accordion.Header>Textbereich</Accordion.Header>
 						<Accordion.Body>
 							<Form
 								onSubmit={handleSubmitBody(data =>
@@ -303,7 +303,7 @@ const MailTemplateDesignForm = () => {
 						</Accordion.Body>
 					</Accordion.Item>
 					<Accordion.Item eventKey='2'>
-						<Accordion.Header>Footer</Accordion.Header>
+						<Accordion.Header>Fußzeile</Accordion.Header>
 						<Accordion.Body>
 							<Form
 								onSubmit={handleSubmitFooter(data =>
