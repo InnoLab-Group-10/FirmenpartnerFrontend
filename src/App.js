@@ -37,7 +37,6 @@ const App = () => {
 								<Navbar />
 								<div className='content'>
 									<Routes>
-										{/* TODO replace default route with splace screen or keep dashboard */}
 										<Route path='/' element={<Dashboard />} />
 										<Route path='dashboard' element={<Dashboard />} />
 										<Route path='benutzer' element={<Benutzer />} />

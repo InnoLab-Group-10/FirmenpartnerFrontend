@@ -1,5 +1,12 @@
-FROM node:17-alpine
+FROM node:16.3-alpine
+
+COPY . /frontend
 WORKDIR /frontend
-COPY /build /frontend/build
+
 RUN npm install -g serve
-CMD ["serve", "-s", "build", "-l", "80"]
+RUN npm install
+RUN npm run build
+
+EXPOSE 8080
+
+ENTRYPOINT npx react-inject-env set && serve -s build -l 8080

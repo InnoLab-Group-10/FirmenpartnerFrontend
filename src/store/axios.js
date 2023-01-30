@@ -1,6 +1,7 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { Mutex } from 'async-mutex';
+import { env } from '../env';
 
 import { sessionRefresh } from './session-thunks';
 
@@ -13,11 +14,11 @@ const mutex = new Mutex();
 
 // used for requests that don't need authentication
 export const axiosPublic = axios.create({
-	baseURL: 'http://toadsworth.ddns.net:5000/api',
+	baseURL: env.REACT_APP_API_URL,
 });
 // used for requests that need authentication
 export const axiosPrivate = axios.create({
-	baseURL: 'http://toadsworth.ddns.net:5000/api',
+	baseURL: env.REACT_APP_API_URL,
 });
 
 // TODO maybe axios-auth-refresh

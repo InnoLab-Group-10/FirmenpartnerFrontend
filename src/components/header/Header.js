@@ -9,9 +9,10 @@ import {
 	BiUserCircle,
 } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
+import { LinkContainer } from 'react-router-bootstrap';
+
 import Notifications from '../cards/Notifications';
 import Timeline from '../cards/Timeline';
-
 import { sessionInvalidate } from '../../store/session-thunks';
 import { uiActions } from '../../store/ui-slice';
 import CreateAppointmentForm from '../forms/CreateAppointmentForm';
@@ -152,7 +153,9 @@ const Header = () => {
 									</div>
 								</Dropdown.Toggle>
 								<Dropdown.Menu>
-									<Dropdown.Item href='/dashboard'>Dashboard</Dropdown.Item>
+									<LinkContainer to='/dashboard'>
+										<Dropdown.Item>Dashboard</Dropdown.Item>
+									</LinkContainer>
 									<Dropdown.Item href='#'>Infoseite</Dropdown.Item>
 									<Dropdown.Divider />
 									<Dropdown.Item
